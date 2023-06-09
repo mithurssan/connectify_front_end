@@ -1,6 +1,6 @@
 # connectify_front_end
 
-## Installation:
+## Installation
 
 To download all the required packages for the repository, follow these steps:
 
@@ -9,7 +9,7 @@ To download all the required packages for the repository, follow these steps:
 - Run the command **npm install**. This command will initiate the package installation process and download all the required packages specified in the package.json file.
 
 
-## Running the Server:
+## Running the Server
 
 To run the app and start the development server, follow these steps:
 
