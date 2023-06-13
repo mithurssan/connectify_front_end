@@ -1,92 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
 .navbar {
-    background-color: #F99776;
-    height: 80px;
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-  }
-  
-  .menu-bars {
-    margin-right: 2rem; 
-    font-size: 2rem;
-    background: none;
-  }
-  
-  .nav-menu {
-    background-color: white;
-    width: 250px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    right: -100%; 
-    transition: 850ms;
-  }
-  
-  .nav-menu.active {
-    right: 0; 
-    transition: 350ms;
-  }
-  
-  .nav-text {
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-    padding: 8px 16px 8px 0px; 
-    list-style: none;
-    height: 60px;
-  }
-  
-  .nav-text a {
-    text-decoration: none;
-    color: #0A1A41;
-    font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 45px 0 45px;
-    border-radius: 4px;
-  }
-  
-  .nav-text a:hover {
-    color: #4740B2;
-  }
-  
-  .nav-menu-items {
-    width: 100%;
-  }
-  
-  .navbar-toggle {
-    background-color: white;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-  }
-  
-  span {
-    margin-right: 16px; 
-  }
+  background-color: #f99776;
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 
-  .connectify {
-    position: fixed;
-    top: 10;
-    left: 2%;
-    color: #0A1A41;
-    font-family: 'Alfa Slab One', sans-serif;
-  }
+.menu-bars {
+  margin-right: 2rem;
+  font-size: 2rem;
+  background: none;
+}
 
-  .nav-text {
-   display: flex;
-   gap: 20px;
+.nav-menu {
+  background-color: white;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  transition: 850ms;
+}
 
-  }
-  
+.nav-menu.active {
+  right: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px 16px 8px 0px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #0a1a41;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 45px 0 45px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  color: #4740b2;
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  background-color: white;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+span {
+  margin-right: 16px;
+}
+
+.connectify {
+  position: fixed;
+  top: 10;
+  left: 2%;
+  color: #0a1a41;
+  font-family: 'Alfa Slab One', sans-serif;
+}
+
+.nav-text {
+  display: flex;
+  gap: 10px;
+}
