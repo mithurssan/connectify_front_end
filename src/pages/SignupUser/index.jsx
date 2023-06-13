@@ -61,12 +61,21 @@ const SignupUser = () => {
 					<label htmlFor="password">Password: </label>
 					<input type="password" id="password" value={password} onChange={handleInputPassword} />
 				</fieldset>
-				<input type="submit" value="Register" />
+				<button role="button" type="submit" name="Register">
+					Register
+				</button>
 			</form>
-			{isLoaded && <h1>Correct Credentials</h1>}
+
+			{isLoaded && (
+				<h1 role="heading" name="Correct Credentials">
+					Correct Credentials
+				</h1>
+			)}
 			{error && (
 				<div>
-					<h1>Incorrect Credentials</h1>
+					<h1 role="heading" name="Incorrect Credentials">
+						Incorrect Credentials
+					</h1>
 				</div>
 			)}
 		</div>
