@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './style.css'
 
 const SignupBusiness = () => {
 	const [companyName, setCompanyName] = useState('');
@@ -59,24 +60,24 @@ const SignupBusiness = () => {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="business-container">
 				<fieldset>
-					<label htmlFor="name">Company name: </label>
+					<label htmlFor="name" className="company-text" >Company name:  </label>
 					<input type="text" id="name" value={companyName} onChange={handleInputName} />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="number">Company number: </label>
+					<label htmlFor="number" className="company-text">Company number: </label>
 					<input type="number" id="number" value={companyNumber} onChange={handleInputNumber} />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="email">Email address: </label>
+					<label htmlFor="email" className="company-text">Email address: </label>
 					<input type="email" id="email" value={companyEmail} onChange={handleInputEmail} />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="password">Password: </label>
+					<label htmlFor="password" className="company-text">Password: </label>
 					<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} />
 				</fieldset>
-				<input type="submit" value="Register" />
+				<input type="submit" value="Register" className="sign-up" />
 			</form>
 			{isLoaded && <h1>Correct Credentials</h1>}
 			{error && (
