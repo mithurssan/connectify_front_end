@@ -1,34 +1,80 @@
-nav {
+.navbar {
+    background-color: #060B26;
+    height: 80px;
     display: flex;
-    padding: 12px;
-    justify-content: space-between;
+    justify-content: flex-end; 
     align-items: center;
-    background: firebrick;
-    color: white;
-    margin-bottom: 60px;
-}
-
-.nav-links {
+  }
+  
+  .menu-bars {
+    margin-right: 2rem; 
+    font-size: 2rem;
+    background: none;
+  }
+  
+  .nav-menu {
+    background-color: #060B26;
+    width: 250px;
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: -100%; 
+    transition: 850ms;
+  }
+  
+  .nav-menu.active {
+    right: 0; 
+    transition: 350ms;
+  }
+  
+  .nav-text {
+    display: flex;
+    justify-content: flex-end; 
     align-items: center;
+    padding: 8px 16px 8px 0px; 
     list-style: none;
-    font-size: 19px;
-}
-
-.nav-links li {
-    margin-right: 20px;
-}
-
-.nav-links a {
-    color: white;
+    height: 60px;
+  }
+  
+  .nav-text a {
     text-decoration: none;
-}
+    color: #F5F5F5;
+    font-size: 18px;
+    width: 95%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-radius: 4px;
+  }
+  
+  .nav-text a:hover {
+    background-color: #1A83FF;
+  }
+  
+  .nav-menu-items {
+    width: 100%;
+  }
+  
+  .navbar-toggle {
+    background-color: #060B26;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+  }
+  
+  span {
+    margin-right: 16px; 
+  }
 
-.nav-links a:hover {
-    margin-bottom: 20px;
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-    text-underline-position: under;
-    text-decoration-color: darkblue;
-}
+  .connectify {
+    position: fixed;
+    top: 10;
+    left: 0;
+    color: white 
+  }
+  

@@ -1,35 +1,49 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom"
-import "./style.css"
+import React, { useState } from 'react';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { SidebarData } from '../SidebarData/index';
+import './style.css';
+import { IconContext } from 'react-icons';
 
-const NavBar = () => {
-    const username = localStorage.getItem("username")
 
-    const activeStyle = {
-        textDecoration: "underline",
-        color: "blue"
-    }
+function Navbar() {
+  const [sidebar, setSidebar] = useState(false);
 
-    const navA = ({ isActive }) => (isActive ? activeStyle : undefined)
+  const showSidebar = () => setSidebar(!sidebar);
 
-    return (
-        <>
-            <header>
-                <nav>
-                    <h2>
-                        <NavLink style={navA} to="/">Connectify</NavLink>
-                    </h2>
-                    <ul className="nav-links">
-                        <li><NavLink style={navA} to="/rota">Rota</NavLink></li>
-                        <li><NavLink style={navA} to="/wellbeing">Wellbeing</NavLink></li>
-                        <li><NavLink style={navA} to="/dashboard">Dashboard</NavLink></li>
-                        <li><NavLink style={navA} to={`/profile/${username}`}>Profile</NavLink></li>
-                    </ul>
-                </nav>
-            </header>
-            <Outlet />
-        </>
-    )
+  return (
+    <>
+      <IconContext.Provider value={{ color: '#fff' }}>
+        <div className='navbar'>
+        <h1 className='connectify'>Connectify</h1>
+
+          <Link to='#' className='menu-bars'>
+            <FaIcons.FaBars onClick={showSidebar} />
+          </Link>
+        </div>
+        <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+          <ul className='nav-menu-items' onClick={showSidebar}>
+            <li className='navbar-toggle'>
+              <Link to='#' className='menu-bars'>
+                <AiIcons.AiOutlineClose />
+              </Link>
+            </li>
+            {SidebarData.map((item, index) => {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </IconContext.Provider>
+    </>
+  );
 }
 
-export default NavBar
+export default Navbar;
