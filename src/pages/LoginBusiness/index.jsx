@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+
 import './style.css'
 
 const LoginBusiness = () => {
@@ -8,6 +9,11 @@ const LoginBusiness = () => {
   const [password, setPassword] = useState('')
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+
+  const showPasswordHandler = () => {
+    setShowPassword((prev) => !prev)
+  }
 
   const loginBusiness = async () => {
     try {
@@ -54,7 +60,7 @@ const LoginBusiness = () => {
 
   return (
     <div className='container-login-register'>
-      <form onSubmit={handleSubmit} className='buisness-container'>
+      <form onSubmit={handleSubmit} className='business-container'>
         <label htmlFor='username' className='business-label'>
           Business name
         </label>
@@ -63,19 +69,23 @@ const LoginBusiness = () => {
           id='username'
           value={businessName}
           onChange={handleInputBusinessName}
-          className='buisness-text'
+          className='business-text'
         />
 
         <label htmlFor='password' className='business-label'>
           Password
         </label>
+
         <input
-          type='password'
           id='password'
           value={password}
           onChange={handleInputPassword}
-          className='buisness-text'
+          className='business-text'
+          type={!showPassword ? 'password' : 'text'}
         />
+        <span className='showPassword' onClick={showPasswordHandler}>
+          {showPassword ? 'Hide' : 'Show'}
+        </span>
 
         <input type='submit' value='LOGIN' className='login-register-button' />
         <div className='container'>

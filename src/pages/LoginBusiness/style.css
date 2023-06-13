@@ -4,16 +4,15 @@
   color: #0a1a41;
 }
 
-.buisness-text {
-  width: 100%;
-  max-width: 483px; /* Set the maximum width of the input box */
+.business-text {
   height: 25px;
   padding: 8px; /* Adjust the desired padding */
   background-color: white;
   border: none;
+  max-width: 483px;
 }
 
-.buisness-text:focus {
+.business-text:focus {
   outline: none;
 }
 
@@ -23,7 +22,7 @@
   height: 100vh;
 }
 
-.buisness-container {
+.business-container {
   position: fixed;
   top: 50%; /* Adjust the desired distance from the top */
   left: 5%; /* Adjust the desired distance from the left */
@@ -32,10 +31,9 @@
   flex-direction: column;
   justify-content: space-between; /* Add space between the elements */
   gap: 10px;
-  width: 80%; /* Adjust the desired container width */
-  max-width: 520px;
+  width: 80%;
+  max-width: 550px;
 }
-
 .login-register-button {
   margin-top: 20px;
   height: 40px;
@@ -58,25 +56,39 @@
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
+  transform: translate(35%, 80%);
 }
 
 .sign-in-user {
   color: #ffffff;
   font-size: 18px;
-  text-align: center;
-  font-size: 18px;
 }
-
+.sign-in-user:hover {
+  color: #785a9f;
+  transition: 0.3s ease-in-out;
+}
 @media (max-width: 600px) {
   /* Apply the styles when the viewport width is 600px or less */
   .login-register-button {
     width: auto; /* Reset the button width to its original value */
   }
-  .buisness-text {
-    width: auto;
+
+  .business-text {
+    width: auto; /* Reset the button width to its original value */
   }
+  .showPassword {
+    position: fixed;
+    top: 50px;
+  }
+
+  .showPassword {
+    transform: translate(-30px);
+  }
+}
+
+.showPassword {
+  position: fixed;
+  top: 130px;
+  left: 450px;
+  cursor: pointer;
 }

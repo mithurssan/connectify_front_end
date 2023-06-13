@@ -1,91 +1,146 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import './style.css'
 
 const SignupBusiness = () => {
-	const [companyName, setCompanyName] = useState('');
-	const [companyNumber, setCompanyNumber] = useState('');
-	const [companyPassword, setCompanyPassword] = useState('');
-	const [companyEmail, setCompanyEmail] = useState('');
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [error, setError] = useState(false);
+  const [companyName, setCompanyName] = useState('')
+  const [companyNumber, setCompanyNumber] = useState('')
+  const [companyPassword, setCompanyPassword] = useState('')
+  const [companyEmail, setCompanyEmail] = useState('')
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [error, setError] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
-	async function getCompany(companyNumber) {
-		try {
-			const url = `http://127.0.0.1:5000/api/company/${companyNumber}`;
-			const res = await axios.get(url);
-			const data = res.data;
+  const showPasswordHandler = () => {
+    setShowPassword((prev) => !prev)
+  }
 
-			if (data['company_name'] == companyName && data['company_number'] == companyNumber) {
-				const res = await axios.post('http://127.0.0.1:5000/businesses/register', {
-					business_name: companyName,
-					business_number: companyNumber,
-					business_email: companyEmail,
-					business_password: companyPassword,
-				});
+  async function getCompany(companyNumber) {
+    try {
+      const url = `http://127.0.0.1:5000/api/company/${companyNumber}`
+      const res = await axios.get(url)
+      const data = res.data
 
-				console.log(res);
+      if (
+        data['company_name'] == companyName &&
+        data['company_number'] == companyNumber
+      ) {
+        const res = await axios.post(
+          'http://127.0.0.1:5000/businesses/register',
+          {
+            business_name: companyName,
+            business_number: companyNumber,
+            business_email: companyEmail,
+            business_password: companyPassword,
+          }
+        )
 
-				setError(false);
-				setIsLoaded(true);
-				console.log(data);
-			} else {
-				setError(true);
-				setIsLoaded(false);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	}
+        console.log(res)
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+        setError(false)
+        setIsLoaded(true)
+        console.log(data)
+      } else {
+        setError(true)
+        setIsLoaded(false)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
-		getCompany(companyNumber);
-	};
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
-	const handleInputName = (e) => {
-		setCompanyName(e.target.value.toUpperCase());
-	};
+    getCompany(companyNumber)
+  }
 
-	const handleInputNumber = (e) => {
-		setCompanyNumber(e.target.value);
-	};
-	const handleInputPassword = (e) => {
-		setCompanyPassword(e.target.value);
-	};
-	const handleInputEmail = (e) => {
-		setCompanyEmail(e.target.value);
-	};
+  const handleInputName = (e) => {
+    setCompanyName(e.target.value.toUpperCase())
+  }
 
-	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<fieldset>
-					<label htmlFor="name">Company name: </label>
-					<input type="text" id="name" value={companyName} onChange={handleInputName} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="number">Company number: </label>
-					<input type="number" id="number" value={companyNumber} onChange={handleInputNumber} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="email">Email address: </label>
-					<input type="email" id="email" value={companyEmail} onChange={handleInputEmail} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="password">Password: </label>
-					<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} />
-				</fieldset>
-				<input type="submit" value="Register" />
-			</form>
-			{isLoaded && <h1>Correct Credentials</h1>}
-			{error && (
-				<div>
-					<h1>Incorrect Credentials</h1>
-				</div>
-			)}
-		</div>
-	);
-};
+  const handleInputNumber = (e) => {
+    setCompanyNumber(e.target.value)
+  }
+  const handleInputPassword = (e) => {
+    setCompanyPassword(e.target.value)
+  }
+  const handleInputEmail = (e) => {
+    setCompanyEmail(e.target.value)
+  }
 
-export default SignupBusiness;
+  return (
+    <div className='container-login-register'>
+      <form onSubmit={handleSubmit} className='business-container'>
+        <label htmlFor='name' className='business-label'>
+          Company name
+        </label>
+        <input
+          type='text'
+          id='name'
+          value={companyName}
+          onChange={handleInputName}
+          className='business-text'
+        />
+
+        <label htmlFor='number' className='business-label'>
+          Company number
+        </label>
+        <input
+          type='number'
+          id='number'
+          value={companyNumber}
+          onChange={handleInputNumber}
+          className='business-text'
+        />
+
+        <label htmlFor='email' className='business-label'>
+          Email address
+        </label>
+        <input
+          type='email'
+          id='email'
+          value={companyEmail}
+          onChange={handleInputEmail}
+          className='business-text'
+        />
+
+        <label htmlFor='password' className='business-label'>
+          Password:
+        </label>
+        <input
+          type={!showPassword ? 'password' : 'text'}
+          id='password'
+          value={companyPassword}
+          onChange={handleInputPassword}
+          className='business-text'
+        />
+
+        <span className='showPassword2' onClick={showPasswordHandler}>
+          {showPassword ? 'Hide' : 'Show'}
+        </span>
+
+        <input
+          type='submit'
+          value='Register'
+          className='login-register-button'
+        />
+        <div className='container'>
+          <Link to='/login/user' className='sign-in-user'>
+            Sign in as a User
+          </Link>
+        </div>
+      </form>
+
+      {isLoaded && <h1>Correct Credentials</h1>}
+      {error && (
+        <div>
+          <h1>Incorrect Credentials</h1>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default SignupBusiness
