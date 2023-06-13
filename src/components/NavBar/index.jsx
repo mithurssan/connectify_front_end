@@ -21,7 +21,11 @@ function Navbar() {
 
   return (
     <>
-      <IconContext.Provider value={{ color: '#0A1A41', fontWeight: 900 }}>
+      <IconContext.Provider
+        value={{
+          color: '#0A1A41',
+        }}
+      >
         <div className='navbar'>
           <h1 className='connectify'>Connectify</h1>
 
