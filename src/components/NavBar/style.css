@@ -1,9 +1,10 @@
 .navbar {
-  background-color: #060b26;
+  background-color: pink;
   height: 80px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  z-index: 1 !important;
 }
 
 .menu-bars {
@@ -13,7 +14,7 @@
 }
 
 .nav-menu {
-  background-color: #060b26;
+  background-color: pink;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -59,7 +60,7 @@
 }
 
 .navbar-toggle {
-  background-color: #060b26;
+  background-color: pink;
   width: 100%;
   height: 80px;
   display: flex;
