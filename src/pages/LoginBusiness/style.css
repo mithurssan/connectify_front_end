@@ -4,7 +4,7 @@
   color: #0a1a41;
 }
 
-.buisness-text {
+.business-text {
   width: 100%;
   max-width: 500px; /* Set the maximum width of the input box */
   height: 25px;
@@ -13,7 +13,7 @@
   border: none;
 }
 
-.buisness-text:focus {
+.business-text:focus {
   outline: none;
 }
 
@@ -23,7 +23,7 @@
   height: 100vh;
 }
 
-.buisness-container {
+.business-container {
   position: fixed;
   top: 50%; /* Adjust the desired distance from the top */
   left: 5%; /* Adjust the desired distance from the left */
@@ -75,7 +75,7 @@
     width: 100%; /* Adjust the desired container width for smaller screens */
   }
 
-  .buisness-text {
+  .business-text {
     max-width: 50%; /* Reset the maximum width of the input box */
   }
 }

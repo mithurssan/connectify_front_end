@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './style.css'
 
 const SignupBusiness = () => {
 	const [companyName, setCompanyName] = useState('');
@@ -58,25 +59,26 @@ const SignupBusiness = () => {
 	};
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
+		<div className='container-login-register'>
+			<form onSubmit={handleSubmit} className="business-container">
 				<fieldset>
-					<label htmlFor="name">Company name: </label>
-					<input type="text" id="name" value={companyName} onChange={handleInputName} />
+					<label htmlFor="name" className="company-label" >Company name:  </label>
+					<input type="text" id="name" value={companyName} onChange={handleInputName} className='business-text' />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="number">Company number: </label>
-					<input type="number" id="number" value={companyNumber} onChange={handleInputNumber} />
+					<label htmlFor="number" className="company-label">Company number: </label>
+					<input type="number" id="number" value={companyNumber} onChange={handleInputNumber} className='business-text' />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="email">Email address: </label>
-					<input type="email" id="email" value={companyEmail} onChange={handleInputEmail} />
+					<label htmlFor="email" className="company-label">Email address: </label>
+					<input type="email" id="email" value={companyEmail} onChange={handleInputEmail} className='business-text' />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="password">Password: </label>
-					<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} />
+					<label htmlFor="password" className="company-label">Password: </label>
+					<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} className='business-text' />
 				</fieldset>
-				<input type="submit" value="Register" />
+				<input type="submit" value="Register" className='login-register-button' />
+			
 			</form>
 			{isLoaded && <h1>Correct Credentials</h1>}
 			{error && (

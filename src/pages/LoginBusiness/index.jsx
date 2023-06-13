@@ -54,7 +54,7 @@ const LoginBusiness = () => {
 
   return (
     <div className='container-login-register'>
-      <form onSubmit={handleSubmit} className='buisness-container'>
+      <form onSubmit={handleSubmit} className='business-container'>
         <label htmlFor='username' className='business-label'>
           Business name
         </label>
@@ -63,7 +63,7 @@ const LoginBusiness = () => {
           id='username'
           value={businessName}
           onChange={handleInputBusinessName}
-          className='buisness-text'
+          className='business-text'
         />
 
         <label htmlFor='password' className='business-label'>
@@ -74,7 +74,7 @@ const LoginBusiness = () => {
           id='password'
           value={password}
           onChange={handleInputPassword}
-          className='buisness-text'
+          className='business-text'
         />
 
         <input type='submit' value='LOGIN' className='login-register-button' />
