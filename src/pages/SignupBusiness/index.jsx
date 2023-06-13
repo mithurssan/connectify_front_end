@@ -59,25 +59,26 @@ const SignupBusiness = () => {
 	};
 
 	return (
-		<div>
+		<div className='container-login-register'>
 			<form onSubmit={handleSubmit} className="business-container">
 				<fieldset>
-					<label htmlFor="name" className="company-text" >Company name:  </label>
-					<input type="text" id="name" value={companyName} onChange={handleInputName} />
+					<label htmlFor="name" className="company-label" >Company name:  </label>
+					<input type="text" id="name" value={companyName} onChange={handleInputName} className='business-text' />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="number" className="company-text">Company number: </label>
-					<input type="number" id="number" value={companyNumber} onChange={handleInputNumber} />
+					<label htmlFor="number" className="company-label">Company number: </label>
+					<input type="number" id="number" value={companyNumber} onChange={handleInputNumber} className='business-text' />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="email" className="company-text">Email address: </label>
-					<input type="email" id="email" value={companyEmail} onChange={handleInputEmail} />
+					<label htmlFor="email" className="company-label">Email address: </label>
+					<input type="email" id="email" value={companyEmail} onChange={handleInputEmail} className='business-text' />
 				</fieldset>
 				<fieldset>
-					<label htmlFor="password" className="company-text">Password: </label>
-					<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} />
+					<label htmlFor="password" className="company-label">Password: </label>
+					<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} className='business-text' />
 				</fieldset>
-				<input type="submit" value="Register" className="sign-up" />
+				<input type="submit" value="Register" className='login-register-button' />
+			
 			</form>
 			{isLoaded && <h1>Correct Credentials</h1>}
 			{error && (
