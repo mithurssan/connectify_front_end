@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { SidebarData } from '../SidebarData/index'
 import './style.css'
 import { IconContext } from 'react-icons'
@@ -11,6 +11,12 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false)
 
   const showSidebar = () => setSidebar(!sidebar)
+
+  const activeStyle = {
+    color: '#785A9F',
+  }
+
+  const navActive = ({ isActive }) => (isActive ? activeStyle : undefined)
 
   return (
     <>
@@ -32,10 +38,10 @@ function Navbar() {
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
-                  <Link to={item.path}>
+                  <NavLink to={item.path} style={navActive}>
                     {item.icon}
                     <span>{item.title}</span>
-                  </Link>
+                  </NavLink>
                 </li>
               )
             })}
