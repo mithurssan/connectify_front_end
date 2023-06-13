@@ -20,19 +20,12 @@ describe("Wellbeing", () => {
   });
 
   it("renders the page heading", () => {
-    const heading = screen.getByRole('heading', { name: /mental health/i });
+    const heading = screen.getByRole('heading', { name: /wellbeing/i });
     expect(heading).toBeInTheDocument();
   });
 
-  it("renders the page description", () => {
-    const pageDescription = screen.getByText(
-      "Your well-being is important! Strive for a healthy balance between work, personal life, and leisure activities."
-    );
-    expect(pageDescription).toBeInTheDocument();
-  });
-
   it("renders the image", () => {
-    const image = screen.getByAltText("Importance of mental health");
+    const image = screen.getByAltText("Group of people");
     expect(image).toBeInTheDocument();
   });
 
