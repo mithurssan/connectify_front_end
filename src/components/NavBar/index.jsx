@@ -4,7 +4,6 @@ import * as AiIcons from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { SidebarData } from '../SidebarData/index'
 import './style.css'
-
 import { IconContext } from 'react-icons'
 
 function Navbar() {
@@ -17,6 +16,7 @@ function Navbar() {
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
           <h1 className='connectify'>Connectify</h1>
+
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
