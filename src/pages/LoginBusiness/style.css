@@ -6,7 +6,7 @@
 
 .buisness-text {
   width: 100%;
-  max-width: 500px; /* Set the maximum width of the input box */
+  max-width: 483px; /* Set the maximum width of the input box */
   height: 25px;
   padding: 8px; /* Adjust the desired padding */
   background-color: white;
@@ -45,6 +45,8 @@
   font-size: 15px;
   font-weight: 900;
   cursor: pointer;
+  width: 100%;
+  max-width: 500px;
 }
 
 .login-register-button:hover {
@@ -71,11 +73,10 @@
 
 @media (max-width: 600px) {
   /* Apply the styles when the viewport width is 600px or less */
-  .buisness-container {
-    width: 100%; /* Adjust the desired container width for smaller screens */
+  .login-register-button {
+    width: auto; /* Reset the button width to its original value */
   }
-
   .buisness-text {
-    max-width: 50%; /* Reset the maximum width of the input box */
+    width: auto;
   }
 }

@@ -7,6 +7,7 @@ import Navbar from '.'
 import { SidebarData } from '../SidebarData'
 
 import matchers from '@testing-library/jest-dom/matchers'
+import userEvent from '@testing-library/user-event'
 expect.extend(matchers)
 
 describe('Navbar component', () => {
@@ -36,5 +37,18 @@ describe('Navbar component', () => {
 
     const nav = screen.getAllByRole('navbar')
     expect(nav).toHaveLength(5)
+  })
+  it('should render the nav links when the menu is clicked', () => {
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    )
+
+    const menu = screen.getByRole('menu')
+    userEvent.click(menu)
+
+    const navbarLinks = screen.getByRole('nav')
+    expect(navbarLinks).toBeInTheDocument()
   })
 })
