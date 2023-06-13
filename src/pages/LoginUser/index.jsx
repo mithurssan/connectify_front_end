@@ -19,7 +19,8 @@ const LoginUser = () => {
 		} catch (error) {
 			console.log(error, 'error');
 			if (error.response.status == 401) {
-				alert('Invalid credentials');
+				setIsLoaded(false);
+				setError(true);
 			}
 		}
 	};
@@ -28,13 +29,16 @@ const LoginUser = () => {
 		e.preventDefault();
 
 		if (username.length === 0) {
-			alert('Do not forget about email!');
+			setIsLoaded(false);
+			setError(true);
 		} else if (password.length === 0) {
-			alert('Do not forget about password!');
+			setIsLoaded(false);
+			setError(true);
 		} else {
 			loginUser();
 
-			alert('success');
+			setIsLoaded(true);
+			setError(false);
 		}
 	};
 
@@ -57,7 +61,7 @@ const LoginUser = () => {
 					<label htmlFor="password">Password: </label>
 					<input type="password" id="password" value={password} onChange={handleInputPassword} />
 				</fieldset>
-				<input type="submit" value="Register" />
+				<input type="submit" value="Login" />
 			</form>
 			{isLoaded && <h1>Correct Credentials</h1>}
 			{error && (
