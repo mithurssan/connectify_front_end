@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686664212401" clover="3.2.0">
-  <project timestamp="1686664212401" name="All files">
+<coverage generated="1686666205494" clover="3.2.0">
+  <project timestamp="1686666205494" name="All files">
     <metrics statements="45" coveredstatements="45" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1" elements="47" coveredelements="47" complexity="0" loc="45" ncloc="45" packages="1" files="1" classes="1"/>
     <file name="index.jsx" path="C:\Users\tomic\Downloads\work\final-project\connectify_front_end\src\pages\Wellbeing\index.jsx">
       <metrics statements="45" coveredstatements="45" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
