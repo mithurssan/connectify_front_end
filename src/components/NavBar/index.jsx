@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { SidebarData } from '../SidebarData/index'
 import './style.css'
 import { IconContext } from 'react-icons'
+import { Outlet } from 'react-router-dom'
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false)
@@ -41,6 +42,7 @@ function Navbar() {
           </ul>
         </nav>
       </IconContext.Provider>
+      <Outlet />
     </>
   )
 }
