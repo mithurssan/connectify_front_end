@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import { Link, NavLink } from 'react-router-dom';
-import { SidebarData } from '../SidebarData/index';
-import './style.css';
-import { IconContext } from 'react-icons';
-import { Outlet, useLocation } from 'react-router-dom';
+import React, { useState } from 'react'
+import * as FaIcons from 'react-icons/fa'
+import * as AiIcons from 'react-icons/ai'
+import { Link, NavLink } from 'react-router-dom'
+import { SidebarData } from '../SidebarData/index'
+import './style.css'
+import { IconContext } from 'react-icons'
+import { Outlet, useLocation } from 'react-router-dom'
 
 function Navbar() {
-  const [sidebar, setSidebar] = useState(false);
-  const location = useLocation();
+  const [sidebar, setSidebar] = useState(false)
+  const location = useLocation()
 
-  const showSidebar = () => setSidebar(!sidebar);
+  const showSidebar = () => setSidebar(!sidebar)
 
   const activeStyle = {
     color: '#785A9F',
-  };
+  }
 
-  const navActive = ({ isActive }) => (isActive ? activeStyle : undefined);
+  const navActive = ({ isActive }) => (isActive ? activeStyle : undefined)
 
   return (
     <>
-      <IconContext.Provider value={{ color: '#0A1A41' , fontWeight: 900}}>
+      <IconContext.Provider value={{ color: '#0A1A41', fontWeight: 900 }}>
         <div className='navbar'>
           <h1 className='connectify'>Connectify</h1>
 
@@ -44,17 +44,15 @@ function Navbar() {
 
                     <span>{item.title}</span>
                   </NavLink>
-                  </li>
-                  </div>
-                );
-              })}
+                </li>
+              )
+            })}
           </ul>
         </nav>
       </IconContext.Provider>
       <Outlet />
     </>
-  );
+  )
 }
 
-export default Navbar;
-
+export default Navbar
