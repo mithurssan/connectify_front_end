@@ -38,11 +38,10 @@ function Navbar() {
             </li>
             {SidebarData.map((item, index) => {
               return (
-                <div className='menu-container'>
-                    
-                <li key={index} className={item.cName}>
-                  <NavLink to={item.path} isActive={navActive} exact>
-                    {item.icon}
+                <li key={index} className={item.cName} role='navbar'>
+                  <NavLink to={item.path} style={navActive}>
+                    <span role='icon'> {item.icon}</span>
+
                     <span>{item.title}</span>
                   </NavLink>
                   </li>
