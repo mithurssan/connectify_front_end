@@ -69,7 +69,7 @@ const SignupUser = () => {
 				<input type="submit" value="Register" className='login-register-button' />
 
 				<div className='container'>
-					<Link to='/signup/business' className='sign-up-business' >
+					<Link to='/login-register' className='sign-up-business' >
 						Sign Up as a Business
 					</Link>
 				</div>
