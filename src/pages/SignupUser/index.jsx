@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import LoginImage from '../../assets/Connectify.jpg';
+import './style.css';
 
 const SignupUser = () => {
 	const [username, setUsername] = useState('');
@@ -47,28 +50,47 @@ const SignupUser = () => {
 	};
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<fieldset>
-					<label htmlFor="username">Username: </label>
-					<input type="text" id="username" value={username} onChange={handleInputUsername} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="email">Email: </label>
-					<input type="email" id="email" value={email} onChange={handleInputEmail} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="password">Password: </label>
-					<input type="password" id="password" value={password} onChange={handleInputPassword} />
-				</fieldset>
-				<input type="submit" value="Register" />
+		<div className="container-login-register">
+			<form onSubmit={handleSubmit} className="business-container">
+				<label htmlFor="username" className="business-label">
+					Username:{' '}
+				</label>
+				<input type="text" id="username" value={username} onChange={handleInputUsername} className="business-text" />
+
+				<label htmlFor="email" className="business-label">
+					Email:{' '}
+				</label>
+				<input type="email" id="email" value={email} onChange={handleInputEmail} className="business-text" />
+
+				<label htmlFor="password" className="business-label">
+					Password:{' '}
+				</label>
+				<input type="password" id="password" value={password} onChange={handleInputPassword} className="business-text" />
+
+				<input type="submit" value="Register" className="login-register-button" />
+
+				<div className="container">
+					<Link to="/login-register" className="sign-up-business">
+						Sign Up as a Business
+					</Link>
+				</div>
 			</form>
-			{isLoaded && <h1>Correct Credentials</h1>}
+
+			{isLoaded && (
+				<h1 role="heading" name="Correct Credentials">
+					Correct Credentials
+				</h1>
+			)}
 			{error && (
 				<div>
-					<h1>Incorrect Credentials</h1>
+					<h1 role="heading" name="Incorrect Credentials">
+						Incorrect Credentials
+					</h1>
 				</div>
 			)}
+			<div className="login-register-image">
+				<img src={LoginImage} alt="login-page" className="image" />
+			</div>
 		</div>
 	);
 };

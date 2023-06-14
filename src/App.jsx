@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import * as Pages from './pages'
-import { NavBar, LoginPage } from './components'
+import { NavBar, LoginPage, LoginUse } from './components'
 
 import './App.css'
 
@@ -14,6 +14,7 @@ const App = () => {
       <Route path='/signup/business' element={<Pages.SignupBusiness />} />
       <Route path='/signup/user' element={<Pages.SignupUser />} />
       <Route path='/login-register' element={<LoginPage />} />
+      <Route path='/login-user' element={<LoginUse />} />
       <Route path='/' element={<NavBar />}>
         <Route index element={<Pages.Dashboard />} />
         <Route path='/rota' element={<Pages.Rota />} />
