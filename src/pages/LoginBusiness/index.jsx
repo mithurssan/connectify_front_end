@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import LoginImage from '../../assets/loginPage.png'
+import LoginImage from '../../assets/Connectify.jpg'
 
 import './style.css'
 
@@ -96,12 +96,7 @@ const LoginBusiness = () => {
       )}
 
       <div className='login-register-image'>
-        <div className='description'>
-          <h1 className='connectify-title'>Connectify</h1>
-          <h2 className='connectify-paragraph'>
-            One Platform, Limitless Connections
-          </h2>
-        </div>
+        
         <img src={LoginImage} alt='login-page' className='image' />
       </div>
     </div>
