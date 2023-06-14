@@ -9,10 +9,12 @@ import "./style.css"
 const Wellbeing = () => {
   return (
     <div className="wellbeing-page">
-      <h1>Wellbeing</h1>
+      <h1 className="heading">Mental Health</h1>
+      <div className='section'>
+      <p className="image-description"><b>Your well-being is important! Strive for a<br></br> healthy balance between work, personal<br></br> life, and leisure activities.</b> </p>
       <div className="image-container">
         <img src={group} alt="Group of people" />
-        <p className="image-description">"Prioritize self-care, and let the ripple effects of <br></br>well-being positively impact all areas of your life."</p>
+      </div>
       </div>
       <div>
       <div className="image-grid">

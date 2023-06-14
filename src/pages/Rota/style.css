@@ -1,0 +1,32 @@
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 40px;
+    max-width: 1400px;
+    max-height: 1400px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .calendar-wrapper {
+    height: 800px; 
+    width: 1400px
+  }
+
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active {
+  background-color: #785A9F!important;
+  color: #fff !important;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.rbc-event{
+  background-color: #785A9F !important;
+  color: #fff  !important;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.rbc-btn-group {
+  font-family: 'Montserrat', sans-serif;
+}
+

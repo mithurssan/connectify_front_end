@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686682442340" clover="3.2.0">
-  <project timestamp="1686682442340" name="All files">
-    <metrics statements="149" coveredstatements="149" conditionals="7" coveredconditionals="6" methods="4" coveredmethods="3" elements="160" coveredelements="158" complexity="0" loc="149" ncloc="149" packages="3" files="3" classes="3"/>
+<coverage generated="1686744353767" clover="3.2.0">
+  <project timestamp="1686744353767" name="All files">
+    <metrics statements="172" coveredstatements="172" conditionals="9" coveredconditionals="8" methods="6" coveredmethods="5" elements="187" coveredelements="185" complexity="0" loc="172" ncloc="172" packages="4" files="4" classes="4"/>
     <package name="components.NavBar">
       <metrics statements="65" coveredstatements="65" conditionals="6" coveredconditionals="5" methods="3" coveredmethods="2"/>
-      <file name="index.jsx" path="/Users/doheelee/Desktop/connectify_frontend/src/components/NavBar/index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\final-project\connectify_front_end\src\components\NavBar\index.jsx">
         <metrics statements="65" coveredstatements="65" conditionals="6" coveredconditionals="5" methods="3" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -75,7 +75,7 @@
     </package>
     <package name="components.SidebarData">
       <metrics statements="39" coveredstatements="39" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.jsx" path="/Users/doheelee/Desktop/connectify_frontend/src/components/SidebarData/index.jsx">
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\final-project\connectify_front_end\src\components\SidebarData\index.jsx">
         <metrics statements="39" coveredstatements="39" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -118,10 +118,37 @@
         <line num="39" count="1" type="stmt"/>
       </file>
     </package>
+    <package name="pages.NotFound">
+      <metrics statements="21" coveredstatements="21" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\final-project\connectify_front_end\src\pages\NotFound\index.jsx">
+        <metrics statements="21" coveredstatements="21" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="6" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+      </file>
+    </package>
     <package name="pages.Wellbeing">
-      <metrics statements="45" coveredstatements="45" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
-      <file name="index.jsx" path="/Users/doheelee/Desktop/connectify_frontend/src/pages/Wellbeing/index.jsx">
-        <metrics statements="45" coveredstatements="45" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <metrics statements="47" coveredstatements="47" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="index.jsx" path="C:\Users\tomic\Downloads\work\final-project\connectify_front_end\src\pages\Wellbeing\index.jsx">
+        <metrics statements="47" coveredstatements="47" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -165,8 +192,10 @@
         <line num="41" count="5" type="stmt"/>
         <line num="42" count="5" type="stmt"/>
         <line num="43" count="5" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
+        <line num="44" count="5" type="stmt"/>
+        <line num="45" count="5" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
       </file>
     </package>
   </project>
