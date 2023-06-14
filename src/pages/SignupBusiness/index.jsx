@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import LoginImage from '../../assets/Connectify.jpg';
+import './style.css';
 
 const SignupBusiness = () => {
 	const [companyName, setCompanyName] = useState('');
@@ -67,32 +72,40 @@ const SignupBusiness = () => {
 	};
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<fieldset>
-					<label htmlFor="name">Company name: </label>
-					<input type="text" id="name" value={companyName} onChange={handleInputName} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="number">Company number: </label>
-					<input type="number" id="number" value={companyNumber} onChange={handleInputNumber} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="email">Email address: </label>
-					<input type="email" id="email" value={companyEmail} onChange={handleInputEmail} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="password">Password: </label>
-					<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} />
-				</fieldset>
-				<input type="submit" value="Register" />
+		<div className="container-login-register">
+			<form onSubmit={handleSubmit} className="business-container">
+				<label htmlFor="name" className="business-label">
+					Company name:
+				</label>
+				<input type="text" id="name" value={companyName} onChange={handleInputName} className="business-text" />
+
+				<label htmlFor="number" className="business-label">
+					Company number:
+				</label>
+				<input type="number" id="number" value={companyNumber} onChange={handleInputNumber} className="business-text" />
+
+				<label htmlFor="email" className="business-label">
+					Email address:
+				</label>
+				<input type="email" id="email" value={companyEmail} onChange={handleInputEmail} className="business-text" />
+
+				<label htmlFor="password" className="business-label">
+					Password:
+				</label>
+				<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} className="business-text" />
+
+				<input type="submit" value="Register" className="login-register-button" />
 			</form>
+
 			{isLoaded && <h1>Correct Credentials</h1>}
 			{error && (
 				<div>
 					<h1>Incorrect Credentials</h1>
 				</div>
 			)}
+			<div className="login-register-image">
+				<img src={LoginImage} alt="login-page" className="image" />
+			</div>
 		</div>
 	);
 };

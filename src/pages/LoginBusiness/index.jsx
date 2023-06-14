@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import LoginImage from '../../assets/Connectify.jpg';
+
+import './style.css';
 
 const LoginBusiness = () => {
 	const [businessName, setBusinessName] = useState('');
@@ -50,24 +54,37 @@ const LoginBusiness = () => {
 	};
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<fieldset>
-					<label htmlFor="username">Business name: </label>
-					<input type="text" id="username" value={businessName} onChange={handleInputBusinessName} />
-				</fieldset>
-				<fieldset>
-					<label htmlFor="password">Password: </label>
-					<input type="password" id="password" value={password} onChange={handleInputPassword} />
-				</fieldset>
-				<input type="submit" value="Login" />
+		<div className="container-login-register">
+			<form onSubmit={handleSubmit} className="business-container">
+				<label htmlFor="username" className="business-label">
+					Business name:
+				</label>
+				<input type="text" id="username" value={businessName} onChange={handleInputBusinessName} className="business-text" />
+
+				<label htmlFor="password" className="business-label">
+					Password:
+				</label>
+
+				<input id="password" value={password} onChange={handleInputPassword} className="business-text" type="password" />
+
+				<input type="submit" value="Login" className="login-register-button" />
+				<div className="container">
+					<Link to="/login-user" className="sign-in-user">
+						SignIn as a User
+					</Link>
+				</div>
 			</form>
+
 			{isLoaded && <h1>Correct Credentials</h1>}
 			{error && (
 				<div>
 					<h1>Incorrect Credentials</h1>
 				</div>
 			)}
+
+			<div className="login-register-image">
+				<img src={LoginImage} alt="login-page" className="image" />
+			</div>
 		</div>
 	);
 };
