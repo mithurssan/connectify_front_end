@@ -58,7 +58,7 @@ const LoginBusiness = () => {
     <div className='container-login-register'>
       <form onSubmit={handleSubmit} className='business-container'>
         <label htmlFor='username' className='business-label'>
-          Business name
+          Business name:
         </label>
         <input
           type='text'
@@ -69,7 +69,7 @@ const LoginBusiness = () => {
         />
 
         <label htmlFor='password' className='business-label'>
-          Password
+          Password:
         </label>
 
         <input
@@ -80,10 +80,10 @@ const LoginBusiness = () => {
           type='password'
         />
 
-        <input type='submit' value='LOGIN' className='login-register-button' />
+        <input type='submit' value='Login' className='login-register-button' />
         <div className='container'>
           <Link to='/login/user' className='sign-in-user'>
-            Sign in as a User
+            SignIn as a User
           </Link>
         </div>
       </form>

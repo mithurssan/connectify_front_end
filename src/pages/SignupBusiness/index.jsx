@@ -70,7 +70,7 @@ const SignupBusiness = () => {
     <div className='container-login-register'>
       <form onSubmit={handleSubmit} className='business-container'>
         <label htmlFor='name' className='business-label'>
-          Company name
+          Company name:
         </label>
         <input
           type='text'
@@ -81,7 +81,7 @@ const SignupBusiness = () => {
         />
 
         <label htmlFor='number' className='business-label'>
-          Company number
+          Company number:
         </label>
         <input
           type='number'
@@ -92,7 +92,7 @@ const SignupBusiness = () => {
         />
 
         <label htmlFor='email' className='business-label'>
-          Email address
+          Email address:
         </label>
         <input
           type='email'
@@ -103,7 +103,7 @@ const SignupBusiness = () => {
         />
 
         <label htmlFor='password' className='business-label'>
-          Password
+          Password:
         </label>
         <input
           type='password'
@@ -115,7 +115,7 @@ const SignupBusiness = () => {
 
         <input
           type='submit'
-          value='REGISTER'
+          value='Register'
           className='login-register-button'
         />
         <div className='container'>
