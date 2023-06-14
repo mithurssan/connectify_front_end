@@ -1,25 +1,39 @@
 .login-wrapper {
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
+  gap: 10px;
 }
 
 .topbar {
-  display: flex;
-  gap: 25px;
-  cursor: pointer;
-  height: 9%;
+  position: absolute;
+  top: 2%;
+  left: 7%;
+  z-index: 1;
+  padding-bottom: 10px;
 }
 
 .mainContent {
   width: 1200px;
   box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out;
+  position: relative;
 }
 
+.slide-in-animation {
+  animation: slide-in 0.8s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
 .create-account,
 .sign-in {
   font-size: 30px;
@@ -39,20 +53,31 @@
   margin: 20px;
 }
 
-.mainContent.slide-in {
-  transform: translateX(-100%);
-  animation-fill-mode: forwards;
+.sign-in-focused::after,
+.sign-in:hover::after,
+.create-account-focused::after,
+.create-account:hover::after {
+  content: '';
+  position: absolute;
+  background-color: #785a9f;
+  height: 2px;
+  width: 0;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  opacity: 1;
+  transition: width 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
+  transform-origin: center;
 }
 
-.slide-in-animation {
-  animation: slide-in 0.3s ease-in-out forwards;
+.sign-in-focused::after,
+.sign-in:hover::after {
+  width: 100%;
+  opacity: 1;
 }
 
-@keyframes slide-in {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+.create-account-focused::after,
+.create-account:hover::after {
+  width: 100%;
+  opacity: 1;
 }

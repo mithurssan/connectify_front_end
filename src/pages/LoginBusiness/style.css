@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Montserrat';
-  src: url(path/to/font/Montserrat-Regular.ttf) format('truetype');}
-
+  src: url(path/to/font/Montserrat-Regular.ttf) format('truetype');
+}
 
 .container-login-register {
   display: grid;
@@ -21,7 +21,7 @@
   box-sizing: border-box;
   max-width: 800px;
   position: relative;
-
+  transition: 1s ease-in-out;
   padding-left: 5%;
   padding-right: 5%;
 }
@@ -52,13 +52,13 @@
 }
 
 .business-label {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 900;
   color: #0a1a41;
   align-self: flex-start;
   margin-left: 1%;
   margin-top: 18px;
-  font-family:'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .login-register-button {
@@ -86,19 +86,17 @@
 
 .sign-in-user {
   color: #ffffff;
-  font-size: 20px;
-  font-family:'Montserrat', sans-serif;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
   text-decoration: none;
 }
 .sign-in-user:hover {
   color: #785a9f;
   transition: 0.3s ease-in-out;
-  font-family:'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-decoration: underline;
 }
 
 .login-register-image {
   position: relative;
 }
-
-
