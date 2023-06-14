@@ -1,0 +1,36 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .not-found-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .not-found-message {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+  
+  .not-found-button {
+    padding: 12px 24px;
+    background-color: #785A9F;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .not-found-button:hover{
+  background-color: #f99776;
+  border: 2px solid #785a9f;
+  transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  }
