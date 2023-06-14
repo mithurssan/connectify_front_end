@@ -1,25 +1,45 @@
 import { useState } from 'react'
 import { LoginBusiness, SignupBusiness } from '../../pages'
-import LoginImage from '../../assets/loginPage.png'
+import './style.css'
 
 const LoginPage = () => {
   const [signIn, setSignIn] = useState(false)
+  const [slideAnimation, setSlideAnimation] = useState('')
 
   const activateSignIn = () => {
-    setSignIn(true)
+    setSlideAnimation('slide-in-animation')
+    setTimeout(() => {
+      setSignIn(false)
+      setSlideAnimation('')
+    }, 600)
   }
 
   const activateRegister = () => {
-    setSignIn(false)
+    setSlideAnimation('slide-in-animation')
+    setTimeout(() => {
+      setSignIn(true)
+      setSlideAnimation('')
+    }, 600)
   }
 
   return (
     <div className='login-wrapper'>
-      <button onClick={activateSignIn}>SIGN IN</button>
-      <button onClick={activateRegister}>SIGN UP</button>
-      <div className='mainContent'>
-        {signIn ? <LoginBusiness /> : <SignupBusiness />}
-        <img src={LoginImage} alt='login-page' />
+      <div className='topbar'>
+        <p
+          onClick={activateSignIn}
+          className={signIn ? 'sign-in' : 'sign-in-focused'}
+        >
+          SIGN IN
+        </p>
+        <p
+          onClick={activateRegister}
+          className={signIn ? 'create-account-focused' : 'create-account'}
+        >
+          SIGN UP
+        </p>
+      </div>
+      <div className={`mainContent ${slideAnimation}`}>
+        {!signIn ? <LoginBusiness /> : <SignupBusiness />}
       </div>
     </div>
   )
