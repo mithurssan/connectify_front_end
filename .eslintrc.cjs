@@ -1,21 +1,13 @@
 module.exports = {
-  env: { browser: true, es2020: true, node: true},
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    'react-refresh/only-export-components': 'warn',
-    'react/prop-types': 'off',
-    'no-unused-vars': ['off', { "varsIgnorePattern": "React" }],
-    'react/no-unescaped-entities': ["error", { "forbid": [">", "}"] }],
-    "react/jsx-key": "off",
-    "no-empty": "off",
-    "react-hooks/exhaustive-deps": 'off'
-  },
-}
+	env: { browser: true, es2020: true, node: true },
+	extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react/jsx-runtime', 'plugin:react-hooks/recommended'],
+	parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+	settings: { react: { version: '18.2' } },
+	plugins: ['react-refresh'],
+	rules: {
+		'react-refresh/only-export-components': 'warn',
+		'react/prop-types': 'off',
+		'no-unused-vars': ['off', { varsIgnorePattern: 'React' }],
+		'react/no-unescaped-entities': ['error', { forbid: ['>', '}'] }],
+	},
+};

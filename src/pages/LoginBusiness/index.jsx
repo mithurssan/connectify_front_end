@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import LoginImage from '../../assets/Connectify.jpg';
-
 import './style.css';
 
 const LoginBusiness = () => {
@@ -69,7 +68,7 @@ const LoginBusiness = () => {
 
 				<input type="submit" value="Login" className="login-register-button" />
 				<div className="container">
-					<Link to="/login-user" className="sign-in-user">
+					<Link to="/login/user" className="sign-in-user">
 						SignIn as a User
 					</Link>
 				</div>

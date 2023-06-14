@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 
@@ -69,11 +69,11 @@ const SignupUser = () => {
 
 				<input type="submit" value="Register" className="login-register-button" />
 
-				<div className="container">
+				{/* <div className="container">
 					<Link to="/login-register" className="sign-up-business">
 						Sign Up as a Business
 					</Link>
-				</div>
+				</div> */}
 			</form>
 
 			{isLoaded && (
