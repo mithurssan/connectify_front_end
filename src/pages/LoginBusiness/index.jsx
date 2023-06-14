@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import LoginImage from '../../assets/loginPage.png'
+
 import './style.css'
 
 const LoginBusiness = () => {
@@ -69,12 +71,13 @@ const LoginBusiness = () => {
         <label htmlFor='password' className='business-label'>
           Password
         </label>
+
         <input
-          type='password'
           id='password'
           value={password}
           onChange={handleInputPassword}
           className='business-text'
+          type='password'
         />
 
         <input type='submit' value='LOGIN' className='login-register-button' />
@@ -84,12 +87,23 @@ const LoginBusiness = () => {
           </Link>
         </div>
       </form>
+
       {isLoaded && <h1>Correct Credentials</h1>}
       {error && (
         <div>
           <h1>Incorrect Credentials</h1>
         </div>
       )}
+
+      <div className='login-register-image'>
+        <div className='description'>
+          <h1 className='connectify-title'>Connectify</h1>
+          <h2 className='connectify-paragraph'>
+            One Platform, Limitless Connections
+          </h2>
+        </div>
+        <img src={LoginImage} alt='login-page' className='image' />
+      </div>
     </div>
   )
 }

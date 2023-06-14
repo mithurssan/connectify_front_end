@@ -30,11 +30,14 @@ function Navbar() {
           <h1 className='connectify'>Connectify</h1>
 
           <Link to='#' className='menu-bars'>
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={showSidebar} role='menu' />
           </Link>
         </div>
-        <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
+        <nav
+          className={sidebar ? 'nav-menu active' : 'nav-menu'}
+          role='sidebar'
+        >
+          <ul className='nav-menu-items' onClick={showSidebar} role='nav'>
             <li className='navbar-toggle'>
               <Link to='#' className='menu-bars'>
                 <AiIcons.AiOutlineClose />
