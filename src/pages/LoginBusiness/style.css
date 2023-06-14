@@ -1,42 +1,62 @@
-.business-label {
-  font-size: 20px;
-  font-weight: 900;
-  color: #0a1a41;
+.container-login-register {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  width: 100%;
+  height: 100%;
+  background-color: #f99776;
+  position: relative;
 }
 
-.business-text {
-  height: 25px;
-  padding: 8px; /* Adjust the desired padding */
-  background-color: white;
+.business-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  max-width: 800px;
+  position: relative;
+
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.business-text,
+.login-register-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  height: 6%;
   border: none;
-  max-width: 483px;
+  width: 100%;
 }
 
 .business-text:focus {
   outline: none;
 }
 
-.container-login-register {
-  background-color: #f99776;
-  width: 100vw;
-  height: 100vh;
+.business-text {
+  font-size: 20px;
 }
 
-.business-container {
-  position: fixed;
-  top: 50%; /* Adjust the desired distance from the top */
-  left: 5%; /* Adjust the desired distance from the left */
-  transform: translate(0, -50%); /* Center the container using translation */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Add space between the elements */
-  gap: 10px;
-  width: 80%;
-  max-width: 550px;
+.image {
+  width: 100%;
+  height: 100%;
 }
+
+.business-label {
+  font-size: 20px;
+  font-weight: 900;
+  color: #0a1a41;
+  align-self: flex-start;
+  margin-left: 7%;
+  margin-top: 18px;
+}
+
 .login-register-button {
   margin-top: 20px;
-  height: 40px;
   background-color: #785a9f;
   border: none;
   color: white;
@@ -44,7 +64,6 @@
   font-weight: 900;
   cursor: pointer;
   width: 100%;
-  max-width: 500px;
 }
 
 .login-register-button:hover {
@@ -56,39 +75,36 @@
 }
 
 .container {
-  transform: translate(35%, 80%);
+  margin-top: 20px;
 }
 
 .sign-in-user {
   color: #ffffff;
-  font-size: 18px;
+  font-size: 20px;
 }
 .sign-in-user:hover {
   color: #785a9f;
   transition: 0.3s ease-in-out;
 }
-@media (max-width: 600px) {
-  /* Apply the styles when the viewport width is 600px or less */
-  .login-register-button {
-    width: auto; /* Reset the button width to its original value */
-  }
 
-  .business-text {
-    width: auto; /* Reset the button width to its original value */
-  }
-  .showPassword {
-    position: fixed;
-    top: 50px;
-  }
-
-  .showPassword {
-    transform: translate(-30px);
-  }
+.login-register-image {
+  position: relative;
 }
 
-.showPassword {
-  position: fixed;
-  top: 130px;
-  left: 450px;
-  cursor: pointer;
+.description {
+  position: absolute;
+  top: 15%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  justify-content: center;
+  align-items: center;
+}
+.connectify-title {
+  font-size: 60px;
+}
+.connectify-paragraph {
+  font-size: 30px;
 }

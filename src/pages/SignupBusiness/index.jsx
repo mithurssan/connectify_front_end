@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import LoginImage from '../../assets/loginPage.png'
 import './style.css'
 
 const SignupBusiness = () => {
@@ -10,11 +11,6 @@ const SignupBusiness = () => {
   const [companyEmail, setCompanyEmail] = useState('')
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-
-  const showPasswordHandler = () => {
-    setShowPassword((prev) => !prev)
-  }
 
   async function getCompany(companyNumber) {
     try {
@@ -107,23 +103,19 @@ const SignupBusiness = () => {
         />
 
         <label htmlFor='password' className='business-label'>
-          Password:
+          Password
         </label>
         <input
-          type={!showPassword ? 'password' : 'text'}
+          type='password'
           id='password'
           value={companyPassword}
           onChange={handleInputPassword}
           className='business-text'
         />
 
-        <span className='showPassword2' onClick={showPasswordHandler}>
-          {showPassword ? 'Hide' : 'Show'}
-        </span>
-
         <input
           type='submit'
-          value='Register'
+          value='REGISTER'
           className='login-register-button'
         />
         <div className='container'>
@@ -139,6 +131,15 @@ const SignupBusiness = () => {
           <h1>Incorrect Credentials</h1>
         </div>
       )}
+      <div className='login-register-image'>
+        <div className='description'>
+          <h1 className='connectify-title'>Connectify</h1>
+          <h2 className='connectify-paragraph'>
+            One Platform, Limitless Connections
+          </h2>
+        </div>
+        <img src={LoginImage} alt='login-page' className='image' />
+      </div>
     </div>
   )
 }
