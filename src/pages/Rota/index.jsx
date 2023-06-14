@@ -2,48 +2,41 @@ import React, { useEffect, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'; 
-import "./style.css"
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+import './style.css';
 
 const localizer = momentLocalizer(moment);
-const DragAndDropCalendar = withDragAndDrop(Calendar); 
+const DragAndDropCalendar = withDragAndDrop(Calendar);
 
 const Rota = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetchEvents()
-      .then((data) => {
-        setEvents(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching events:', error);
-      });
+    // Load mock events on component mount
+    const mockEvents = [
+      {
+        id: 1,
+        title: 'Event 1',
+        start: moment().startOf('day').toDate(),
+        end: moment().endOf('day').toDate(),
+      },
+      {
+        id: 2,
+        title: 'Event 2',
+        start: moment().add(1, 'day').startOf('day').toDate(),
+        end: moment().add(1, 'day').endOf('day').toDate(),
+      },
+    ];
+
+    setEvents(mockEvents);
   }, []);
 
-  const fetchEvents = async () => {
-    try {
-      const response = await fetch('');
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      throw new Error('');
-    }
-  };
-
-  const handleEventDrop = async ({ event, start, end }) => {
-    const updatedEvent = { ...event, start, end };
-
-    try {
-      await updateEvent(updatedEvent);
-
-      const updatedEvents = events.map((ev) =>
-        ev.id === updatedEvent.id ? updatedEvent : ev
-      );
-      setEvents(updatedEvents);
-    } catch (error) {
-      console.error('Error updating event:', error);
-    }
+  const handleEventDrop = ({ event, start, end }) => {
+    // Update the event start and end times in the local state
+    const updatedEvents = events.map((ev) =>
+      ev.id === event.id ? { ...ev, start, end } : ev
+    );
+    setEvents(updatedEvents);
   };
 
   return (
