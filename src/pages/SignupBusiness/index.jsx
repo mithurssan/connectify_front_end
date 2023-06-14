@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const SignupBusiness = () => {
@@ -6,15 +6,27 @@ const SignupBusiness = () => {
 	const [companyNumber, setCompanyNumber] = useState('');
 	const [companyPassword, setCompanyPassword] = useState('');
 	const [companyEmail, setCompanyEmail] = useState('');
+	const [data, setData] = useState('');
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [error, setError] = useState(false);
 
-	async function getCompany(companyNumber) {
+	useEffect(() => {
+		postCompany();
+	}, [data]);
+
+	async function getCompany(number) {
 		try {
-			const url = `http://127.0.0.1:5000/api/company/${companyNumber}`;
+			const url = `http://127.0.0.1:5000/api/company/${number}`;
 			const res = await axios.get(url);
 			const data = res.data;
+			setData(data);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
+	async function postCompany() {
+		try {
 			if (data['company_name'] == companyName && data['company_number'] == companyNumber) {
 				const res = await axios.post('http://127.0.0.1:5000/businesses/register', {
 					business_name: companyName,
@@ -22,25 +34,22 @@ const SignupBusiness = () => {
 					business_email: companyEmail,
 					business_password: companyPassword,
 				});
-
 				console.log(res);
-
 				setError(false);
 				setIsLoaded(true);
 				console.log(data);
 			} else {
-				setError(true);
 				setIsLoaded(false);
 			}
 		} catch (error) {
+			setError(true);
 			console.error(error);
 		}
 	}
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		getCompany(companyNumber);
+		await getCompany(companyNumber);
 	};
 
 	const handleInputName = (e) => {
