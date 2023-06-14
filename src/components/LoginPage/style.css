@@ -17,7 +17,7 @@
 .mainContent {
   width: 1200px;
   box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.3);
-  transition: 10s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .create-account,
@@ -29,6 +29,7 @@
   margin: 20px;
   color: #868686;
 }
+
 .sign-in-focused,
 .create-account-focused {
   font-size: 30px;
@@ -38,49 +39,13 @@
   margin: 20px;
 }
 
-.sign-in-focused::after,
-.sign-in:hover::after,
-.create-account-focused::after,
-.create-account:hover::after {
-  content: '';
-  position: absolute;
-  background-color: #f99776;
-  height: 5px;
-  width: 0; /* Initially hide the line */
-  left: 50%; /* Position the line in the center */
-  bottom: 5px;
-  transform: translateX(-50%); /* Center the line horizontally */
-  opacity: 1;
-  transition: width 0.3s ease;
-  transform-origin: center;
-}
-
-.sign-in-focused::after,
-.sign-in:hover::after {
-  width: 100%; /* Show the line when focused or hovered */
-  transform: translateX(-50%) translateY(50%); /* Adjust vertical position */
-}
-
-.create-account-focused::after,
-.create-account:hover::after {
-  width: 100%;
-  transform: translateX(-50%) translateY(50%); /* Adjust vertical position */
-}
-
 .mainContent.slide-in {
   transform: translateX(-100%);
-}
-
-.mainContent.slide-out {
-  transform: translateX(100%);
+  animation-fill-mode: forwards;
 }
 
 .slide-in-animation {
   animation: slide-in 0.3s ease-in-out forwards;
-}
-
-.slide-out-animation {
-  animation: slide-out 0.3s ease-in-out forwards;
 }
 
 @keyframes slide-in {

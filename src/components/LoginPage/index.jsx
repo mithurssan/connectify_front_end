@@ -11,7 +11,7 @@ const LoginPage = () => {
     setTimeout(() => {
       setSignIn(false)
       setSlideAnimation('')
-    }, 600)
+    }, 300)
   }
 
   const activateRegister = () => {
@@ -19,7 +19,7 @@ const LoginPage = () => {
     setTimeout(() => {
       setSignIn(true)
       setSlideAnimation('')
-    }, 600)
+    }, 300)
   }
 
   return (
@@ -39,7 +39,8 @@ const LoginPage = () => {
         </p>
       </div>
       <div className={`mainContent ${slideAnimation}`}>
-        {!signIn ? <LoginBusiness /> : <SignupBusiness />}
+        {!signIn && <LoginBusiness />}
+        {signIn && <SignupBusiness />}
       </div>
     </div>
   )
