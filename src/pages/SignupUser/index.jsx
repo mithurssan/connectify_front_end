@@ -16,11 +16,13 @@ const SignupUser = () => {
 			const url = 'http://127.0.0.1:5000/users/register';
 			const options = { user_username: username, user_email: email, user_password: password };
 			const res = await axios.post(url, options);
+
 			const data = res.data;
 
 			if (res.status === 200) {
 				setError(false);
 				setIsLoaded(true);
+				await axios.post('http://127.0.0.1:5000/verify-email', { user_email: email, token: data.token });
 			} else {
 				setError(true);
 				setIsLoaded(false);

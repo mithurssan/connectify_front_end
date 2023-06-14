@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 
-const LoginUser = () => {
+const LoginUser = (props) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -17,10 +17,12 @@ const LoginUser = () => {
 				user_username: username,
 				user_password: password,
 			};
-			await axios.post(url, options);
+			const res = await axios.post(url, options);
+			props.setToken(res.data.token);
+			console.log(res.data);
 		} catch (error) {
 			console.log(error, 'error');
-			if (error.response.status == 401) {
+			if (error.response && error.response.status == 401) {
 				setIsLoaded(false);
 				setError(true);
 			}

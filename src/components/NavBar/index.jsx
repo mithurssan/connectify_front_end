@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link, NavLink } from 'react-router-dom';
-import { SidebarData } from '../SidebarData/index';
-import './style.css';
 import { IconContext } from 'react-icons';
 import { Outlet, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { SidebarData } from '../SidebarData/index';
+import './style.css';
 
-function Navbar() {
+function Navbar({ token }) {
 	const [sidebar, setSidebar] = useState(false);
 	const location = useLocation();
 
@@ -18,6 +19,12 @@ function Navbar() {
 	};
 
 	const navActive = ({ isActive }) => (isActive ? activeStyle : undefined);
+
+	const logout = async () => {
+		const url = 'http://127.0.0.1:5000/logout';
+		await axios.post(url);
+		token();
+	};
 
 	return (
 		<>
@@ -52,6 +59,7 @@ function Navbar() {
 						})}
 					</ul>
 				</nav>
+				<button onClick={logout}>Logout</button>
 			</IconContext.Provider>
 			<Outlet />
 		</>
