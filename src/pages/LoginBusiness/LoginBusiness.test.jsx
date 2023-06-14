@@ -51,7 +51,6 @@ describe('LoginBusiness page', () => {
 	});
 
 	test('shows error for incorrect credentials', async () => {
-		// Mock axios.post to simulate an error response
 		vi.spyOn(axios, 'post').mockRejectedValueOnce({ response: { status: 401 } });
 
 		render(<LoginBusiness />);
