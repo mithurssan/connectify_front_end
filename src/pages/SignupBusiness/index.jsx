@@ -118,11 +118,7 @@ const SignupBusiness = () => {
           value='Register'
           className='login-register-button'
         />
-        <div className='container'>
-          <Link to='/login/user' className='sign-in-user'>
-            Sign in as a User
-          </Link>
-        </div>
+        
       </form>
 
       {isLoaded && <h1>Correct Credentials</h1>}

@@ -82,7 +82,7 @@ const LoginBusiness = () => {
 
         <input type='submit' value='Login' className='login-register-button' />
         <div className='container'>
-          <Link to='/login/user' className='sign-in-user'>
+          <Link to='/login-user' className='sign-in-user'>
             SignIn as a User
           </Link>
         </div>
