@@ -93,6 +93,8 @@ describe('SignupBusiness page', () => {
 		expect(screen.getByRole('heading', { name: 'Incorrect Credentials' })).toBeDefined();
 	});
 
+	// ! TEST SHOULD CHECK ERRORS BUT DOES NOT WORK
+	// TODO: FIX IT
 	// async function getCompany(number) {
 	// 	try {
 	// 		const url = `http://127.0.0.1:5000/api/company/${number}`;

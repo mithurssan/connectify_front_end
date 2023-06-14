@@ -35,17 +35,14 @@ describe('SignupUser page', () => {
 
 		render(<SignupUser />);
 
-		// Fill in the form fields
 		fireEvent.change(screen.getByLabelText('Username:'), { target: { value: 'testuser' } });
 		fireEvent.change(screen.getByLabelText('Email:'), { target: { value: 'test@example.com' } });
 		fireEvent.change(screen.getByLabelText('Password:'), { target: { value: 'testpassword' } });
 
 		fireEvent.click(screen.getAllByRole('button', { name: 'Register' })[0]);
 
-		// Wait for the API request to resolve
 		await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
 
-		// Assert that the error message is displayed
 		expect(screen.getByRole('heading', { name: 'Incorrect Credentials' })).toBeDefined();
 	});
 
