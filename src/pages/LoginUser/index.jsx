@@ -14,8 +14,7 @@ const LoginUser = () => {
 				user_username: username,
 				user_password: password,
 			};
-			const res = await axios.post(url, options);
-			console.log(res);
+			await axios.post(url, options);
 		} catch (error) {
 			console.log(error, 'error');
 			if (error.response.status == 401) {
