@@ -24,7 +24,6 @@ function Navbar() {
       <IconContext.Provider
         value={{
           color: '#0A1A41',
-          marginTop: '-90px',
         }}
       >
         <div className='navbar'>

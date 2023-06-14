@@ -1,13 +1,2 @@
-.showPassword2 {
-  position: fixed;
-  top: 296px;
-  left: 450px;
-  cursor: pointer;
-}
-@media (max-width: 600px) {
-  /* Apply the styles when the viewport width is 600px or less */
 
-  .showPassword2 {
-    transform: translate(-30px);
-  }
-}
+

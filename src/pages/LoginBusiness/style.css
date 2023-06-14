@@ -51,7 +51,7 @@
   font-weight: 900;
   color: #0a1a41;
   align-self: flex-start;
-  margin-left: 7%;
+  margin-left: 1%;
   margin-top: 18px;
 }
 
@@ -94,11 +94,11 @@
 .description {
   position: absolute;
   top: 15%;
-  left: 52%;
+  left: 55%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  max-width: 500px;
+
   justify-content: center;
   align-items: center;
 }
