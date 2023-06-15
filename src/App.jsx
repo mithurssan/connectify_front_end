@@ -12,7 +12,7 @@ const App = () => {
 	return (
 		<>
 			{!token && token !== '' && token !== undefined ? (
-				<Pages.SignupUser setToken={setToken} />
+				<Pages.LoginUser setToken={setToken} />
 			) : (
 				<Routes>
 					<Route path="/" element={<NavBar token={removeToken} />}>
