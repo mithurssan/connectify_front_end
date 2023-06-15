@@ -4,28 +4,30 @@ import { Link } from 'react-router-dom'
 import LoginImage from '../../assets/Connectify.jpg'
 import './style.css'
 
-const LoginUser = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [error, setError] = useState(false)
+const LoginUser = (props) => {
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [error, setError] = useState(false);
 
-  const loginUser = async () => {
-    try {
-      const url = 'http://127.0.0.1:5000/users/login'
-      const options = {
-        user_username: username,
-        user_password: password,
-      }
-      await axios.post(url, options)
-    } catch (error) {
-      console.log(error, 'error')
-      if (error.response.status == 401) {
-        setIsLoaded(false)
-        setError(true)
-      }
-    }
-  }
+	const loginUser = async () => {
+		try {
+			const url = 'http://127.0.0.1:5000/users/login';
+			const options = {
+				user_username: username,
+				user_password: password,
+			};
+			const res = await axios.post(url, options);
+			props.setToken(res.data.token);
+			console.log(res.data);
+		} catch (error) {
+			console.log(error, 'error');
+			if (error.response && error.response.status == 401) {
+				setIsLoaded(false);
+				setError(true);
+			}
+		}
+	};
 
   const handleSubmit = async (e) => {
     e.preventDefault()
