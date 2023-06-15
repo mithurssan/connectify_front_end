@@ -24,23 +24,26 @@ const LoginPage = () => {
 
   return (
     <div className='login-wrapper'>
-      <div className='topbar'>
-        <p
-          onClick={activateSignIn}
-          className={signIn ? 'sign-in' : 'sign-in-focused'}
-        >
-          SIGN IN
-        </p>
-        <p
-          onClick={activateRegister}
-          className={signIn ? 'create-account-focused' : 'create-account'}
-        >
-          SIGN UP
-        </p>
-      </div>
       <div className={`mainContent ${slideAnimation}`}>
-        {!signIn && <LoginBusiness />}
-        {signIn && <SignupBusiness />}
+        <div className='topbar'>
+          <div className='signup-box'>
+            <p
+              onClick={activateSignIn}
+              className={signIn ? 'sign-in' : 'sign-in-focused'}
+            >
+              SIGN IN
+            </p>
+          </div>
+          <div className='signin-box'>
+            <p
+              onClick={activateRegister}
+              className={signIn ? 'create-account-focused' : 'create-account'}
+            >
+              SIGN UP
+            </p>
+          </div>
+        </div>
+        {!signIn ? <LoginBusiness /> : <SignupBusiness />}
       </div>
     </div>
   )

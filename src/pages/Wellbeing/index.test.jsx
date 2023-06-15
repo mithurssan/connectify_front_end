@@ -20,7 +20,7 @@ describe("Wellbeing", () => {
   });
 
   it("renders the page heading", () => {
-    const heading = screen.getByRole('heading', { name: /wellbeing/i });
+    const heading = screen.getByRole('heading', { name: /Mental Health/i });
     expect(heading).toBeInTheDocument();
   });
 
