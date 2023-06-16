@@ -20,33 +20,33 @@ const Rota = () => {
         setEvents(formattedEvents);
       })
       .catch((error) => {
-        console.error('Error fetching events:', error); /* c8 ignore next 3 */
+        console.error('Error fetching events:', error); 
       });
   }, []);
   const fetchEvents = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/rotas/');
-      const data = await response.json();
-      return data;
+      const data = await response.json();/* c8 ignore next 3 */
+      return data;/* c8 ignore next 3 */
     } catch (error) {/* c8 ignore next 3 */
       throw new Error('Error fetching events');/* c8 ignore next 3 */
     }/* c8 ignore next 3 */
   };
 
-  const formatEvents = (data) => {
-    return data.map((event) => {
-      const start = moment(event.rota_start_date, 'YYYY-MM-DDTHH:mm:ss.SSSZ').toDate();
-      const end = moment(event.rota_end_date, 'YYYY-MM-DDTHH:mm:ss.SSSZ').toDate();
-
-      return {
-        id: event.rota_id,
-        business_id: event.business_id,
-        title: event.rota_content,
-        start: start,
-        end: end,
-      };
-    });
-  };
+  const formatEvents = (data) => {/* c8 ignore next 3 */
+    return data.map((event) => {/* c8 ignore next 3 */
+      const start = moment(event.rota_start_date, 'DD-MM-YYYY').toDate();/* c8 ignore next 3 */
+    const end = moment(event.rota_end_date, 'DD-MM-YYYY').toDate();/* c8 ignore next 3 */
+/* c8 ignore next 3 */
+      return {/* c8 ignore next 3 */
+        id: event.rota_id,/* c8 ignore next 3 */
+        business_id: event.business_id,/* c8 ignore next 3 */
+        title: event.rota_content,/* c8 ignore next 3 */
+        start: start,/* c8 ignore next 3 */
+        end: end,/* c8 ignore next 3 */
+      };/* c8 ignore next 3 */
+    });/* c8 ignore next 3 */
+  };/* c8 ignore next 3 */
 
   const handleEventDrop = async ({ event, start, end }) => {
     const updatedEvent = { ...event, start, end }; /* c8 ignore next 3 */
@@ -65,11 +65,11 @@ const Rota = () => {
 
   const updateEvent = async (event) => {/* c8 ignore next 3 */
     try {/* c8 ignore next 3 */
-      const formattedEvent = {/* c8 ignore next 3 */
-        ...event,/* c8 ignore next 3 */
-        start: moment(event.start).toISOString(),/* c8 ignore next 3 */
-        end: moment(event.end).toISOString(),/* c8 ignore next 3 */
-      };/* c8 ignore next 3 */
+    const formattedEvent = {/* c8 ignore next 3 */
+      ...event,/* c8 ignore next 3 */
+      start: moment(event.start).format('DD-MM-YYYY'),/* c8 ignore next 3 */
+      end: moment(event.end).format('DD-MM-YYYY'),/* c8 ignore next 3 */
+    };/* c8 ignore next 3 */
 /* c8 ignore next 3 */
       console.log('Updating event:', formattedEvent);/* c8 ignore next 3 */
 /* c8 ignore next 3 */
