@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Pages from './pages';
 import { NavBar, LoginPage, LoginUse, Spinner } from './components';
 import useToken from './components/useToken';
-import { setToken, removeToken, loadPersistedState } from './actions';
+import { setToken, removeToken } from './actions';
+import { loadPersistedState } from './localStorage';
 import './App.css';
 
 const App = () => {
@@ -25,28 +26,33 @@ const App = () => {
 
 	return (
 		<>
-			<Routes>
-				{/* <Route path="/" element={token ? <NavBar token={handleRemoveToken} /> : <Navigate to="/login-register" />}> */}
-				<Route index element={token ? <Pages.Dashboard /> : <Navigate to="/login-register" />} />
+			{!token ? (
+				<>
+					<Routes>
+						<Route path="/" element={<Pages.Home />} />
+						<Route path="/login-register" element={<LoginPage />} />
+						<Route path="/login-user" element={<LoginUse />} />
+					</Routes>
+				</>
+			) : (
+				<Routes>
+					<Route path="/" element={<NavBar />}>
+						<Route path="/dashboard" element={<Pages.Dashboard />} />
+						<Route path="/rota" element={<Pages.Rota />} />
+						<Route path="/wellbeing" element={<Pages.Wellbeing />} />
+						<Route path="/profile/:username" element={<Pages.Profile />} />
+						<Route path="/bookings" element={<Pages.Booking />} />
+						<Route path="*" element={<Pages.NotFound />} />
+					</Route>
 
-				<Route path="/rota" element={token ? <Pages.Rota /> : <Navigate to="/login-register" />} />
-				<Route path="/wellbeing" element={token ? <Pages.Wellbeing /> : <Navigate to="/login-register" />} />
-
-				<Route path="/profile/:username" element={token ? <Pages.Profile /> : <Navigate to="/login-register" />} />
-				<Route path="/bookings" element={token ? <Pages.Booking /> : <Navigate to="/login-register" />} />
-				<Route path="/home" element={token ? <Pages.Home /> : <Navigate to="/login-register" />} />
-				<Route path="/spinner" element={token ? <Spinner /> : <Navigate to="/login-register" />} />
-				<Route path="/chat" element={token ? <Pages.Chat /> : <Navigate to="/login-register" />} />
-
-				<Route path="/login-register" element={token ? null : <LoginUse token={handleSetToken} />} />
-				<Route path="/login/user" element={token === null ? <Pages.LoginUser /> : <Navigate to="/" />} />
-				<Route path="/login/business" element={token === null ? <Pages.LoginBusiness /> : <Navigate to="/" />} />
-				<Route path="/signup/business" element={token === null ? <Pages.SignupBusiness /> : <Navigate to="/" />} />
-				<Route path="/signup/user" element={token === null ? <Pages.SignupUser /> : <Navigate to="/" />} />
-				<Route path="/login-user" element={token === null ? <LoginUse /> : <Navigate to="/" />} />
-				<Route path="/*" element={token ? <Pages.NotFound /> : <Navigate to="/login-register" />} />
-				{/* </Route> */}
-			</Routes>
+					<Route path="/login/user" element={<Pages.LoginUser />} />
+					<Route path="/login/business" element={<Pages.LoginBusiness />} />
+					<Route path="/signup/business" element={<Pages.SignupBusiness />} />
+					<Route path="/signup/user" element={<Pages.SignupUser />} />
+					<Route path="/login-register" element={<LoginPage />} />
+					<Route path="/login-user" element={<LoginUse />} />
+				</Routes>
+			)}
 		</>
 	);
 };
