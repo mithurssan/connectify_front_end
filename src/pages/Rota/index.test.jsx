@@ -35,33 +35,34 @@ describe('Rota', () => {
     const event = {
       rota_id: 1,
       business_id: 1,
-      rota_start_date: '2023-06-16T09:00:00.000Z',
-      rota_end_date: '2023-06-16T17:00:00.000Z',
-      rota_content: 'Assigned to user: test1',
+      rota_start_date: '16-06-2023',
+      rota_end_date: '20-06-2023',
+      rota_content: 'Assigned to user: test1'
     };
 
     mockAxios.onPut(`http://127.0.0.1:5000/rotas/${event.rota_id}`).reply(200);
-    
+
   });
 
   it('handles error when fetching events', async () => {
     mockAxios.onGet('http://127.0.0.1:5000/rotas/').reply(500);
 
-    await expect(screen.findByText('Assigned to user: test6')).rejects.toThrow();
+    await expect(screen.findByText('Assigned to user: test1')).rejects.toThrow();
   });
 
   it('handles error when updating an event', async () => {
     const event = {
       rota_id: 1,
       business_id: 1,
-      rota_start_date: '2023-06-16T09:00:00.000Z',
-      rota_end_date: '2023-06-16T17:00:00.000Z',
-      rota_content: 'Assigned to user: test6',
+      rota_start_date: '16-06-2023',
+      rota_end_date: '20-06-2023',
+      rota_content: 'Assigned to user: test1'
     };
 
     mockAxios.onPut(`http://127.0.0.1:5000/rotas/${event.rota_id}`).reply(500);
 
   });
+  
 
 });
 
