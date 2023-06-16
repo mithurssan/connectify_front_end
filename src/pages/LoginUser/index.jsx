@@ -19,21 +19,38 @@ const LoginUser = () => {
   const password = useSelector((state) => state.user.password)
   const isLoaded = useSelector((state) => state.app.isLoaded)
   const error = useSelector((state) => state.app.error)
+  const token = useSelector((state) => state.auth.token) // Add this line to access the token state
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const storedToken = localStorage.getItem('token')
+        if (storedToken) {
+          dispatch(setToken(storedToken))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchToken()
+  }, [dispatch])
 
   const loginUser = async () => {
     try {
       const url = 'http://127.0.0.1:5000/users/login'
-      const options = {
+      const data = {
         user_username: username,
         user_password: password,
       }
-      const res = await axios.post(url, options)
-      dispatch(setToken(res.data.token))
-      navigate('/dashboard')
+      const res = await axios.post(url, data)
+      await dispatch(setToken(res.data.token))
+      console.log('Token dispatched:', res.data.token)
       console.log(dispatch(setToken(res.data.token)))
+      navigate('/dashboard')
     } catch (error) {
       console.log(error, 'error')
-      if (error.response && error.response.status == 401) {
+      if (error.response && error.response.status === 401) {
         dispatch(setIsLoaded(false))
         dispatch(setError(true))
       }

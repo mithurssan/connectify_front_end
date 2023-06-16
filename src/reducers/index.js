@@ -8,6 +8,7 @@ export const authReducer = (state = initialTokenState, action) => {
       return { ...state, token: action.payload }
     case 'REMOVE_TOKEN':
       return { ...state, token: null }
+
     default:
       return state
   }
