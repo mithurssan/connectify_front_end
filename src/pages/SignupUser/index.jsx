@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { setUsername, setEmail, setPassword, setIsLoaded, setError } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 
 const SignupUser = () => {
-	const [username, setUsername] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [error, setError] = useState(false);
+	const dispatch = useDispatch();
+	const username = useSelector((state) => state.user.username);
+	const email = useSelector((state) => state.user.email);
+	const password = useSelector((state) => state.user.password);
+	const isLoaded = useSelector((state) => state.app.isLoaded);
+	const error = useSelector((state) => state.app.error);
 
 	async function registerUser() {
 		try {
@@ -20,12 +23,12 @@ const SignupUser = () => {
 			const data = res.data;
 
 			if (res.status === 200) {
-				setError(false);
-				setIsLoaded(true);
+				dispatch(setIsLoaded(true));
+				dispatch(setError(false));
 				await axios.post('http://127.0.0.1:5000/verify-email', { user_email: email, token: data.token });
 			} else {
-				setError(true);
-				setIsLoaded(false);
+				dispatch(setIsLoaded(false));
+				dispatch(setError(true));
 			}
 
 			console.log(data);
@@ -41,14 +44,14 @@ const SignupUser = () => {
 	};
 
 	const handleInputUsername = (e) => {
-		setUsername(e.target.value);
+		dispatch(setUsername(e.target.value));
 	};
 
 	const handleInputEmail = (e) => {
-		setEmail(e.target.value);
+		dispatch(setEmail(e.target.value));
 	};
 	const handleInputPassword = (e) => {
-		setPassword(e.target.value);
+		dispatch(setPassword(e.target.value));
 	};
 
 	return (
@@ -76,26 +79,10 @@ const SignupUser = () => {
 						Sign Up as a Business
 					</Link>
 				</div>
-		
-        <input
-          type='submit'
-          value='Register'
-          className='login-register-button'
-        />
-      </form>
+			</form>
 
-			{isLoaded && (
-				<h1 role="heading" name="Correct Credentials">
-					Correct Credentials
-				</h1>
-			)}
-			{error && (
-				<div>
-					<h1 role="heading" name="Incorrect Credentials">
-						Incorrect Credentials
-					</h1>
-				</div>
-			)}
+			{isLoaded && console.log('Correct Credentials')}
+			{error && console.log('Incorrect Credentials')}
 			<div className="login-register-image">
 				<img src={LoginImage} alt="login-page" className="image" />
 			</div>

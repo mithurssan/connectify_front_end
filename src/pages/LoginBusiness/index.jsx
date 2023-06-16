@@ -1,104 +1,90 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import LoginImage from '../../assets/Connectify.jpg'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { setToken, setCompanyName, setCompanyPassword, setIsLoaded, setError } from '../../actions';
+import LoginImage from '../../assets/Connectify.jpg';
 
-import './style.css'
+import './style.css';
 
 const LoginBusiness = () => {
-  const [businessName, setBusinessName] = useState('')
-  const [password, setPassword] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [error, setError] = useState(false)
+	const dispatch = useDispatch();
+	const companyName = useSelector((state) => state.business.companyName);
+	const companyPassword = useSelector((state) => state.business.companyPassword);
+	const isLoaded = useSelector((state) => state.app.isLoaded);
+	const error = useSelector((state) => state.app.error);
 
-  const loginBusiness = async () => {
-    try {
-      const url = 'http://127.0.0.1:5000/businesses/login'
-      const options = {
-        business_name: businessName,
-        business_password: password,
-      }
-      await axios.post(url, options)
-    } catch (error) {
-      console.log(error, 'error')
-      if (error.response.status == 401) {
-        setIsLoaded(false)
-        setError(true)
-      }
-    }
-  }
+	const loginBusiness = async () => {
+		try {
+			const url = 'http://127.0.0.1:5000/businesses/login';
+			const options = {
+				business_name: companyName,
+				business_password: companyPassword,
+			};
+			const res = await axios.post(url, options);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+			dispatch(setToken(res.data.token));
+		} catch (error) {
+			console.log(error, 'error');
+			if (error.response.status == 401) {
+				dispatch(setIsLoaded(false));
+				dispatch(setError(true));
+			}
+		}
+	};
 
-    if (businessName.length === 0) {
-      setIsLoaded(false)
-      setError(true)
-    } else if (password.length === 0) {
-      setIsLoaded(false)
-      setError(true)
-    } else {
-      loginBusiness()
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
-      setIsLoaded(true)
-      setError(false)
-    }
-  }
+		if (companyName.length === 0 || companyPassword.length === 0) {
+			setIsLoaded(false);
+			setError(true);
+		} else {
+			loginBusiness();
 
-  const handleInputBusinessName = (e) => {
-    setBusinessName(e.target.value)
-  }
+			dispatch(setIsLoaded(true));
+			dispatch(setError(false));
+		}
+	};
 
-  const handleInputPassword = (e) => {
-    setPassword(e.target.value)
-  }
+	const handleInputBusinessName = (e) => {
+		dispatch(setCompanyName(e.target.value));
+	};
 
-  return (
-    <div className='container-login-register'>
-      <form onSubmit={handleSubmit} className='business-container'>
-        <label htmlFor='username' className='business-label'>
-          Business name:
-        </label>
-        <input
-          type='text'
-          id='username'
-          value={businessName}
-          onChange={handleInputBusinessName}
-          className='business-text'
-        />
+	const handleInputPassword = (e) => {
+		dispatch(setCompanyPassword(e.target.value));
+	};
 
-        <label htmlFor='password' className='business-label'>
-          Password:
-        </label>
+	return (
+		<div className="container-login-register">
+			<form onSubmit={handleSubmit} className="business-container">
+				<label htmlFor="username" className="business-label">
+					Business name:
+				</label>
+				<input type="text" id="username" value={companyName} onChange={handleInputBusinessName} className="business-text" />
 
-        <input
-          id='password'
-          value={password}
-          onChange={handleInputPassword}
-          className='business-text'
-          type='password'
-        />
+				<label htmlFor="password" className="business-label">
+					Password:
+				</label>
 
-        <input type='submit' value='Login' className='login-register-button' />
-        <div className='container'>
-          <Link to='/login-user' className='sign-in-user'>
-            Login as a User
-          </Link>
-        </div>
-      </form>
+				<input type="password" id="password" value={companyPassword} onChange={handleInputPassword} className="business-text" />
 
-      {isLoaded && <h1>Correct Credentials</h1>}
-      {error && (
-        <div>
-          <h1>Incorrect Credentials</h1>
-        </div>
-      )}
+				<input type="submit" value="Login" className="login-register-button" />
+				<div className="container">
+					<Link to="/login-user" className="sign-in-user">
+						Login as a User
+					</Link>
+				</div>
+			</form>
 
-      <div className='login-register-image'>
-        <img src={LoginImage} alt='login-page' className='image' />
-      </div>
-    </div>
-  )
-}
+			{isLoaded && console.log('Correct Credentials')}
+			{error && console.log('Incorrect Credentials')}
 
-export default LoginBusiness
+			<div className="login-register-image">
+				<img src={LoginImage} alt="login-page" className="image" />
+			</div>
+		</div>
+	);
+};
+
+export default LoginBusiness;
