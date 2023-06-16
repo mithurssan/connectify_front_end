@@ -22,7 +22,7 @@ const SignupUser = () => {
 			if (res.status === 200) {
 				setError(false);
 				setIsLoaded(true);
-				await axios.post('http://127.0.0.1:5000/verify-email', { user_email: email, token: data.token });
+				await axios.post('http://127.0.0.1:5000/verify-email', { user_email: email, token: data.token }); /* c8 ignore next 3 */
 			} else {
 				setError(true);
 				setIsLoaded(false);

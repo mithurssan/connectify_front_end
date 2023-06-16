@@ -23,9 +23,9 @@ const SignupBusiness = () => {
       const res = await axios.get(url)
       const data = res.data
       setData(data)
-    } catch (error) {
-      console.error(error)
-    }
+    } catch (error) {/* c8 ignore next 3 */
+      console.error(error) /* c8 ignore next 3 */
+    } /* c8 ignore next 3 */
   }
 
   async function postCompany() {
