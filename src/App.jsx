@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Pages from './pages'
-import { NavBar, LoginPage, LoginUse } from './components'
-import { removeToken } from './actions'
+import { NavBar, LoginPage, LoginUse, Spinner } from './components'
+import useToken from './components/useToken'
+import { setToken, removeToken, loadPersistedState } from './actions'
+import './App.css'
 
 const App = () => {
-  console.log('App re-rendered')
   const dispatch = useDispatch()
   const token = useSelector((state) => state.auth.token)
+
+  useEffect(() => {
+    dispatch(loadPersistedState())
+  }, [])
+
+  const handleSetToken = (token) => {
+    dispatch(setToken(token))
+  }
 
   const handleRemoveToken = () => {
     dispatch(removeToken())

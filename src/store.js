@@ -1,6 +1,15 @@
-import { legacy_createStore as createStore, combineReducers } from 'redux';
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { authReducer, signupReducer, appReducer, signupBusinessReducer } from './reducers';
+import { loadPersistedState, saveStateToLocalStorage } from './localStorage';
+
+const persistConfig = {
+	key: 'root',
+	storage,
+};
 
 const rootReducer = combineReducers({
 	auth: authReducer,
@@ -9,6 +18,16 @@ const rootReducer = combineReducers({
 	business: signupBusinessReducer,
 });
 
-const store = createStore(rootReducer, devToolsEnhancer());
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-export default store;
+// Load persisted state from local storage
+store.dispatch(loadPersistedState());
+
+// Save state to local storage whenever it changes
+store.subscribe(() => {
+	const state = store.getState();
+	saveStateToLocalStorage(state);
+});
+
+export const persistor = persistStore(store);
