@@ -3,6 +3,11 @@
   src: url(path/to/font/Montserrat-Regular.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Montserrat';
+  src: url(path/to/font/Montserrat-Regular.ttf) format('truetype');
+}
+
 .container-login-register {
   display: grid;
   grid-template-columns: 40% 60%;
@@ -89,6 +94,7 @@
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
+  font-weight: 900;
 }
 
 .sign-in-business:hover {
@@ -99,4 +105,43 @@
 
 .login-register-image {
   position: relative;
+}
+
+.not-recognised {
+  font-size: 15px;
+}
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.error-message-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: -40px;
+}
+
+.not-recognised {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: -80px;
+  margin-top: 20px;
+  width: 250px;
+  font-size: 18px;
+  color: #0a1a41;
+  text-align: center;
+  transition: 0.5s ease-in-out;
+}
+.show-password-user {
+  position: absolute;
+  top: 49.8%;
+  right: 7%;
+  cursor: pointer;
+  font-size: 18px;
+  color: #0a1a41;
 }

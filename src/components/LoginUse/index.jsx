@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { LoginUser, SignupUser } from '../../pages'
+import { useNavigate } from 'react-router-dom'
 import './style.css'
 
 const LoginUse = () => {
@@ -21,6 +22,13 @@ const LoginUse = () => {
       setSignIn(true)
       setSlideAnimation('')
     }, 300)
+  }
+
+  const navigate = useNavigate()
+
+  const handleSuccessfulRegistration = () => {
+    activateSignIn()
+    navigate('/login-user')
   }
 
   return (
@@ -44,7 +52,13 @@ const LoginUse = () => {
             </p>
           </div>
         </div>
-        {!signIn ? <LoginUser /> : <SignupUser />}
+        {!signIn ? (
+          <LoginUser />
+        ) : (
+          <SignupUser
+            handleSuccessfulRegistration={handleSuccessfulRegistration}
+          />
+        )}
       </div>
     </div>
   )

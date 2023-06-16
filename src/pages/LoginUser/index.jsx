@@ -1,25 +1,24 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  setToken,
-  setUsername,
-  setPassword,
-  setIsLoaded,
-  setError,
-} from '../../actions'
+import { setToken, setUsername, setPassword } from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
 import './style.css'
+import { Spinner } from '../../components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 
 const LoginUser = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const username = useSelector((state) => state.user.username)
   const password = useSelector((state) => state.user.password)
-  const isLoaded = useSelector((state) => state.app.isLoaded)
-  const error = useSelector((state) => state.app.error)
-  const token = useSelector((state) => state.auth.token) // Add this line to access the token state
+
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [showPassword, setShowPassword] = useState(true)
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -44,15 +43,17 @@ const LoginUser = () => {
         user_password: password,
       }
       const res = await axios.post(url, data)
-      await dispatch(setToken(res.data.token))
+
       console.log('Token dispatched:', res.data.token)
       console.log(dispatch(setToken(res.data.token)))
       navigate('/dashboard')
     } catch (error) {
       console.log(error, 'error')
       if (error.response && error.response.status === 401) {
-        dispatch(setIsLoaded(false))
-        dispatch(setError(true))
+        setIsLoaded(false)
+
+        setError(true)
+        setErrorMessage('Details not recognised')
       }
     }
   }
@@ -61,13 +62,14 @@ const LoginUser = () => {
     e.preventDefault()
 
     if (username.length === 0 || password.length === 0) {
-      dispatch(setIsLoaded(false))
-      dispatch(setError(true))
+      setIsLoaded(false)
+      setError(true)
+      setErrorMessage('Please Enter Your Details')
     } else {
-      loginUser()
-      console.log(username)
-      dispatch(setIsLoaded(true))
-      dispatch(setError(false))
+      setIsLoaded(true)
+      setError(false)
+
+      await loginUser()
     }
   }
 
@@ -77,6 +79,10 @@ const LoginUser = () => {
 
   const handleInputPassword = (e) => {
     dispatch(setPassword(e.target.value))
+  }
+
+  const showPasswordHandler = () => {
+    setShowPassword((prev) => !prev)
   }
 
   return (
@@ -97,22 +103,45 @@ const LoginUser = () => {
           Password:
         </label>
         <input
-          type='password'
+          type={!showPassword ? 'text' : 'password'}
           id='password'
           value={password}
           onChange={handleInputPassword}
           className='user-text'
         />
-
+        {!showPassword ? (
+          <FontAwesomeIcon
+            className='show-password-user'
+            icon={faEye}
+            onClick={showPasswordHandler}
+          />
+        ) : (
+          <FontAwesomeIcon
+            className='show-password-user'
+            icon={faEyeSlash}
+            onClick={showPasswordHandler}
+          />
+        )}
         <input type='submit' value='Login' className='login-register-button' />
         <div className='container'>
-          <Link to='/login-register' className='sign-in-business'>
+          <Link to='/login-register' className='sign-in-user '>
             Login as a Business
           </Link>
         </div>
+
+        <div className='error-container'>
+          <div className='error-message-container' data-testid='spinner'>
+            {isLoaded && (
+              <div className='spinner'>
+                <Spinner />
+              </div>
+            )}
+          </div>
+          <div className='error-message-container'>
+            {error && <h1 className='not-recognised'>{errorMessage}</h1>}
+          </div>
+        </div>
       </form>
-      {isLoaded && console.log('Correct Credentials')}
-      {error && console.log('Incorrect Credentials')}
 
       <div className='login-register-image'>
         <img src={LoginImage} alt='login-page' className='image' />

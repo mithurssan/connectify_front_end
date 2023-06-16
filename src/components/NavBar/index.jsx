@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { removeToken } from '../../actions'
 import { SidebarData } from '../SidebarData/index'
+import { setUsername, setPassword, setEmail } from '../../actions'
 import './style.css'
 
 function Navbar() {
@@ -18,6 +19,11 @@ function Navbar() {
   const showSidebar = () => setSidebar(!sidebar)
   const handleRemoveToken = () => {
     dispatch(removeToken())
+    dispatch(setUsername(''))
+    dispatch(setPassword(''))
+    dispatch(setEmail(''))
+    localStorage.removeItem('reduxState')
+    localStorage.removeItem('root')
   }
 
   const activeStyle = {
@@ -68,9 +74,9 @@ function Navbar() {
                 </li>
               )
             })}
+            <button onClick={logout}>Logout</button>
           </ul>
         </nav>
-        <button onClick={logout}>Logout</button>
       </IconContext.Provider>
       <Outlet />
     </>

@@ -1,24 +1,23 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import {
-  setUsername,
-  setEmail,
-  setPassword,
-  setIsLoaded,
-  setError,
-} from '../../actions'
+import { setUsername, setEmail, setPassword } from '../../actions'
+import { Spinner } from '../../components'
 import LoginImage from '../../assets/Connectify.jpg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import './style.css'
 
-const SignupUser = () => {
+const SignupUser = ({ handleSuccessfulRegistration }) => {
   const dispatch = useDispatch()
   const username = useSelector((state) => state.user.username)
   const email = useSelector((state) => state.user.email)
   const password = useSelector((state) => state.user.password)
-  const isLoaded = useSelector((state) => state.app.isLoaded)
-  const error = useSelector((state) => state.app.error)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [showPassword, setShowPassword] = useState(true)
 
   async function registerUser() {
     try {
@@ -32,28 +31,45 @@ const SignupUser = () => {
 
       const data = res.data
 
-      if (res.status === 200) {
-        dispatch(setIsLoaded(true))
-        dispatch(setError(false))
+      if (data.error) {
+        setError(true)
+        setTimeout(() => {
+          setIsLoaded(false)
+        }, 100)
+        setErrorMessage(data.error)
+        setEmail('')
+        setUsername('')
+        setPassword('')
+      } else {
+        setError(false)
+        setIsLoaded(true)
+
         await axios.post('http://127.0.0.1:5000/verify-email', {
           user_email: email,
           token: data.token,
         })
-      } else {
-        dispatch(setIsLoaded(false))
-        dispatch(setError(true))
+        handleSuccessfulRegistration()
       }
 
       console.log(data)
     } catch (error) {
-      console.error(error)
+      setError(true)
+      setIsLoaded(false)
+      setErrorMessage('Error occured')
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    registerUser()
+    if (username.length === 0 || email.length === 0 || password.length === 0) {
+      setIsLoaded(false)
+      setError(true)
+      setErrorMessage('Please Enter Your Details')
+    } else {
+      registerUser()
+      setError(false)
+      setIsLoaded(true)
+    }
   }
 
   const handleInputUsername = (e) => {
@@ -65,6 +81,9 @@ const SignupUser = () => {
   }
   const handleInputPassword = (e) => {
     dispatch(setPassword(e.target.value))
+  }
+  const showPasswordHandler = () => {
+    setShowPassword((prev) => !prev)
   }
 
   return (
@@ -96,12 +115,25 @@ const SignupUser = () => {
           Password:{' '}
         </label>
         <input
-          type='password'
+          type={!showPassword ? 'text' : 'password'}
           id='password'
           value={password}
           onChange={handleInputPassword}
           className='business-text'
         />
+        {!showPassword ? (
+          <FontAwesomeIcon
+            className='show-password-sign-up-user'
+            icon={faEye}
+            onClick={showPasswordHandler}
+          />
+        ) : (
+          <FontAwesomeIcon
+            className='show-password-sign-up-user'
+            icon={faEyeSlash}
+            onClick={showPasswordHandler}
+          />
+        )}
 
         <input
           type='submit'
@@ -109,15 +141,21 @@ const SignupUser = () => {
           className='login-register-button'
         />
 
-        <div className='container'>
-          <Link to='/login-register' className='sign-up-business'>
-            Sign Up as a Business
-          </Link>
+        <div className='error-container'>
+          <div className='error-message-container' data-testid='spinner'>
+            {isLoaded && (
+              <div className='spinner'>
+                <Spinner />
+              </div>
+            )}
+          </div>
+
+          <div className='error-message-container'>
+            {error && <h1 className='not-recognised'>{errorMessage}</h1>}
+          </div>
         </div>
       </form>
 
-      {isLoaded && console.log('Correct Credentials')}
-      {error && console.log('Incorrect Credentials')}
       <div className='login-register-image'>
         <img src={LoginImage} alt='login-page' className='image' />
       </div>

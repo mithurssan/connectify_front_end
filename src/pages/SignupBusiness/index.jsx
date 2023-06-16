@@ -7,11 +7,12 @@ import {
   setCompanyEmail,
   setCompanyPassword,
   setCompanyNumber,
-  setIsLoaded,
-  setError,
 } from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
 import './style.css'
+import { Spinner } from '../../components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 
 const SignupBusiness = () => {
   const dispatch = useDispatch()
@@ -19,8 +20,11 @@ const SignupBusiness = () => {
   const companyNumber = useSelector((state) => state.business.companyNumber)
   const companyPassword = useSelector((state) => state.business.companyPassword)
   const companyEmail = useSelector((state) => state.business.companyEmail)
-  const isLoaded = useSelector((state) => state.app.isLoaded)
-  const error = useSelector((state) => state.app.error)
+  const [showPassword, setShowPassword] = useState(true)
+
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const [data, setData] = useState('')
 
@@ -56,25 +60,42 @@ const SignupBusiness = () => {
         const data = res.data
 
         if (res.status === 200) {
-          dispatch(setIsLoaded(true))
-          dispatch(setError(false))
+          setError(false)
+          setIsLoaded(true)
           await axios.post('http://127.0.0.1:5000/verify-business-email', {
             business_email: companyEmail,
             token: data.token,
           })
         }
       } else {
-        dispatch(setIsLoaded(false))
+        setErrorMessage('Problem Occured Please Try Again')
+        setIsLoaded(false)
+        setError(true)
       }
     } catch (error) {
-      dispatch(setError(true))
+      setError(true)
+      setErrorMessage('Problem Occured Please Try Again')
       console.error(error)
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await getCompany(companyNumber)
+
+    if (
+      companyName.length === 0 ||
+      companyNumber.length === 0 ||
+      companyPassword.length === 0 ||
+      companyEmail.length === 0
+    ) {
+      setError(true)
+      setIsLoaded(false)
+      setErrorMessage('Please Enter Your Details')
+    } else {
+      await getCompany(companyNumber)
+      setError(false)
+      setIsLoaded(true)
+    }
   }
 
   const handleInputName = (e) => {
@@ -89,6 +110,10 @@ const SignupBusiness = () => {
   }
   const handleInputEmail = (e) => {
     dispatch(setCompanyEmail(e.target.value))
+  }
+
+  const showPasswordHandler = () => {
+    setShowPassword((prev) => !prev)
   }
 
   return (
@@ -131,22 +156,45 @@ const SignupBusiness = () => {
           Password:
         </label>
         <input
-          type='password'
+          type={!showPassword ? 'text' : 'password'}
           id='password'
           value={companyPassword}
           onChange={handleInputPassword}
           className='business-text'
         />
+        {!showPassword ? (
+          <FontAwesomeIcon
+            className='show-password-sign-up'
+            icon={faEye}
+            onClick={showPasswordHandler}
+          />
+        ) : (
+          <FontAwesomeIcon
+            className='show-password-sign-up'
+            icon={faEyeSlash}
+            onClick={showPasswordHandler}
+          />
+        )}
 
         <input
           type='submit'
           value='Register'
           className='login-register-button'
         />
+        <div className='error-container'>
+          <div className='error-message-container'>
+            {isLoaded && (
+              <div className='spinner' data-testid='spinner'>
+                <Spinner />
+              </div>
+            )}
+          </div>
+          <div className='error-message-container'>
+            {error && <h1 className='not-recognised'>{errorMessage}</h1>}
+          </div>
+        </div>
       </form>
 
-      {isLoaded && console.log('Correct Credentials')}
-      {error && console.log('Incorrect Credentials')}
       <div className='login-register-image'>
         <img src={LoginImage} alt='login-page' className='image' />
       </div>

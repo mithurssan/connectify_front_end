@@ -54,25 +54,3 @@ export const signupBusinessReducer = (state = initialBusinessState, action) => {
       return state
   }
 }
-
-const initialAppState = {
-  isLoaded: false,
-  error: false,
-}
-
-export const appReducer = (state = initialAppState, action) => {
-  switch (action.type) {
-    case 'SET_IS_LOADED':
-      return {
-        ...state,
-        isLoaded: action.payload,
-      }
-    case 'SET_ERROR':
-      return {
-        ...state,
-        error: action.payload,
-      }
-    default:
-      return state
-  }
-}
