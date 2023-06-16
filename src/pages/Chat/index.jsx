@@ -11,7 +11,7 @@ const Chat = () => {
 	console.log(username);
 	return (
 		<div style={{ height: '100vh' }}>
-			<PrettyChatWindow projectId={'7f8e7fee-521a-4f50-8d9a-9028fc529c34'} username={username} secret={password} style={{ height: '100%' }} />
+			<ChatEngine projectId={'7f8e7fee-521a-4f50-8d9a-9028fc529c34'} username={username} secret={password} style={{ height: '100%' }} />
 		</div>
 	);
 };
