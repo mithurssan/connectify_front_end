@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const useToken = () => {
-	const [token, setToken] = useState(getToken());
-
 	function getToken() {
 		const userToken = localStorage.getItem('token');
+		console.log('Retrieved token:', userToken);
 		return userToken && userToken;
 	}
+	const [token, setToken] = useState(getToken());
 
 	function saveToken(userToken) {
 		localStorage.setItem('token', userToken);
@@ -19,8 +19,8 @@ const useToken = () => {
 	}
 
 	return {
-		setToken: saveToken,
 		token,
+		setToken: saveToken,
 		removeToken,
 	};
 };

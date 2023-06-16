@@ -2,7 +2,7 @@ const initialTokenState = {
 	token: '',
 };
 
-export let authReducer = (state = initialTokenState, action) => {
+export const authReducer = (state = initialTokenState, action) => {
 	switch (action.type) {
 		case 'SET_TOKEN':
 			return { ...state, token: action.payload };

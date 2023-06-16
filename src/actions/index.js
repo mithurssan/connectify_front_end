@@ -5,7 +5,6 @@ export const setToken = (token) => {
 		payload: token,
 	};
 };
-
 export const removeToken = () => {
 	localStorage.removeItem('token');
 	return {
@@ -70,18 +69,3 @@ export const setError = (error) => ({
 	type: 'SET_ERROR',
 	payload: error,
 });
-
-export const loadPersistedState = () => {
-	return (dispatch) => {
-		try {
-			const serializedState = localStorage.getItem('reduxState');
-			if (serializedState === null) {
-				return undefined;
-			}
-			const state = JSON.parse(serializedState);
-			dispatch({ type: 'LOAD_PERSISTED_STATE', payload: state });
-		} catch (error) {
-			console.log('Error loading persisted state:', error);
-		}
-	};
-};
