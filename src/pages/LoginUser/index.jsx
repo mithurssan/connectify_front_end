@@ -1,57 +1,82 @@
-import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import {
+  setToken,
+  setUsername,
+  setPassword,
+  setIsLoaded,
+  setError,
+} from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
 import './style.css'
 
-const LoginUser = (props) => {
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [error, setError] = useState(false);
+const LoginUser = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const username = useSelector((state) => state.user.username)
+  const password = useSelector((state) => state.user.password)
+  const isLoaded = useSelector((state) => state.app.isLoaded)
+  const error = useSelector((state) => state.app.error)
+  const token = useSelector((state) => state.auth.token) // Add this line to access the token state
 
-	const loginUser = async () => {
-		try {
-			const url = 'http://127.0.0.1:5000/users/login';
-			const options = {
-				user_username: username,
-				user_password: password,
-			};
-			const res = await axios.post(url, options);
-			props.setToken(res.data.token);
-			console.log(res.data);
-		} catch (error) {
-			console.log(error, 'error');
-			if (error.response && error.response.status == 401) {
-				setIsLoaded(false);
-				setError(true);
-			}
-		}
-	};
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const storedToken = localStorage.getItem('token')
+        if (storedToken) {
+          dispatch(setToken(storedToken))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchToken()
+  }, [dispatch])
+
+  const loginUser = async () => {
+    try {
+      const url = 'http://127.0.0.1:5000/users/login'
+      const data = {
+        user_username: username,
+        user_password: password,
+      }
+      const res = await axios.post(url, data)
+      await dispatch(setToken(res.data.token))
+      console.log('Token dispatched:', res.data.token)
+      console.log(dispatch(setToken(res.data.token)))
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error, 'error')
+      if (error.response && error.response.status === 401) {
+        dispatch(setIsLoaded(false))
+        dispatch(setError(true))
+      }
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (username.length === 0) {
-      setIsLoaded(false)
-      setError(true)
-    } else if (password.length === 0) {
-      setIsLoaded(false)
-      setError(true)
+    if (username.length === 0 || password.length === 0) {
+      dispatch(setIsLoaded(false))
+      dispatch(setError(true))
     } else {
       loginUser()
-
-      setIsLoaded(true)
-      setError(false)
+      console.log(username)
+      dispatch(setIsLoaded(true))
+      dispatch(setError(false))
     }
   }
 
   const handleInputUsername = (e) => {
-    setUsername(e.target.value)
+    dispatch(setUsername(e.target.value))
   }
 
   const handleInputPassword = (e) => {
-    setPassword(e.target.value)
+    dispatch(setPassword(e.target.value))
   }
 
   return (
@@ -86,12 +111,8 @@ const LoginUser = (props) => {
           </Link>
         </div>
       </form>
-      {isLoaded && <h1>Correct Credentials</h1>}
-      {error && (
-        <div>
-          <h1>Incorrect Credentials</h1>
-        </div>
-      )}
+      {isLoaded && console.log('Correct Credentials')}
+      {error && console.log('Incorrect Credentials')}
 
       <div className='login-register-image'>
         <img src={LoginImage} alt='login-page' className='image' />

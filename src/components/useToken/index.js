@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react'
 
 const useToken = () => {
-	function getToken() {
-		const userToken = localStorage.getItem('token');
-		return userToken && userToken;
-	}
+  const getToken = () => {
+    const userToken = localStorage.getItem('token')
+    console.log('Retrieved token:', userToken)
+    return userToken || ''
+  }
 
-	const [token, setToken] = useState(getToken());
+  const [token, setToken] = useState(getToken())
 
-	function saveToken(userToken) {
-		localStorage.setItem('token', userToken);
-		setToken(userToken);
-	}
+  useEffect(() => {
+    const storedToken = getToken()
+    if (storedToken) {
+      setToken(storedToken)
+    }
+  }, [])
 
-	function removeToken() {
-		localStorage.removeItem('token');
-		setToken(null);
-	}
+  const saveToken = (userToken) => {
+    localStorage.setItem('token', userToken)
+    setToken(userToken)
+  }
 
-	return {
-		setToken: saveToken,
-		token,
-		removeToken,
-	};
-};
+  const removeToken = () => {
+    localStorage.removeItem('token')
+    setToken('')
+  }
 
-export default useToken;
+  return {
+    token,
+    setToken: saveToken,
+    removeToken,
+  }
+}
+
+export default useToken
