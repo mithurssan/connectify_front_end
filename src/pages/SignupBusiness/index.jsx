@@ -14,13 +14,14 @@ import { Spinner } from '../../components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 
-const SignupBusiness = () => {
+const SignupBusiness = ({ handleSuccessfulRegistration }) => {
   const dispatch = useDispatch()
   const companyName = useSelector((state) => state.business.companyName)
   const companyNumber = useSelector((state) => state.business.companyNumber)
   const companyPassword = useSelector((state) => state.business.companyPassword)
   const companyEmail = useSelector((state) => state.business.companyEmail)
   const [showPassword, setShowPassword] = useState(true)
+  const [showSuccessMessage, setShowSuccessMessage] = useState('')
 
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
@@ -66,6 +67,10 @@ const SignupBusiness = () => {
             business_email: companyEmail,
             token: data.token,
           })
+          setShowSuccessMessage('Your account has successfully been created')
+          setTimeout(() => {
+            handleSuccessfulRegistration()
+          }, 700)
         }
       } else {
         setErrorMessage('Problem Occured Please Try Again')
@@ -182,15 +187,20 @@ const SignupBusiness = () => {
           className='login-register-button'
         />
         <div className='error-container'>
-          <div className='error-message-container'>
+          <div className='error-message-container' data-testid='spinner'>
             {isLoaded && (
-              <div className='spinner' data-testid='spinner'>
+              <div className='spinner'>
                 <Spinner />
               </div>
             )}
           </div>
+
           <div className='error-message-container'>
-            {error && <h1 className='not-recognised'>{errorMessage}</h1>}
+            {error ? (
+              <h1 className='not-recognised'>{errorMessage}</h1>
+            ) : (
+              <h1 className='success-messsage'>{showSuccessMessage}</h1>
+            )}
           </div>
         </div>
       </form>

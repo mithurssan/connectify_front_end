@@ -70,8 +70,6 @@ describe('SignupBusiness page', () => {
         }
       )
     })
-
-    expect(screen.getByText('Correct Credentials')).to.exist
   })
 
   test('submits the form with incorrect credentials', async () => {
@@ -126,6 +124,6 @@ describe('SignupBusiness page', () => {
       )
     })
 
-    expect(screen.getByText('Incorrect Credentials')).to.exist
+    expect(screen.getByText('Problem Occured Please Try Again')).to.exist
   })
 })

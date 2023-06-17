@@ -74,7 +74,9 @@ function Navbar() {
                 </li>
               )
             })}
-            <button onClick={logout}>Logout</button>
+            <button data-testid='logout-button' onClick={logout}>
+              Logout
+            </button>
           </ul>
         </nav>
       </IconContext.Provider>

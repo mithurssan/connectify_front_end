@@ -1,21 +1,37 @@
 import React from 'react'
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { screen, render, cleanup } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { screen, render, cleanup, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import axios from 'axios'
+import { Home } from '../../pages'
+
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import Navbar from '.'
 import { SidebarData } from '../SidebarData'
 
 import matchers from '@testing-library/jest-dom/matchers'
-import userEvent from '@testing-library/user-event'
+
+import { Provider } from 'react-redux'
+import configureStore from 'redux-mock-store'
 
 expect.extend(matchers)
 
 describe('Navbar component', () => {
+  const mockStore = configureStore()
+  let store
+  const initialState = {
+    auth: {
+      token: '',
+    },
+  }
   beforeEach(() => {
+    store = mockStore({}) // Initialize the store with an empty state
     render(
-      <MemoryRouter>
-        <Navbar SidebarData={SidebarData} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Navbar SidebarData={SidebarData} />
+        </MemoryRouter>
+      </Provider>
     )
   })
 
@@ -46,18 +62,30 @@ describe('Navbar component', () => {
     expect(sidebar).toBeInTheDocument()
   })
 
-  it('should apply active style to the active link', () => {
-    const { path } = SidebarData[0]
-    const link = screen.getByRole('link', { name: SidebarData[0].title })
-
-    cleanup()
+  it('logs out and navigates to homepage', async () => {
+    const removeItemSpy = vi.spyOn(localStorage, 'removeItem')
+    const postMock = vi.spyOn(axios, 'post').mockResolvedValueOnce()
 
     render(
-      <MemoryRouter initialEntries={[path]}>
-        <Navbar SidebarData={SidebarData} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Navbar SidebarData={SidebarData} />
+          <Routes>
+            <Route path='/' element={<Home />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     )
 
-    expect(link).toHaveStyle(`color: #785A9F`)
+    const logoutButton = screen.getAllByTestId('logout-button')[0]
+    userEvent.click(logoutButton)
+
+    await waitFor(() => {
+      expect(postMock).toHaveBeenCalledWith('http://127.0.0.1:5000/logout')
+      expect(screen.getByText('Home')).toBeInTheDocument()
+    })
+
+    removeItemSpy.mockRestore()
+    postMock.mockRestore()
   })
 })

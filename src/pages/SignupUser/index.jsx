@@ -7,6 +7,7 @@ import { Spinner } from '../../components'
 import LoginImage from '../../assets/Connectify.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
+
 import './style.css'
 
 const SignupUser = ({ handleSuccessfulRegistration }) => {
@@ -18,6 +19,7 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [showPassword, setShowPassword] = useState(true)
+  const [showSuccessMessage, setShowSuccessMessage] = useState('')
 
   async function registerUser() {
     try {
@@ -42,13 +44,18 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
         setPassword('')
       } else {
         setError(false)
-        setIsLoaded(true)
+        setTimeout(() => {
+          setIsLoaded(false)
+        }, 100)
 
         await axios.post('http://127.0.0.1:5000/verify-email', {
           user_email: email,
           token: data.token,
         })
-        handleSuccessfulRegistration()
+        setShowSuccessMessage('Your account has successfully been created')
+        setTimeout(() => {
+          handleSuccessfulRegistration()
+        }, 700)
       }
 
       console.log(data)
@@ -151,7 +158,11 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
           </div>
 
           <div className='error-message-container'>
-            {error && <h1 className='not-recognised'>{errorMessage}</h1>}
+            {error ? (
+              <h1 className='not-recognised'>{errorMessage}</h1>
+            ) : (
+              <h1 className='success-messsage'>{showSuccessMessage}</h1>
+            )}
           </div>
         </div>
       </form>

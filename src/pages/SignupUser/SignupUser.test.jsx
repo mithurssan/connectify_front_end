@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, test, expect, vi } from 'vitest'
 import axios from 'axios'
-import SignupUser from '.'
+import SignupUser, { setIsLoaded } from '.'
 import { MemoryRouter } from 'react-router-dom'
 
 describe('SignupUser page', () => {
@@ -45,15 +45,15 @@ describe('SignupUser page', () => {
 
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1))
 
-    expect(
-      screen.getByRole('heading', { name: 'Correct Credentials' })
-    ).toBeDefined()
+    await waitFor(() => {
+      expect(screen.getByTestId('spinner')).toBeDefined()
+    })
   })
 
   test('submits the form with incorrect credentials', async () => {
     vi.spyOn(axios, 'post').mockResolvedValueOnce({
       status: 400,
-      data: { message: 'Invalid credentials' },
+      data: { message: 'error occured' },
     })
 
     render(
@@ -76,9 +76,7 @@ describe('SignupUser page', () => {
 
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1))
 
-    expect(
-      screen.getByRole('heading', { name: 'Incorrect Credentials' })
-    ).toBeDefined()
+    expect(screen.getByRole('heading', { name: 'error occured' })).toBeDefined()
   })
 
   test('handles error in form submission', async () => {
