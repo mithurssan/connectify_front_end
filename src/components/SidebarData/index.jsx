@@ -1,10 +1,10 @@
 import React from 'react'
 import * as AiIcons from 'react-icons/ai'
-
+const business_id = localStorage.getItem("business_id")
 export const SidebarData = [
   {
     title: 'Dashboard',
-    path: '/dashboard',
+    path: `/dashboard/${business_id}`,
     icon: <AiIcons.AiFillHome />,
     cName: 'nav-text',
     forBusiness: true
