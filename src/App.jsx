@@ -2,27 +2,18 @@ import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Pages from './pages';
-import { NavBar, LoginPage, LoginUse, Spinner } from './components';
-import useToken from './components/useToken';
-import { setToken, removeToken } from './actions';
+import { NavBar, LoginPage, LoginUse, LoginUseVerify, Spinner } from './components';
 import { loadPersistedState } from './localStorage';
 import './App.css';
 
 const App = () => {
 	const dispatch = useDispatch();
 	const token = useSelector((state) => state.auth.token);
+	const verified = useSelector((state) => state.app.verified);
 
 	useEffect(() => {
 		dispatch(loadPersistedState());
 	}, []);
-
-	const handleSetToken = (token) => {
-		dispatch(setToken(token));
-	};
-
-	const handleRemoveToken = () => {
-		dispatch(removeToken());
-	};
 
 	return (
 		<>
@@ -32,6 +23,7 @@ const App = () => {
 						<Route path="/" element={<Pages.Home />} />
 						<Route path="/login-register" element={<LoginPage />} />
 						<Route path="/login-user" element={<LoginUse />} />
+						<Route path="/users/verify/:token" element={<LoginUseVerify />} />
 					</Routes>
 				</>
 			) : (
@@ -42,6 +34,7 @@ const App = () => {
 						<Route path="/wellbeing" element={<Pages.Wellbeing />} />
 						<Route path="/profile/:username" element={<Pages.Profile />} />
 						<Route path="/bookings" element={<Pages.Booking />} />
+						<Route path="/chat" element={<Pages.Chat />} />
 						<Route path="*" element={<Pages.NotFound />} />
 					</Route>
 

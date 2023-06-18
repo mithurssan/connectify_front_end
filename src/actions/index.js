@@ -33,6 +33,13 @@ export const setPassword = (password) => {
 	};
 };
 
+export const setVerifyToken = (verifyToken) => {
+	return {
+		type: 'SET_VERIFY_TOKEN',
+		payload: verifyToken,
+	};
+};
+
 export const setCompanyName = (companyName) => {
 	return {
 		type: 'SET_BUSINESS_NAME',
@@ -57,6 +64,13 @@ export const setCompanyNumber = (companyNumber) => {
 	return {
 		type: 'SET_BUSINESS_NUMBER',
 		payload: companyNumber,
+	};
+};
+
+export const setVerified = (verified) => {
+	return {
+		type: 'SET_VERIFIED',
+		payload: verified,
 	};
 };
 
