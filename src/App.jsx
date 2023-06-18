@@ -37,11 +37,12 @@ const App = () => {
 			) : (
 				<Routes>
 					<Route path="/" element={<NavBar />}>
-						<Route path="/dashboard" element={<Pages.Dashboard />} />
+						<Route path="/dashboard/:business_id" element={<Pages.Dashboard />} />
 						<Route path="/rota" element={<Pages.Rota />} />
 						<Route path="/wellbeing" element={<Pages.Wellbeing />} />
 						<Route path="/profile/:username" element={<Pages.Profile />} />
 						<Route path="/bookings" element={<Pages.Booking />} />
+						<Route path="/not-assigned" element={<Pages.NotAssignedBusiness />} />
 						<Route path="*" element={<Pages.NotFound />} />
 					</Route>
 
