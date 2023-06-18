@@ -5,3 +5,4 @@ export { default as Spinner } from './Spinner'
 export { default as useToken } from './useToken';
 export { default as AddUserForm  } from './AddUserForm';
 export { default as DashboardIcons  } from './DashboardIcons';
+export { default as PostForm  } from './PostForm';

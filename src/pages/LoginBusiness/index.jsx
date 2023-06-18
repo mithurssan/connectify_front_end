@@ -28,10 +28,10 @@ const LoginBusiness = () => {
 			console.log('Token dispatched:', res.data.token)
 			console.log(dispatch(setToken(res.data.token)))
 			const business_id = res.data.business_id
-			localStorage.setItem('business_id', res.data.business_id);
+			localStorage.setItem('business_id', business_id);
 			localStorage.setItem('isBusiness', true);
 			localStorage.setItem('joinedBusiness', true);
-			navigate(`/dashboard/${business_id}`)
+			navigate("/dashboard")
 		} catch (error) {
 			console.log(error, 'error');
 			if (error.response.status == 401) {
