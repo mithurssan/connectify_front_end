@@ -15,7 +15,7 @@ const Dashboard = () => {
 	const isBusiness = localStorage.getItem("isBusiness")
 	const businessId = localStorage.getItem("business_id")
 	const userId = localStorage.getItem("user_id")
-
+	const [currentUsername, setCurrentUsername] = useState("");
 	const [posts, setPosts] = useState([]);
 
 	const fetchPosts = async () => {
@@ -28,8 +28,29 @@ const Dashboard = () => {
 		}
 	};
 
+	const fetchUsername = async (userId) => {
+		try {
+			const response = await axios.get(`http://127.0.0.1:5000/users/${userId}`);
+			const data = response.data
+			setCurrentUsername(data.user_username)
+		} catch (error) {
+			console.error('Error:', error.message);
+		}
+	};
+
+	const fetchBusinessName = async (businessId) => {
+		try {
+			const response = await axios.get(`http://127.0.0.1:5000/businesses/${businessId}`);
+			const data = response.data
+			setCurrentUsername(data.business_name)
+		} catch (error) {
+			console.error('Error:', error.message);
+		}
+	};
+	console.log(currentUsername)
 	useEffect(() => {
 		fetchPosts();
+		isBusiness ? (fetchBusinessName(businessId)) : (fetchUsername(userId))
 	}, []);
 
 	const addPost = async (newPost) => {
@@ -37,8 +58,9 @@ const Dashboard = () => {
 			await axios.post('http://127.0.0.1:5000/posts/add', {
 				user_id: userId,
 				business_id: businessId,
+				username: currentUsername,
 				post_title: newPost.title,
-				post_content: newPost.content
+				post_content: newPost.content,
 			});
 			fetchPosts();
 		} catch (error) {
@@ -53,7 +75,6 @@ const Dashboard = () => {
 					<div className="welcome">
 						<h1><span className="wave">👋</span>Welcome, {businessName}!</h1>
 					</div>
-					<AddUserForm />
 				</>
 			) : (
 				<>
@@ -75,13 +96,23 @@ const Dashboard = () => {
 				<Link to="/bookings">
 					<DashboardIcons title="Bookings" image={bookings_icon} />
 				</Link>
-				<PostForm onAddPost={addPost} />
 			</div>
-			<div className="posts">
+			<div className="action-btns">
+				<div className="add-user-btn">
+					{isBusiness && <AddUserForm />}
+				</div>
+				<div className="add-post-btn">
+					<PostForm onAddPost={addPost} />
+				</div>
+			</div>
+			<div className="posts-container">
 				{posts.map((post, index) => (
 					<div key={index} className="post">
-						<h3>{post.post_title}</h3>
-						<p>{post.post_content}</p>
+						<h3 className="post-title">{post.post_title}</h3>
+						<p className="post-content">{post.post_content}</p>
+						<p className={`post-author ${post.username === businessName ? 'red-text' : ''}`}>
+							{post.username}
+						</p>
 					</div>
 				))}
 			</div>
