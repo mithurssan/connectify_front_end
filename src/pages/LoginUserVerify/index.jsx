@@ -51,8 +51,6 @@ const LoginUser = () => {
 		});
 
 	const loginUser = async () => {
-		dispatch(setIsLoaded(false));
-
 		try {
 			const url = 'http://127.0.0.1:5000/users/login';
 			const data = {
@@ -61,10 +59,6 @@ const LoginUser = () => {
 			};
 			const res = await axios.post(url, data);
 
-			if (verified) {
-				dispatch(setToken(res.data.token));
-				navigate('/dashboard');
-			}
 			console.log(res.data.business_id);
 			const business_id = res.data.business_id;
 			const user_id = res.data.user_id;
@@ -74,6 +68,7 @@ const LoginUser = () => {
 				localStorage.setItem('joinedBusiness', true);
 				localStorage.setItem('business_id', business_id);
 				localStorage.setItem('user_id', user_id);
+
 				navigate('/dashboard');
 			}
 		} catch (error) {
@@ -92,7 +87,6 @@ const LoginUser = () => {
 			dispatch(setIsLoaded(false));
 		} else {
 			getUsers();
-			dispatch(setIsLoaded(true));
 		}
 	};
 
@@ -104,7 +98,8 @@ const LoginUser = () => {
 
 			const user = data.find((u) => u.user_username === username);
 
-			dispatch(setVerified(user.user_verified));
+			dispatch(setVerified(true));
+			dispatch(setIsLoaded(true));
 		} catch (error) {
 			if (error) {
 				errorCreate("User doesn't exist");
