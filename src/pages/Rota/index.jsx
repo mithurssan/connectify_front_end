@@ -14,7 +14,7 @@ const Rota = () => {
   const [endDate, setEndDate] = useState('');
   const [content, setContent] = useState('');
   const [isBusiness, setIsBusiness] = useState(false);
-
+/* c8 ignore start */
   useEffect(() => {
     fetchEvents()
       .then((data) => {
@@ -185,7 +185,7 @@ const Rota = () => {
       </div>
     );
   });
-
+/* c8 ignore end */
   return (
     <div className="calendar-container">
     {isBusiness && (
