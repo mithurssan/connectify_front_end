@@ -189,7 +189,7 @@ const SignupBusiness = ({ handleSuccessfulRegistration }) => {
         <div className='error-container'>
           <div className='error-message-container' data-testid='spinner'>
             {isLoaded && (
-              <div className='spinner'>
+              <div className='spinner' data-testid='spinner'>
                 <Spinner />
               </div>
             )}

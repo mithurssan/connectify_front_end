@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { LoginUser, SignupUser } from '../../pages'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
@@ -53,11 +52,15 @@ const LoginUse = () => {
           </div>
         </div>
         {!signIn ? (
-          <LoginUser />
+          <div data-testid='login-user-form'>
+            <LoginUser />
+          </div>
         ) : (
-          <SignupUser
-            handleSuccessfulRegistration={handleSuccessfulRegistration}
-          />
+          <div data-testid='signup-user-form'>
+            <SignupUser
+              handleSuccessfulRegistration={handleSuccessfulRegistration}
+            />
+          </div>
         )}
       </div>
     </div>

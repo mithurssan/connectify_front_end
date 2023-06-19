@@ -4,7 +4,7 @@ import { TailSpin } from 'react-loader-spinner'
 
 const Spinner = () => {
   return (
-    <div className='spinner-container'>
+    <div className='spinner-container' data-testid='spinner-container'>
       <TailSpin
         height='80'
         width='80'

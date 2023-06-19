@@ -43,15 +43,14 @@ const LoginUser = () => {
         user_password: password,
       }
       const res = await axios.post(url, data)
-
       console.log('Token dispatched:', res.data.token)
       console.log(dispatch(setToken(res.data.token)))
+      await dispatch(setToken(res.data.token))
       navigate('/dashboard')
     } catch (error) {
       console.log(error, 'error')
       if (error.response && error.response.status === 401) {
         setIsLoaded(false)
-
         setError(true)
         setErrorMessage('Details not recognised')
       }
@@ -114,12 +113,14 @@ const LoginUser = () => {
             className='show-password-user'
             icon={faEye}
             onClick={showPasswordHandler}
+            data-testid='show-password-icon'
           />
         ) : (
           <FontAwesomeIcon
             className='show-password-user'
             icon={faEyeSlash}
             onClick={showPasswordHandler}
+            data-testid='show-password-icon'
           />
         )}
         <input type='submit' value='Login' className='login-register-button' />
@@ -132,13 +133,17 @@ const LoginUser = () => {
         <div className='error-container'>
           <div className='error-message-container' data-testid='spinner'>
             {isLoaded && (
-              <div className='spinner'>
+              <div className='spinner' data-testid='spinner'>
                 <Spinner />
               </div>
             )}
           </div>
           <div className='error-message-container'>
-            {error && <h1 className='not-recognised'>{errorMessage}</h1>}
+            {error && (
+              <h1 className='not-recognised' role='error'>
+                {errorMessage}
+              </h1>
+            )}
           </div>
         </div>
       </form>

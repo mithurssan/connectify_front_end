@@ -54,3 +54,16 @@ export const signupBusinessReducer = (state = initialBusinessState, action) => {
       return state
   }
 }
+
+const initialUserIDState = {
+  user_id: '',
+}
+
+export const userReducer = (state = initialUserIDState, action) => {
+  switch (action.type) {
+    case 'SET_USER_ID':
+      return { ...state, user_id: action.payload }
+    default:
+      return state
+  }
+}

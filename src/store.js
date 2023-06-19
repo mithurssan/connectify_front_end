@@ -7,7 +7,12 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { authReducer, signupReducer, signupBusinessReducer } from './reducers'
+import {
+  authReducer,
+  signupReducer,
+  signupBusinessReducer,
+  userReducer,
+} from './reducers'
 import { loadPersistedState, saveStateToLocalStorage } from './localStorage'
 
 const persistConfig = {
@@ -19,6 +24,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: signupReducer,
   business: signupBusinessReducer,
+  userID: userReducer,
 })
 
 export const resettableRootReducer = (state, action) => {

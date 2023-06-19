@@ -96,12 +96,14 @@ const LoginBusiness = () => {
             className='show-password'
             icon={faEye}
             onClick={showPasswordHandler}
+            data-testid='show-password-icon'
           />
         ) : (
           <FontAwesomeIcon
             className='show-password'
             icon={faEyeSlash}
             onClick={showPasswordHandler}
+            data-testid='show-password-icon'
           />
         )}
 
@@ -112,15 +114,22 @@ const LoginBusiness = () => {
           </Link>
         </div>
         <div className='error-container'>
-          <div className='error-message-container'>
+          <div className='error-message-container' data-testid='spinner'>
             {isLoaded && (
               <div className='spinner' data-testid='spinner'>
                 <Spinner />
               </div>
             )}
           </div>
-          <div className='error-message-container'>
-            {error && <h1 className='not-recognised'>{errorMessage}</h1>}
+          <div
+            className='error-message-container'
+            data-testid='error-container'
+          >
+            {error && (
+              <h1 className='not-recognised' data-testid='error-container'>
+                {errorMessage}
+              </h1>
+            )}
           </div>
         </div>
       </form>

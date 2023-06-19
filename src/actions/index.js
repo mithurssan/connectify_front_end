@@ -65,3 +65,10 @@ export const clearState = () => {
     type: 'CLEAR_STATE',
   }
 }
+
+export const setUser = (user) => {
+  return {
+    type: 'SET_USER_ID',
+    payload: user,
+  }
+}

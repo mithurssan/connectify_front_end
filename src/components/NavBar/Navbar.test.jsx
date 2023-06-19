@@ -19,11 +19,7 @@ expect.extend(matchers)
 describe('Navbar component', () => {
   const mockStore = configureStore()
   let store
-  const initialState = {
-    auth: {
-      token: '',
-    },
-  }
+
   beforeEach(() => {
     store = mockStore({}) // Initialize the store with an empty state
     render(

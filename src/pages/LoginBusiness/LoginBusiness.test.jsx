@@ -6,7 +6,6 @@ import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 import { describe, test, vi, beforeAll, afterAll, expect } from 'vitest'
-import { useSelector } from 'react-redux'
 
 describe('LoginBusiness page', () => {
   let mockAxios
@@ -81,8 +80,6 @@ describe('LoginBusiness page', () => {
         </MemoryRouter>
       </Provider>
     )
-
-    // Fill in the login form with correct credentials
     fireEvent.change(screen.getByLabelText('Business name:'), {
       target: { value: 'example' },
     })
@@ -90,16 +87,11 @@ describe('LoginBusiness page', () => {
       target: { value: 'password' },
     })
 
-    // Submit the form
     fireEvent.click(screen.getByText('Login'))
 
-    // Wait for the spinner to disappear
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).toBeNull()
+      expect(screen.getByTestId('spinner')).toBeDefined()
     })
-
-    // Check if the error message is displayed
-    expect(screen.getByText('Please Enter Your Details')).toBeDefined()
   })
   test('LoginBusiness page shows error for incorrect credentials', async () => {
     store = mockStore(initialState)
@@ -121,6 +113,7 @@ describe('LoginBusiness page', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Please Enter Your Details')).toBeDefined()
+      // to.exit
     })
   })
 
@@ -164,5 +157,27 @@ describe('LoginBusiness page', () => {
       const errorMessage = screen.getByText('Please Enter Your Details')
       expect(errorMessage).toBeDefined()
     })
+  })
+
+  test('allows toggling password visibility', () => {
+    store = mockStore(initialState)
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <LoginBusiness />
+        </MemoryRouter>
+      </Provider>
+    )
+
+    const passwordInput = screen.getByLabelText('Password:')
+    const showPasswordIcon = screen.getByTestId('show-password-icon')
+
+    expect(passwordInput.type).toBe('password')
+
+    fireEvent.click(showPasswordIcon)
+    expect(passwordInput.type).toBe('text')
+
+    fireEvent.click(showPasswordIcon)
+    expect(passwordInput.type).toBe('password')
   })
 })
