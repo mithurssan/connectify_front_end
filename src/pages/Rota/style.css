@@ -1,17 +1,69 @@
 .calendar-container {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    margin-top: 20px;
-    max-width: 1400px;
-    max-height: 1400px;
-    font-family: 'Montserrat', sans-serif;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 20px;
+  max-width: 1400px;
+  max-height: 1400px;
+  font-family: 'Montserrat', sans-serif;
+}
 
-  .calendar-wrapper {
-    height: 800px; 
-    width: 1400px
-  }
+.add-entry-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.add-entry-container input[type="text"]{
+  font-family: 'Montserrat', sans-serif;
+  margin: 5px;
+  padding: 8px;
+  border-radius: 25px;
+}
+.add-entry-container button {
+  background-color: #785A9F;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 25px;
+}
+
+.event-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
+  padding: 8px;
+}
+
+.event-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.event-container span {
+  margin-right: 5px;
+}
+
+.event-container button {
+  background-color: #785A9F;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 25px;
+}
+
+.calendar-wrapper {
+  height: 800px; 
+  width: 1400px;
+}
 
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active {
@@ -20,7 +72,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.rbc-event{
+.rbc-event {
   background-color: #785A9F !important;
   color: #fff  !important;
   font-family: 'Montserrat', sans-serif;
@@ -29,4 +81,5 @@
 .rbc-btn-group {
   font-family: 'Montserrat', sans-serif;
 }
+
 

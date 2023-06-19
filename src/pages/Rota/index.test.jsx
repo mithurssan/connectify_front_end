@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import matchers from "@testing-library/jest-dom/matchers";
+import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 import Rota from '.';
 
@@ -37,7 +37,7 @@ describe('Rota', () => {
       business_id: 1,
       rota_start_date: '16-06-2023',
       rota_end_date: '20-06-2023',
-      rota_content: 'Assigned to user: test1'
+      rota_content: 'Assigned to user: test1',
     };
 
     mockAxios.onPut(`http://127.0.0.1:5000/rotas/${event.rota_id}`).reply(200);
@@ -48,6 +48,8 @@ describe('Rota', () => {
     mockAxios.onGet('http://127.0.0.1:5000/rotas/').reply(500);
 
     await expect(screen.findByText('Assigned to user: test1')).rejects.toThrow();
+
+    
   });
 
   it('handles error when updating an event', async () => {
@@ -56,13 +58,12 @@ describe('Rota', () => {
       business_id: 1,
       rota_start_date: '16-06-2023',
       rota_end_date: '20-06-2023',
-      rota_content: 'Assigned to user: test1'
+      rota_content: 'Assigned to user: test1',
     };
 
     mockAxios.onPut(`http://127.0.0.1:5000/rotas/${event.rota_id}`).reply(500);
 
   });
-  
 
 });
 
