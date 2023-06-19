@@ -10,6 +10,9 @@ const DragAndDropCalendar = withDragAndDrop(Calendar);
 
 const Rota = () => {
   const [events, setEvents] = useState([]);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [content, setContent] = useState('');
 
   useEffect(() => {
     fetchEvents()
@@ -26,86 +29,184 @@ const Rota = () => {
   const fetchEvents = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/rotas/');
-      const data = await response.json();/* c8 ignore next 3 */
-      return data;/* c8 ignore next 3 */
-    } catch (error) {/* c8 ignore next 3 */
-      throw new Error('Error fetching events');/* c8 ignore next 3 */
-    }/* c8 ignore next 3 */
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error('Error fetching events');
+    }
   };
 
-  const formatEvents = (data) => {/* c8 ignore next 3 */
-    return data.map((event) => {/* c8 ignore next 3 */
-      const start = moment(event.rota_start_date, 'DD-MM-YYYY').toDate();/* c8 ignore next 3 */
-    const end = moment(event.rota_end_date, 'DD-MM-YYYY').toDate();/* c8 ignore next 3 */
-/* c8 ignore next 3 */
-      return {/* c8 ignore next 3 */
-        id: event.rota_id,/* c8 ignore next 3 */
-        business_id: event.business_id,/* c8 ignore next 3 */
-        title: event.rota_content,/* c8 ignore next 3 */
-        start: start,/* c8 ignore next 3 */
-        end: end,/* c8 ignore next 3 */
-      };/* c8 ignore next 3 */
-    });/* c8 ignore next 3 */
-  };/* c8 ignore next 3 */
+  const formatEvents = (data) => {
+    return data.map((event) => {
+      const start = moment(event.rota_start_date, 'DD-MM-YYYY').toDate();
+    const end = moment(event.rota_end_date, 'DD-MM-YYYY').toDate();
+      return {
+        id: event.rota_id,
+        business_id: event.business_id,
+        title: event.rota_content,
+        start: start,
+        end: end,
+      };
+    });
+  };
 
   const handleEventDrop = async ({ event, start, end }) => {
-    const updatedEvent = { ...event, start, end }; /* c8 ignore next 3 */
-/* c8 ignore next 3 */
-    try {/* c8 ignore next 3 */
-      await updateEvent(updatedEvent);/* c8 ignore next 3 */
-      const updatedEvents = events.map((ev) =>/* c8 ignore next 3 */
-        ev.id === updatedEvent.id ? updatedEvent : ev/* c8 ignore next 3 */
-      );/* c8 ignore next 3 */
-      setEvents(updatedEvents);/* c8 ignore next 3 */
-      localStorage.setItem('events', JSON.stringify(updatedEvents));/* c8 ignore next 3 */
-    } catch (error) {/* c8 ignore next 3 */
-      console.error('Error updating event:', error);/* c8 ignore next 3 */
-    }/* c8 ignore next 3 */
-  };/* c8 ignore next 3 */
+    const updatedEvent = { ...event, start, end }; 
 
-  const updateEvent = async (event) => {/* c8 ignore next 3 */
-    try {/* c8 ignore next 3 */
-    const formattedEvent = {/* c8 ignore next 3 */
-      ...event,/* c8 ignore next 3 */
-      start: moment(event.start).format('DD-MM-YYYY'),/* c8 ignore next 3 */
-      end: moment(event.end).format('DD-MM-YYYY'),/* c8 ignore next 3 */
-    };/* c8 ignore next 3 */
-/* c8 ignore next 3 */
-      console.log('Updating event:', formattedEvent);/* c8 ignore next 3 */
-/* c8 ignore next 3 */
-      const response = await fetch(/* c8 ignore next 3 */
-        `http://127.0.0.1:5000/rotas/update/${formattedEvent.id}`,/* c8 ignore next 3 */
-        {/* c8 ignore next 3 */
-          method: 'PUT',/* c8 ignore next 3 */
-          headers: {/* c8 ignore next 3 */
-            'Content-Type': 'application/json',/* c8 ignore next 3 */
-          },/* c8 ignore next 3 */
+    try {
+      await updateEvent(updatedEvent);
+      const updatedEvents = events.map((ev) =>
+        ev.id === updatedEvent.id ? updatedEvent : ev
+      );
+      setEvents(updatedEvents);
+      localStorage.setItem('events', JSON.stringify(updatedEvents));
+    } catch (error) {
+      console.error('Error updating event:', error);
+    }
+  };
+
+  const updateEvent = async (event) => {
+    try {
+    const formattedEvent = {
+      ...event,
+      start: moment(event.start).format('DD-MM-YYYY'),
+      end: moment(event.end).format('DD-MM-YYYY'),
+    };
+
+      console.log('Updating event:', formattedEvent);
+
+      const response = await fetch(
+        `http://127.0.0.1:5000/rotas/update/${formattedEvent.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({
-            business_id: formattedEvent.business_id,/* c8 ignore next 3 */
-            rota_start_date: formattedEvent.start,/* c8 ignore next 3 */
-            rota_end_date: formattedEvent.end,/* c8 ignore next 3 */
-            rota_content: formattedEvent.title,/* c8 ignore next 3 */
-          }),/* c8 ignore next 3 */
-        }/* c8 ignore next 3 */
-      );/* c8 ignore next 3 */
-/* c8 ignore next 3 */
-      console.log('Update response:', response);/* c8 ignore next 3 */
-/* c8 ignore next 3 */
-      if (response.ok) {/* c8 ignore next 3 */
-        console.log('Rota updated successfully');/* c8 ignore next 3 */
-      } else {/* c8 ignore next 3 */
-        throw new Error('Failed to update rota');/* c8 ignore next 3 */
-      }/* c8 ignore next 3 */
-    } catch (error) {/* c8 ignore next 3 */
-      console.error('Error updating event:', error);/* c8 ignore next 3 */
-      throw new Error('Error updating event');/* c8 ignore next 3 */
-    }/* c8 ignore next 3 */
-  };/* c8 ignore next 3 */
+            business_id: formattedEvent.business_id,
+            rota_start_date: formattedEvent.start,
+            rota_end_date: formattedEvent.end,
+            rota_content: formattedEvent.title,
+          }),
+        }
+      );
+
+      console.log('Update response:', response);
+
+      if (response.ok) {
+        console.log('Rota updated successfully');
+      } else {
+        throw new Error('Failed to update rota');
+      }
+    } catch (error) {
+      console.error('Error updating event:', error);
+      throw new Error('Error updating event');
+    }
+  };
+
+  const handleAddEntry = async () => {
+    if (!startDate || !endDate || !content) {
+      console.error('Empty fields are not allowed');
+      return;
+    }
+    try {
+      const storedEvents = localStorage.getItem('events');
+      const formattedEvents = formatEvents(JSON.parse(storedEvents));
+      const businessId = formattedEvents[0]?.business_id;
+
+      const newEntry = {
+        business_id: businessId,
+        rota_start_date: startDate,
+        rota_end_date: endDate,
+        rota_content: content,
+      };
+
+      const response = await fetch('http://127.0.0.1:5000/rotas/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEntry),
+      });
+
+      if (response.ok) {
+        console.log('New entry added successfully');
+        fetchEvents()
+          .then((data) => {
+            const formattedEvents = formatEvents(data);
+            setEvents(formattedEvents);
+          })
+          .catch((error) => {
+            console.error('Error fetching events:', error);
+          });
+
+        setStartDate('');
+        setEndDate('');
+        setContent('');
+      } else {
+        console.error('Failed to add new entry');
+      }
+    } catch (error) {
+      console.error('Error adding new entry:', error);
+    }
+  };
 
   console.log(events);
 
+  const handleDeleteEntry = async (event) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:5000/rotas/delete/${event.id}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (response.ok) {
+        console.log('Entry deleted successfully');
+        const updatedEvents = events.filter((ev) => ev.id !== event.id);
+        setEvents(updatedEvents);
+      } else {
+        console.error('Failed to delete entry');
+      }
+    } catch (error) {
+      console.error('Error deleting entry:', error);
+    }
+  };
+
+  const eventComponents = events.map((event) => {
+    return (
+      <div key={event.id} className="event-container">
+        <span>{event.title}</span>
+        <button onClick={() => handleDeleteEntry(event)}>Delete</button>
+      </div>
+    );
+  });
+
   return (
     <div className="calendar-container">
+      <div className="add-entry-container">
+        <input
+          type="text"
+          placeholder="Start Date (DD-MM-YYYY)"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="End Date (DD-MM-YYYY)"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <button onClick={handleAddEntry}>Add Entry</button>
+      </div>
+      <div className="event-list-container">{eventComponents}</div>
       <div className="calendar-wrapper">
         <DragAndDropCalendar
           localizer={localizer}
