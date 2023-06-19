@@ -4,7 +4,7 @@ const business_id = localStorage.getItem("business_id")
 export const SidebarData = [
   {
     title: 'Dashboard',
-    path: "/dashboard",
+    path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
     cName: 'nav-text',
     forBusiness: true
