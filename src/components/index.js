@@ -12,3 +12,4 @@ export { default as DashboardIcons } from './DashboardIcons'
 export { default as PostForm } from './PostForm'
 export { default as Posts } from './Posts'
 export { default as CommentDialog } from './CommentDialog'
+export { default as LoginPageVerify } from './LoginPageVerify';

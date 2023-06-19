@@ -1,0 +1,83 @@
+.login-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  gap: 10px;
+}
+
+.topbar {
+  position: absolute;
+  top: 2%;
+  left: 7%;
+  z-index: 1;
+  padding-bottom: 10px;
+}
+
+.mainContent {
+  width: 1200px;
+  box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.slide-in-animation {
+  animation: slide-in 0.8s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+.create-account,
+.sign-in {
+  font-size: 30px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  margin: 20px;
+  color: #868686;
+}
+
+.sign-in-focused,
+.create-account-focused {
+  font-size: 30px;
+  border: none;
+  color: #0a1a41;
+  position: relative;
+  margin: 20px;
+}
+
+.sign-in-focused::after,
+.sign-in:hover::after,
+.create-account-focused::after,
+.create-account:hover::after {
+  content: '';
+  position: absolute;
+  background-color: #785a9f;
+  height: 2px;
+  width: 0;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  opacity: 1;
+  transition: width 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
+  transform-origin: center;
+}
+
+.sign-in-focused::after,
+.sign-in:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.create-account-focused::after,
+.create-account:hover::after {
+  width: 100%;
+  opacity: 1;
+}
