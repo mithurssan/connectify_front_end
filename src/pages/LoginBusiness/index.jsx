@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setToken, setCompanyName, setCompanyPassword, setIsLoaded, setError } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 
@@ -13,6 +13,7 @@ const LoginBusiness = () => {
 	const companyPassword = useSelector((state) => state.business.companyPassword);
 	const isLoaded = useSelector((state) => state.app.isLoaded);
 	const error = useSelector((state) => state.app.error);
+	const navigate = useNavigate()
 
 	const loginBusiness = async () => {
 		try {
@@ -24,6 +25,13 @@ const LoginBusiness = () => {
 			const res = await axios.post(url, options);
 
 			dispatch(setToken(res.data.token));
+			console.log('Token dispatched:', res.data.token)
+			console.log(dispatch(setToken(res.data.token)))
+			const business_id = res.data.business_id
+			localStorage.setItem('business_id', business_id);
+			localStorage.setItem('isBusiness', true);
+			localStorage.setItem('joinedBusiness', true);
+			navigate("/dashboard")
 		} catch (error) {
 			console.log(error, 'error');
 			if (error.response.status == 401) {

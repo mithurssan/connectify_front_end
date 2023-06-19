@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { Link, NavLink } from 'react-router-dom'
@@ -14,7 +14,8 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  const [joinedBusiness, setJoinedBusiness] = useState(null);
+  
   const showSidebar = () => setSidebar(!sidebar)
   const handleRemoveToken = () => {
     dispatch(removeToken())
@@ -30,8 +31,22 @@ function Navbar() {
     const url = 'http://127.0.0.1:5000/logout'
     await axios.post(url)
     handleRemoveToken(removeToken())
+    localStorage.clear()
     navigate('/')
   }
+
+  useEffect(() => {
+    const joinedBusinessValue = localStorage.getItem('joinedBusiness');
+    setJoinedBusiness(joinedBusinessValue);
+  }, []);
+
+  const filteredSidebarData = SidebarData.filter(item => {
+    if (joinedBusiness) {
+      return item.forBusiness;
+    } else {
+      return item.show;
+    }
+  });
 
   return (
     <>
@@ -57,7 +72,7 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {SidebarData.map((item, index) => {
+            {filteredSidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName} role='navbar'>
                   <NavLink to={item.path} style={navActive}>

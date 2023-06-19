@@ -47,7 +47,17 @@ const LoginUser = () => {
       await dispatch(setToken(res.data.token))
       console.log('Token dispatched:', res.data.token)
       console.log(dispatch(setToken(res.data.token)))
-      navigate('/dashboard')
+      console.log(res.data.business_id)
+      const business_id = res.data.business_id
+      const user_id = res.data.user_id
+      if (business_id == null) {
+        navigate("/not-assigned")
+      } else {
+        localStorage.setItem('joinedBusiness', true);
+        localStorage.setItem('business_id', business_id);
+        localStorage.setItem('user_id', user_id);
+        navigate("/dashboard")
+      }
     } catch (error) {
       console.log(error, 'error')
       if (error.response && error.response.status === 401) {
