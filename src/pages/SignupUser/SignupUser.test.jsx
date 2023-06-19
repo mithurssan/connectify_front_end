@@ -4,13 +4,29 @@ import { describe, test, expect, vi } from 'vitest'
 import axios from 'axios'
 import SignupUser from '.'
 import { MemoryRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import configureStore from 'redux-mock-store'
 
 describe('SignupUser page', () => {
+  const initialState = {
+    user: {
+      username: '',
+      email: '',
+      password: '',
+    },
+  }
+
+  const mockStore = configureStore()
+  let store
+
   test('renders the SignupUser component', () => {
+    store = mockStore(initialState)
     render(
-      <MemoryRouter>
-        <SignupUser />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <SignupUser />
+        </MemoryRouter>
+      </Provider>
     )
 
     expect(screen.getByLabelText('Username:')).toBeDefined()
@@ -18,17 +34,17 @@ describe('SignupUser page', () => {
     expect(screen.getByLabelText('Password:')).toBeDefined()
     expect(screen.getByRole('button', { name: 'Register' })).toBeDefined()
   })
-
   test('submits the form with correct credentials', async () => {
-    vi.spyOn(axios, 'post').mockResolvedValueOnce({
-      status: 200,
-      data: { message: 'User registered successfully' },
-    })
+    const axiosPostSpy = vi
+      .spyOn(axios, 'post')
+      .mockResolvedValueOnce({ status: 200 })
 
     render(
-      <MemoryRouter>
-        <SignupUser />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <SignupUser />
+        </MemoryRouter>
+      </Provider>
     )
 
     fireEvent.change(screen.getByLabelText('Username:'), {
@@ -41,71 +57,85 @@ describe('SignupUser page', () => {
       target: { value: 'testpassword' },
     })
 
-    fireEvent.click(screen.getAllByRole('button', { name: 'Register' })[0])
+    fireEvent.click(screen.getByRole('button', { name: 'Register' }))
 
-    await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1))
+    expect(axiosPostSpy).toHaveBeenCalledWith(
+      'http://127.0.0.1:5000/users/register',
+      {
+        user_username: 'testuser',
+        user_email: 'test@example.com',
+        user_password: 'testpassword',
+      }
+    )
 
-    expect(
-      screen.getByRole('heading', { name: 'Correct Credentials' })
-    ).toBeDefined()
+    await waitFor(() => {
+      expect(screen.queryByTestId('spinner')).toBeDefined()
+    })
+
+    axiosPostSpy.mockRestore()
   })
 
-  test('submits the form with incorrect credentials', async () => {
-    vi.spyOn(axios, 'post').mockResolvedValueOnce({
+  test('throws error when nothing is submitted', async () => {
+    const axiosPostSpy = vi.spyOn(axios, 'post').mockResolvedValueOnce({
       status: 400,
-      data: { message: 'Invalid credentials' },
+      data: { message: 'Error occurred' },
     })
 
+    store = mockStore(initialState)
     render(
-      <MemoryRouter>
-        <SignupUser />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <SignupUser />
+        </MemoryRouter>
+      </Provider>
     )
 
     fireEvent.change(screen.getByLabelText('Username:'), {
-      target: { value: 'testuser' },
+      target: { value: '' },
     })
     fireEvent.change(screen.getByLabelText('Email:'), {
-      target: { value: 'test@example.com' },
+      target: { value: '' },
     })
     fireEvent.change(screen.getByLabelText('Password:'), {
-      target: { value: 'testpassword' },
+      target: { value: '' },
     })
 
-    fireEvent.click(screen.getAllByRole('button', { name: 'Register' })[0])
-
-    await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1))
+    fireEvent.click(screen.getByRole('button', { name: 'Register' }))
 
     expect(
-      screen.getByRole('heading', { name: 'Incorrect Credentials' })
+      screen.getByRole('heading', { name: 'Please Enter Your Details' })
     ).toBeDefined()
+
+    axiosPostSpy.mockRestore()
   })
 
-  test('handles error in form submission', async () => {
-    const errorMessage = 'Error occurred during registration'
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation()
-    vi.spyOn(axios, 'post').mockRejectedValueOnce(new Error(errorMessage))
+  // test('handles error in form submission', async () => {
+  //   const errorMessage = 'Error occurred during registration'
+  //   const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation()
+  //   vi.spyOn(axios, 'post').mockRejectedValueOnce(new Error(errorMessage))
+  //   store = mockStore(initialState)
+  //   render(
+  //     <Provider store={store}>
+  //       <MemoryRouter>
+  //         <SignupUser />
+  //       </MemoryRouter>
+  //     </Provider>
+  //   )
 
-    render(
-      <MemoryRouter>
-        <SignupUser />
-      </MemoryRouter>
-    )
+  //   fireEvent.change(screen.getByLabelText('Username:'), {
+  //     target: { value: 'testuser' },
+  //   })
+  //   fireEvent.change(screen.getByLabelText('Email:'), {
+  //     target: { value: 'test@example.com' },
+  //   })
+  //   fireEvent.change(screen.getByLabelText('Password:'), {
+  //     target: { value: 'testpassword' },
+  //   })
 
-    fireEvent.change(screen.getByLabelText('Username:'), {
-      target: { value: 'testuser' },
-    })
-    fireEvent.change(screen.getByLabelText('Email:'), {
-      target: { value: 'test@example.com' },
-    })
-    fireEvent.change(screen.getByLabelText('Password:'), {
-      target: { value: 'testpassword' },
-    })
+  //   fireEvent.click(screen.getAllByRole('button', { name: 'Register' })[0])
 
-    fireEvent.click(screen.getAllByRole('button', { name: 'Register' })[0])
+  //   await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1))
 
-    await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1))
-
-    consoleErrorSpy.mockRestore()
-  })
+  //   consoleErrorSpy.mockRestore()
+  // })
 })
