@@ -80,7 +80,6 @@
 }
 
 .container {
-  margin-top: 20px;
 }
 
 .sign-up-business {
@@ -100,21 +99,11 @@
   position: relative;
 }
 
-.show-password-sign-up-user {
+.show-password-sign-up2 {
   position: absolute;
-  top: 59.5%;
+  top: 57.5%;
   right: 7%;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 15px;
   color: #0a1a41;
-}
-.success-messsage {
-  transform: translate(-250px, 0px);
-  margin-top: 30px;
-  width: 600px;
-  font-size: 18px;
-  color: #0a1a41;
-  text-align: center;
-  transition: 0.5s ease-in-out;
-  font-weight: 900;
 }

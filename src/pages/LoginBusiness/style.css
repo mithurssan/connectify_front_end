@@ -103,9 +103,12 @@
 }
 .show-password {
   position: absolute;
-  top: 48.5%;
+  top: 48.7%;
   right: 7%;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   color: #0a1a41;
+}
+.loaded {
+  margin-top: 90px;
 }

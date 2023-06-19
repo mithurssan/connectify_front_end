@@ -42,7 +42,7 @@ const GetJournal = () => {
     })
   }
 
-  const deleteSnack = async (id) => {
+  const deleteEntry = async (id) => {
     try {
       const response = await axios.delete(
         `http://127.0.0.1:5000/entries/delete/${id}`
@@ -73,7 +73,7 @@ const GetJournal = () => {
               <h1>{entry_title}</h1>
               <p>{entry_content}</p>
               <Link to={`/edit-journal/${entry_id}`}>Edit</Link>
-              <button onClick={() => deleteSnack(entry_id)}>Delete</button>
+              <button onClick={() => deleteEntry(entry_id)}>Delete</button>
             </div>
           )
         )}

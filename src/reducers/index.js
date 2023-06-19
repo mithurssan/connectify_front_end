@@ -18,6 +18,7 @@ const initialUserState = {
   username: '',
   email: '',
   password: '',
+  verifyToken: '',
 }
 
 export const signupReducer = (state = initialUserState, action) => {
@@ -28,6 +29,8 @@ export const signupReducer = (state = initialUserState, action) => {
       return { ...state, email: action.payload }
     case 'SET_PASSWORD':
       return { ...state, password: action.payload }
+    case 'SET_VERIFY_TOKEN':
+      return { ...state, verifyToken: action.payload }
     default:
       return state
   }
@@ -55,14 +58,29 @@ export const signupBusinessReducer = (state = initialBusinessState, action) => {
   }
 }
 
-const initialUserIDState = {
-  user_id: '',
+const initialAppState = {
+  isLoaded: '',
+  error: '',
+  verified: '',
 }
 
-export const userReducer = (state = initialUserIDState, action) => {
+export const appReducer = (state = initialAppState, action) => {
   switch (action.type) {
-    case 'SET_USER_ID':
-      return { ...state, user_id: action.payload }
+    case 'SET_IS_LOADED':
+      return {
+        ...state,
+        isLoaded: action.payload,
+      }
+    case 'SET_ERROR':
+      return {
+        ...state,
+        error: action.payload,
+      }
+    case 'SET_VERIFIED':
+      return {
+        ...state,
+        verified: action.payload,
+      }
     default:
       return state
   }

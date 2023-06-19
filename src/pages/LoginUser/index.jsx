@@ -1,24 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import { setToken, setUsername, setPassword } from '../../actions'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { setToken, setUsername, setIsLoaded, setVerified } from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
 import './style.css'
 import { Spinner } from '../../components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
 
 const LoginUser = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const username = useSelector((state) => state.user.username)
-  const password = useSelector((state) => state.user.password)
-
+  const [password, setPassword] = useState('')
   const [isLoaded, setIsLoaded] = useState(false)
-  const [error, setError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [showPassword, setShowPassword] = useState(true)
+
+  const username = useSelector((state) => state.user.username)
+  const verified = useSelector((state) => state.app.verified)
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -35,7 +34,27 @@ const LoginUser = () => {
     fetchToken()
   }, [dispatch])
 
+  useEffect(() => {
+    if (verified && isLoaded) {
+      loginUser()
+    }
+  }, [verified, isLoaded])
+
+  const errorCreate = (error) =>
+    toast.error(error, {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    })
+
   const loginUser = async () => {
+    setIsLoaded(false)
+
     try {
       const url = 'http://127.0.0.1:5000/users/login'
       const data = {
@@ -43,45 +62,58 @@ const LoginUser = () => {
         user_password: password,
       }
       const res = await axios.post(url, data)
-      console.log('Token dispatched:', res.data.token)
-      console.log(dispatch(setToken(res.data.token)))
-      await dispatch(setToken(res.data.token))
-      navigate('/dashboard')
+
+      if (verified) {
+        dispatch(setToken(res.data.token))
+        navigate('/dashboard')
+      }
+      console.log(res.data.business_id)
+      const business_id = res.data.business_id
+      const user_id = res.data.user_id
+      if (business_id == null) {
+        navigate('/not-assigned')
+      } else {
+        localStorage.setItem('joinedBusiness', true)
+        localStorage.setItem('business_id', business_id)
+        localStorage.setItem('user_id', user_id)
+        navigate('/dashboard')
+      }
     } catch (error) {
       console.log(error, 'error')
-      if (error.response && error.response.status === 401) {
-        setIsLoaded(false)
-        setError(true)
-        setErrorMessage('Details not recognised')
+      if (error && password.length != 0) {
+        errorCreate('Incorrect credentials')
       }
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     if (username.length === 0 || password.length === 0) {
-      setIsLoaded(false)
-      setError(true)
-      setErrorMessage('Please Enter Your Details')
+      errorCreate('Enter username and password')
+      setTimeout(() => {
+        setIsLoaded(false)
+      }, 500)
     } else {
+      getUsers()
       setIsLoaded(true)
-      setError(false)
-
-      await loginUser()
     }
   }
 
-  const handleInputUsername = (e) => {
-    dispatch(setUsername(e.target.value))
-  }
+  async function getUsers() {
+    try {
+      const url = 'http://127.0.0.1:5000/users/'
+      const res = await axios.get(url)
+      const data = await res.data
 
-  const handleInputPassword = (e) => {
-    dispatch(setPassword(e.target.value))
-  }
+      const user = data.find((u) => u.user_username === username)
 
-  const showPasswordHandler = () => {
-    setShowPassword((prev) => !prev)
+      dispatch(setVerified(user.user_verified))
+    } catch (error) {
+      if (error) {
+        errorCreate("User doesn't exist")
+      }
+    }
   }
 
   return (
@@ -94,7 +126,7 @@ const LoginUser = () => {
           type='text'
           id='username'
           value={username}
-          onChange={handleInputUsername}
+          onChange={(e) => dispatch(setUsername(e.target.value))}
           className='user-text'
         />
 
@@ -102,55 +134,32 @@ const LoginUser = () => {
           Password:
         </label>
         <input
-          type={!showPassword ? 'text' : 'password'}
+          type='password'
           id='password'
           value={password}
-          onChange={handleInputPassword}
+          onChange={(e) => setPassword(e.target.value)}
           className='user-text'
         />
-        {!showPassword ? (
-          <FontAwesomeIcon
-            className='show-password-user'
-            icon={faEye}
-            onClick={showPasswordHandler}
-            data-testid='show-password-icon'
-          />
-        ) : (
-          <FontAwesomeIcon
-            className='show-password-user'
-            icon={faEyeSlash}
-            onClick={showPasswordHandler}
-            data-testid='show-password-icon'
-          />
-        )}
         <input type='submit' value='Login' className='login-register-button' />
         <div className='container'>
-          <Link to='/login-register' className='sign-in-user '>
+          <Link to='/login-register' className='sign-in-user'>
             Login as a Business
           </Link>
         </div>
 
-        <div className='error-container'>
-          <div className='error-message-container' data-testid='spinner'>
-            {isLoaded && (
-              <div className='spinner' data-testid='spinner'>
-                <Spinner />
-              </div>
-            )}
-          </div>
-          <div className='error-message-container'>
-            {error && (
-              <h1 className='not-recognised' role='error'>
-                {errorMessage}
-              </h1>
-            )}
-          </div>
+        <div className='error-message-container'>
+          {isLoaded && (
+            <div className='spinner' data-testid='spinner'>
+              <Spinner />
+            </div>
+          )}
         </div>
       </form>
 
       <div className='login-register-image'>
         <img src={LoginImage} alt='login-page' className='image' />
       </div>
+      <ToastContainer />
     </div>
   )
 }

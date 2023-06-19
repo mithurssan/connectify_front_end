@@ -1,25 +1,33 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { setUsername, setEmail, setPassword } from '../../actions'
-import { Spinner } from '../../components'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { setVerified } from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
-
+import { Spinner } from '../../components'
 import './style.css'
 
 const SignupUser = ({ handleSuccessfulRegistration }) => {
   const dispatch = useDispatch()
-  const username = useSelector((state) => state.user.username)
-  const email = useSelector((state) => state.user.email)
-  const password = useSelector((state) => state.user.password)
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
   const [isLoaded, setIsLoaded] = useState(false)
-  const [error, setError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [showPassword, setShowPassword] = useState(true)
-  const [showSuccessMessage, setShowSuccessMessage] = useState('')
+
+  const errorCreate = (error) =>
+    toast.error(error, {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    })
 
   async function registerUser() {
     try {
@@ -31,66 +39,24 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
       }
       const res = await axios.post(url, options)
 
-      const data = res.data
-
-      if (data.error) {
-        setError(true)
-        setTimeout(() => {
-          setIsLoaded(false)
-        }, 100)
-        setErrorMessage(data.error)
-        setEmail('')
-        setUsername('')
-        setPassword('')
-      } else {
-        setError(false)
-        setTimeout(() => {
-          setIsLoaded(false)
-        }, 100)
-
-        await axios.post('http://127.0.0.1:5000/verify-email', {
-          user_email: email,
-          token: data.token,
-        })
-        setShowSuccessMessage('Your account has successfully been created')
-        setTimeout(() => {
-          handleSuccessfulRegistration()
-        }, 700)
-      }
-
-      console.log(data)
+      dispatch(setVerified(false))
+      setIsLoaded(true)
+      setTimeout(() => {
+        handleSuccessfulRegistration()
+      }, 1000)
     } catch (error) {
-      setError(true)
-      setIsLoaded(false)
-      setErrorMessage('Error occured')
+      errorCreate('LINE 44')
+      console.error(error)
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (username.length === 0 || email.length === 0 || password.length === 0) {
-      setIsLoaded(false)
-      setError(true)
-      setErrorMessage('Please Enter Your Details')
-    } else {
-      registerUser()
-      setError(false)
-      setIsLoaded(true)
-    }
+    registerUser()
   }
 
-  const handleInputUsername = (e) => {
-    dispatch(setUsername(e.target.value))
-  }
-
-  const handleInputEmail = (e) => {
-    dispatch(setEmail(e.target.value))
-  }
-  const handleInputPassword = (e) => {
-    dispatch(setPassword(e.target.value))
-  }
-  const showPasswordHandler = () => {
-    setShowPassword((prev) => !prev)
+  const handleInputChange = (e, setValue) => {
+    setValue(e.target.value)
   }
 
   return (
@@ -103,7 +69,7 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
           type='text'
           id='username'
           value={username}
-          onChange={handleInputUsername}
+          onChange={(e) => handleInputChange(e, setUsername)}
           className='business-text'
         />
 
@@ -114,7 +80,7 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
           type='email'
           id='email'
           value={email}
-          onChange={handleInputEmail}
+          onChange={(e) => handleInputChange(e, setEmail)}
           className='business-text'
         />
 
@@ -122,54 +88,31 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
           Password:{' '}
         </label>
         <input
-          type={!showPassword ? 'text' : 'password'}
+          type='password'
           id='password'
           value={password}
-          onChange={handleInputPassword}
+          onChange={(e) => handleInputChange(e, setPassword)}
           className='business-text'
         />
-        {!showPassword ? (
-          <FontAwesomeIcon
-            className='show-password-sign-up-user'
-            icon={faEye}
-            onClick={showPasswordHandler}
-          />
-        ) : (
-          <FontAwesomeIcon
-            className='show-password-sign-up-user'
-            icon={faEyeSlash}
-            onClick={showPasswordHandler}
-          />
-        )}
 
         <input
           type='submit'
           value='Register'
           className='login-register-button'
         />
-
-        <div className='error-container'>
-          <div className='error-message-container' data-testid='spinner'>
-            {isLoaded && (
-              <div className='spinner' data-testid='spinner'>
-                <Spinner />
-              </div>
-            )}
-          </div>
-
-          <div className='error-message-container'>
-            {error ? (
-              <h1 className='not-recognised'>{errorMessage}</h1>
-            ) : (
-              <h1 className='success-messsage'>{showSuccessMessage}</h1>
-            )}
-          </div>
+        <div className='error-message-container'>
+          {isLoaded && (
+            <div className='spinner' data-testid='spinner'>
+              <Spinner />
+            </div>
+          )}
         </div>
       </form>
 
       <div className='login-register-image'>
         <img src={LoginImage} alt='login-page' className='image' />
       </div>
+      <ToastContainer />
     </div>
   )
 }

@@ -29,6 +29,7 @@
 
   padding-left: 5%;
   padding-right: 5%;
+  position: relative;
 }
 
 .user-text,
@@ -91,10 +92,11 @@
 
 .sign-in-business {
   color: #ffffff;
-  font-size: 16px;
+  font-size: 30px;
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
   font-weight: 900;
+  padding-top: 80px;
 }
 
 .sign-in-business:hover {
@@ -120,9 +122,8 @@
 
 .error-message-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: -40px;
+  top: 500px;
+  margin-left: -10px;
 }
 
 .not-recognised {
@@ -139,9 +140,9 @@
 }
 .show-password-user {
   position: absolute;
-  top: 49.8%;
+  top: 50%;
   right: 7%;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 15px;
   color: #0a1a41;
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { LoginUser, SignupUser } from '../../pages'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
@@ -6,6 +7,8 @@ import './style.css'
 const LoginUse = () => {
   const [signIn, setSignIn] = useState(false)
   const [slideAnimation, setSlideAnimation] = useState('')
+
+  const navigate = useNavigate()
 
   const activateSignIn = () => {
     setSlideAnimation('slide-in-animation')
@@ -22,9 +25,6 @@ const LoginUse = () => {
       setSlideAnimation('')
     }, 300)
   }
-
-  const navigate = useNavigate()
-
   const handleSuccessfulRegistration = () => {
     activateSignIn()
     navigate('/login-user')
@@ -52,15 +52,11 @@ const LoginUse = () => {
           </div>
         </div>
         {!signIn ? (
-          <div data-testid='login-user-form'>
-            <LoginUser />
-          </div>
+          <LoginUser />
         ) : (
-          <div data-testid='signup-user-form'>
-            <SignupUser
-              handleSuccessfulRegistration={handleSuccessfulRegistration}
-            />
-          </div>
+          <SignupUser
+            handleSuccessfulRegistration={handleSuccessfulRegistration}
+          />
         )}
       </div>
     </div>

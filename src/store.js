@@ -10,8 +10,8 @@ import storage from 'redux-persist/lib/storage'
 import {
   authReducer,
   signupReducer,
+  appReducer,
   signupBusinessReducer,
-  userReducer,
 } from './reducers'
 import { loadPersistedState, saveStateToLocalStorage } from './localStorage'
 
@@ -23,16 +23,9 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   user: signupReducer,
+  app: appReducer,
   business: signupBusinessReducer,
-  userID: userReducer,
 })
-
-export const resettableRootReducer = (state, action) => {
-  if (action.type === 'CLEAR_STATE') {
-    state = undefined
-  }
-  return rootReducer(state, action)
-}
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = createStore(
