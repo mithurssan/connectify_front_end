@@ -1,0 +1,110 @@
+.welcome {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.wave {
+    animation-name: wave-animation;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    transform-origin: 70% 70%;
+    display: inline-block;
+}
+
+@keyframes wave-animation {
+    0% {
+        transform: rotate(0.0deg)
+    }
+
+    10% {
+        transform: rotate(14.0deg)
+    }
+
+    20% {
+        transform: rotate(-8.0deg)
+    }
+
+    30% {
+        transform: rotate(14.0deg)
+    }
+
+    40% {
+        transform: rotate(-4.0deg)
+    }
+
+    50% {
+        transform: rotate(10.0deg)
+    }
+
+    60% {
+        transform: rotate(0.0deg)
+    }
+
+    100% {
+        transform: rotate(0.0deg)
+    }
+}
+
+.dashboard {
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard a {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.dashboard a:hover {
+    transform: scale(1.1);
+}
+
+.action-btns {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.add-user-btn {
+    margin-right: 10px;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.post {
+    background-color: #f5f5f5;
+    width: 30%;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.post-title {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    text-align: center;
+    font-size: 14px;
+}
+
+.post-author {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: right;
+    margin-top: 8px;
+}
+
+.red-text {
+    color: red;
+}
