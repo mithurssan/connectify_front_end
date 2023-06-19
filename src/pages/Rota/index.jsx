@@ -13,6 +13,7 @@ const Rota = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [content, setContent] = useState('');
+  const [isBusiness, setIsBusiness] = useState(false);
 
   useEffect(() => {
     fetchEvents()
@@ -178,13 +179,16 @@ const Rota = () => {
     return (
       <div key={event.id} className="event-container">
         <span>{event.title}</span>
-        <button onClick={() => handleDeleteEntry(event)}>Delete</button>
+        {isBusiness && (
+          <button onClick={() => handleDeleteEntry(event)}>Delete</button>
+        )}
       </div>
     );
   });
 
   return (
     <div className="calendar-container">
+    {isBusiness && (
       <div className="add-entry-container">
         <input
           type="text"
@@ -206,6 +210,7 @@ const Rota = () => {
         />
         <button onClick={handleAddEntry}>Add Entry</button>
       </div>
+      )}
       <div className="event-list-container">{eventComponents}</div>
       <div className="calendar-wrapper">
         <DragAndDropCalendar
