@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { AddUserForm, DashboardIcons, PostForm } from '../../components';
+import { AddUserForm, DashboardIcons, PostForm, Posts } from '../../components';
 import { Link } from 'react-router-dom';
 import rota_icon from '../../assets/rota-icon.png';
 import messages_icon from '../../assets/messages-icon.png';
@@ -27,30 +27,9 @@ const Dashboard = () => {
 			console.error('Error fetching posts:', error);
 		}
 	};
-
-	const fetchUsername = async (userId) => {
-		try {
-			const response = await axios.get(`http://127.0.0.1:5000/users/${userId}`);
-			const data = response.data
-			setCurrentUsername(data.user_username)
-		} catch (error) {
-			console.error('Error:', error.message);
-		}
-	};
-
-	const fetchBusinessName = async (businessId) => {
-		try {
-			const response = await axios.get(`http://127.0.0.1:5000/businesses/${businessId}`);
-			const data = response.data
-			setCurrentUsername(data.business_name)
-		} catch (error) {
-			console.error('Error:', error.message);
-		}
-	};
-	console.log(currentUsername)
 	useEffect(() => {
 		fetchPosts();
-		isBusiness ? (fetchBusinessName(businessId)) : (fetchUsername(userId))
+		isBusiness ? (setCurrentUsername(businessName)) : (setCurrentUsername(username))
 	}, []);
 
 	const addPost = async (newPost) => {
@@ -90,7 +69,7 @@ const Dashboard = () => {
 				<Link to="/chat">
 					<DashboardIcons title="Messages" image={messages_icon} />
 				</Link>
-				<Link to="/wellbeing/journal" >
+				<Link to="/wellbeing/get-journal" >
 					<DashboardIcons title="Journal" image={planner_icon} />
 				</Link>
 				<Link to="/bookings">
@@ -105,17 +84,7 @@ const Dashboard = () => {
 					<PostForm onAddPost={addPost} />
 				</div>
 			</div>
-			<div className="posts-container">
-				{posts.map((post, index) => (
-					<div key={index} className="post">
-						<h3 className="post-title">{post.post_title}</h3>
-						<p className="post-content">{post.post_content}</p>
-						<p className={`post-author ${post.username === businessName ? 'red-text' : ''}`}>
-							{post.username}
-						</p>
-					</div>
-				))}
-			</div>
+			<Posts posts={posts} setPosts={setPosts} />
 		</>
 	);
 };
