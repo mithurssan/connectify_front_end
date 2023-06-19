@@ -1,12 +1,13 @@
 import React from 'react'
 import * as AiIcons from 'react-icons/ai'
-
+const business_id = localStorage.getItem("business_id")
 export const SidebarData = [
   {
     title: 'Dashboard',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
     cName: 'nav-text',
+    forBusiness: true
   },
 
   {
@@ -14,6 +15,7 @@ export const SidebarData = [
     path: '/rota',
     icon: <AiIcons.AiFillCalendar />,
     cName: 'nav-text',
+    forBusiness: true
   },
 
   {
@@ -21,6 +23,7 @@ export const SidebarData = [
     path: '/bookings',
     icon: <AiIcons.AiFillCloud />,
     cName: 'nav-text',
+    forBusiness: true
   },
 
   {
@@ -28,6 +31,8 @@ export const SidebarData = [
     path: '/profile',
     icon: <AiIcons.AiFillSmile />,
     cName: 'nav-text',
+    show: true,
+    forBusiness: true
   },
 
   {
@@ -35,5 +40,7 @@ export const SidebarData = [
     path: '/wellbeing',
     icon: <AiIcons.AiFillRead />,
     cName: 'nav-text',
+    show: true,
+    forBusiness: true
   },
 ]

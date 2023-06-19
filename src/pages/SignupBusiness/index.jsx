@@ -1,17 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import {
+  setCompanyName,
+  setCompanyEmail,
+  setCompanyPassword,
+  setCompanyNumber,
+  setIsLoaded,
+  setError,
+} from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
 import './style.css'
 
 const SignupBusiness = () => {
-  const [companyName, setCompanyName] = useState('')
-  const [companyNumber, setCompanyNumber] = useState('')
-  const [companyPassword, setCompanyPassword] = useState('')
-  const [companyEmail, setCompanyEmail] = useState('')
+  const dispatch = useDispatch()
+  const companyName = useSelector((state) => state.business.companyName)
+  const companyNumber = useSelector((state) => state.business.companyNumber)
+  const companyPassword = useSelector((state) => state.business.companyPassword)
+  const companyEmail = useSelector((state) => state.business.companyEmail)
+  const isLoaded = useSelector((state) => state.app.isLoaded)
+  const error = useSelector((state) => state.app.error)
+
   const [data, setData] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [error, setError] = useState(false)
 
   useEffect(() => {
     postCompany()
@@ -34,24 +45,29 @@ const SignupBusiness = () => {
         data['company_name'] == companyName &&
         data['company_number'] == companyNumber
       ) {
-        const res = await axios.post(
-          'http://127.0.0.1:5000/businesses/register',
-          {
-            business_name: companyName,
-            business_number: companyNumber,
+        const url = 'http://127.0.0.1:5000/businesses/register'
+        const options = {
+          business_name: companyName,
+          business_number: companyNumber,
+          business_email: companyEmail,
+          business_password: companyPassword,
+        }
+        const res = await axios.post(url, options)
+        const data = res.data
+
+        if (res.status === 200) {
+          dispatch(setIsLoaded(true))
+          dispatch(setError(false))
+          await axios.post('http://127.0.0.1:5000/verify-business-email', {
             business_email: companyEmail,
-            business_password: companyPassword,
-          }
-        )
-        console.log(res)
-        setError(false)
-        setIsLoaded(true)
-        console.log(data)
+            token: data.token,
+          })
+        }
       } else {
-        setIsLoaded(false)
+        dispatch(setIsLoaded(false))
       }
     } catch (error) {
-      setError(true)
+      dispatch(setError(true))
       console.error(error)
     }
   }
@@ -62,17 +78,17 @@ const SignupBusiness = () => {
   }
 
   const handleInputName = (e) => {
-    setCompanyName(e.target.value.toUpperCase())
+    dispatch(setCompanyName(e.target.value.toUpperCase()))
   }
 
   const handleInputNumber = (e) => {
-    setCompanyNumber(e.target.value)
+    dispatch(setCompanyNumber(e.target.value))
   }
   const handleInputPassword = (e) => {
-    setCompanyPassword(e.target.value)
+    dispatch(setCompanyPassword(e.target.value))
   }
   const handleInputEmail = (e) => {
-    setCompanyEmail(e.target.value)
+    dispatch(setCompanyEmail(e.target.value))
   }
 
   return (
@@ -129,12 +145,8 @@ const SignupBusiness = () => {
         />
       </form>
 
-      {isLoaded && <h1>Correct Credentials</h1>}
-      {error && (
-        <div>
-          <h1>Incorrect Credentials</h1>
-        </div>
-      )}
+      {isLoaded && console.log('Correct Credentials')}
+      {error && console.log('Incorrect Credentials')}
       <div className='login-register-image'>
         <img src={LoginImage} alt='login-page' className='image' />
       </div>
