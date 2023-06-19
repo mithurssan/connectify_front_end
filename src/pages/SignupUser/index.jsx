@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -7,29 +6,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
+import { Spinner } from '../../components';
 import './style.css';
-=======
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { setVerified } from '../../actions'
-import LoginImage from '../../assets/Connectify.jpg'
-import { Spinner } from '../../components'
-import './style.css'
->>>>>>> staging
 
 const SignupUser = ({ handleSuccessfulRegistration }) => {
-  const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false)
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('');
+	const [isLoaded, setIsLoaded] = useState(false);
 
-<<<<<<< HEAD
 	const verified = useSelector((state) => state.app.verified);
 
 	const errorCreate = (error) =>
@@ -55,31 +42,17 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
 			progress: undefined,
 			theme: 'colored',
 		});
-=======
-  const errorCreate = (error) =>
-    toast.error(error, {
-      position: 'top-center',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light',
-    })
->>>>>>> staging
 
-  async function registerUser() {
-    try {
-      const url = 'http://127.0.0.1:5000/users/register'
-      const options = {
-        user_username: username,
-        user_email: email,
-        user_password: password,
-      }
-      const res = await axios.post(url, options)
+	async function registerUser() {
+		try {
+			const url = 'http://127.0.0.1:5000/users/register';
+			const options = {
+				user_username: username,
+				user_email: email,
+				user_password: password,
+			};
+			const res = await axios.post(url, options);
 
-<<<<<<< HEAD
 			if (res.status === 200 && (!username || !password)) {
 				errorCreate('Enter username and password');
 			} else if (res.status === 200 && !email) {
@@ -103,84 +76,45 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
 		setUsername('');
 		setPassword('');
 	};
-=======
-      dispatch(setVerified(false))
-      setIsLoaded(true)
-      setTimeout(() => {
-        handleSuccessfulRegistration()
-      }, 1000)
-    } catch (error) {
-      errorCreate('LINE 44')
-      console.error(error)
-    }
-  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    registerUser()
-  }
->>>>>>> staging
+	const handleInputChange = (e, setValue) => {
+		setValue(e.target.value);
+	};
 
-  const handleInputChange = (e, setValue) => {
-    setValue(e.target.value)
-  }
+	return (
+		<div className="container-login-register">
+			<form onSubmit={handleSubmit} className="business-container">
+				<label htmlFor="username" className="business-label">
+					Username:{' '}
+				</label>
+				<input type="text" id="username" value={username} onChange={(e) => handleInputChange(e, setUsername)} className="business-text" />
 
-  return (
-    <div className='container-login-register'>
-      <form onSubmit={handleSubmit} className='business-container'>
-        <label htmlFor='username' className='business-label'>
-          Username:{' '}
-        </label>
-        <input
-          type='text'
-          id='username'
-          value={username}
-          onChange={(e) => handleInputChange(e, setUsername)}
-          className='business-text'
-        />
+				<label htmlFor="email" className="business-label">
+					Email:{' '}
+				</label>
+				<input type="email" id="email" value={email} onChange={(e) => handleInputChange(e, setEmail)} className="business-text" />
 
-        <label htmlFor='email' className='business-label'>
-          Email:{' '}
-        </label>
-        <input
-          type='email'
-          id='email'
-          value={email}
-          onChange={(e) => handleInputChange(e, setEmail)}
-          className='business-text'
-        />
+				<label htmlFor="password" className="business-label">
+					Password:{' '}
+				</label>
+				<input type="password" id="password" value={password} onChange={(e) => handleInputChange(e, setPassword)} className="business-text" />
 
-        <label htmlFor='password' className='business-label'>
-          Password:{' '}
-        </label>
-        <input
-          type='password'
-          id='password'
-          value={password}
-          onChange={(e) => handleInputChange(e, setPassword)}
-          className='business-text'
-        />
+				<input type="submit" value="Register" className="login-register-button" />
+				<div className="error-message-container">
+					{isLoaded && (
+						<div className="spinner" data-testid="spinner">
+							<Spinner />
+						</div>
+					)}
+				</div>
+			</form>
 
-        <input
-          type='submit'
-          value='Register'
-          className='login-register-button'
-        />
-        <div className='error-message-container'>
-          {isLoaded && (
-            <div className='spinner' data-testid='spinner'>
-              <Spinner />
-            </div>
-          )}
-        </div>
-      </form>
+			<div className="login-register-image">
+				<img src={LoginImage} alt="login-page" className="image" />
+			</div>
+			<ToastContainer />
+		</div>
+	);
+};
 
-      <div className='login-register-image'>
-        <img src={LoginImage} alt='login-page' className='image' />
-      </div>
-      <ToastContainer />
-    </div>
-  )
-}
-
-export default SignupUser
+export default SignupUser;
