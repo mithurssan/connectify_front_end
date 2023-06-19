@@ -7,3 +7,6 @@ export { default as useToken } from './useToken';
 export { default as ChatFeed } from './ChatFeed';
 export { default as MessageForm } from './MessageForm';
 export { default as MyMessage } from './MyMessage';
+export { default as AddUserForm } from './AddUserForm';
+export { default as DashboardIcons } from './DashboardIcons';
+export { default as PostForm } from './PostForm';

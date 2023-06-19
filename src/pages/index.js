@@ -11,3 +11,4 @@ export { default as Wellbeing } from './Wellbeing';
 export { default as NotFound } from './NotFound';
 export { default as Booking } from './Booking';
 export { default as Chat } from './Chat';
+export { default as NotAssignedBusiness } from './NotAssignedBusiness';

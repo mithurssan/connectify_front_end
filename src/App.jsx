@@ -35,6 +35,7 @@ const App = () => {
 						<Route path="/profile/:username" element={<Pages.Profile />} />
 						<Route path="/bookings" element={<Pages.Booking />} />
 						<Route path="/chat" element={<Pages.Chat />} />
+						<Route path="/not-assigned" element={<Pages.NotAssignedBusiness />} />
 						<Route path="*" element={<Pages.NotFound />} />
 					</Route>
 

@@ -64,6 +64,13 @@ const LoginBusiness = () => {
 				dispatch(setToken(res.data.token));
 				navigate('/dashboard');
 			}
+			console.log('Token dispatched:', res.data.token);
+			console.log(dispatch(setToken(res.data.token)));
+			const business_id = res.data.business_id;
+			localStorage.setItem('business_id', business_id);
+			localStorage.setItem('isBusiness', true);
+			localStorage.setItem('joinedBusiness', true);
+			navigate('/dashboard');
 		} catch (error) {
 			if (error && companyPassword.length != 0) {
 				errorCreate('Incorrect credentials');
