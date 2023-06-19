@@ -7,13 +7,11 @@ import App from './App';
 import { store, persistor } from './store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistor}>
-				<Router>
-					<App />
-				</Router>
-			</PersistGate>
-		</Provider>
-	</React.StrictMode>
+	<Provider store={store}>
+		<PersistGate loading={null} persistor={persistor}>
+			<Router>
+				<App />
+			</Router>
+		</PersistGate>
+	</Provider>
 );
