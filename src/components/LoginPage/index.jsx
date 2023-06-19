@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { LoginBusiness, SignupBusiness } from '../../pages'
+import { useNavigate } from 'react-router-dom'
 import './style.css'
 
 const LoginPage = () => {
   const [signIn, setSignIn] = useState(false)
   const [slideAnimation, setSlideAnimation] = useState('')
+
+  const navigate = useNavigate()
 
   const activateSignIn = () => {
     setSlideAnimation('slide-in-animation')
@@ -20,6 +23,10 @@ const LoginPage = () => {
       setSignIn(true)
       setSlideAnimation('')
     }, 300)
+  }
+  const handleSuccessfulRegistration = () => {
+    activateSignIn()
+    navigate('/login-user')
   }
 
   return (
@@ -43,7 +50,13 @@ const LoginPage = () => {
             </p>
           </div>
         </div>
-        {!signIn ? <LoginBusiness /> : <SignupBusiness />}
+        {!signIn ? (
+          <LoginBusiness />
+        ) : (
+          <SignupBusiness
+            handleSuccessfulRegistration={handleSuccessfulRegistration}
+          />
+        )}
       </div>
     </div>
   )
