@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,6 +16,8 @@ const SignupUser = () => {
 	const [email, setEmail] = useState('');
 	const [isLoaded, setIsLoaded] = useState('false');
 
+	const verified = useSelector((state) => state.app.verified);
+
 	const errorCreate = (error) =>
 		toast.error(error, {
 			position: 'top-center',
@@ -25,7 +27,19 @@ const SignupUser = () => {
 			pauseOnHover: true,
 			draggable: true,
 			progress: undefined,
-			theme: 'light',
+			theme: 'colored',
+		});
+
+	const successCreate = (msg) =>
+		toast.success(msg, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
 		});
 
 	async function registerUser() {
@@ -38,10 +52,18 @@ const SignupUser = () => {
 			};
 			const res = await axios.post(url, options);
 
-			dispatch(setVerified(false));
-			dispatch(setIsLoaded(true));
+			if (res.status === 200 && (!username || !password)) {
+				errorCreate('Enter username and password');
+			} else if (res.status === 200 && !email) {
+				errorCreate('Enter email address');
+			} else if (res.status === 500) {
+				errorCreate("Couldn't register. Try again later");
+			} else {
+				setIsLoaded(true);
+				dispatch(setVerified(false));
+				successCreate('Registration successful! \n Verify your email to log in. Check your inbox for further instructions.');
+			}
 		} catch (error) {
-			errorCreate('LINE 44');
 			console.error(error);
 		}
 	}
@@ -49,6 +71,9 @@ const SignupUser = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		registerUser();
+		setEmail('');
+		setUsername('');
+		setPassword('');
 	};
 
 	const handleInputChange = (e, setValue) => {

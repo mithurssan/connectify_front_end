@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -15,8 +15,11 @@ const SignupBusiness = () => {
 	const [companyNumber, setCompanyNumber] = useState('');
 	const [companyPassword, setCompanyPassword] = useState('');
 	const [companyEmail, setCompanyEmail] = useState('');
-	const [isLoaded, setIsLoaded] = useState('false');
+	const [isLoaded, setIsLoaded] = useState(false);
 	const [data, setData] = useState('');
+	// const [isLoaded, setIsLoaded] = useState('false');
+
+	const verified = useSelector((state) => state.app.verified);
 
 	const errorCreate = (error) =>
 		toast.error(error, {
@@ -27,11 +30,29 @@ const SignupBusiness = () => {
 			pauseOnHover: true,
 			draggable: true,
 			progress: undefined,
-			theme: 'light',
+			theme: 'colored',
+		});
+
+	const successCreate = (msg) =>
+		toast.success(msg, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
 		});
 
 	useEffect(() => {
-		registerCompany();
+		if (data) {
+			registerCompany();
+			setCompanyName('');
+			setCompanyPassword('');
+			setCompanyEmail('');
+			setCompanyNumber('');
+		}
 	}, [data]);
 
 	async function getCompany(number) {
@@ -39,15 +60,27 @@ const SignupBusiness = () => {
 			const url = `http://127.0.0.1:5000/api/company/${number}`;
 			const res = await axios.get(url);
 			const data = res.data;
-			setData(data);
+
+			if (companyName != data['company_name'] || companyNumber != data['company_number']) {
+				errorCreate('The company is not listed or recorded in Companies House.');
+			} else if (res.status === 200 && (!companyEmail || !companyPassword)) {
+				errorCreate('Enter email address and password');
+			} else {
+				setData(data);
+			}
 		} catch (error) {
-			console.error(error);
+			if (error) {
+				errorCreate("Couldn't register. Try again later.");
+			}
 		}
 	}
 
 	async function registerCompany() {
+		console.log(data);
+		console.log(companyName, '===', data['company_name']);
+		console.log(companyNumber, '===', data['company_number']);
 		try {
-			if (data['company_name'] == companyName && data['company_number'] == companyNumber) {
+			if (data['company_name'] === companyName && data['company_number'] === companyNumber) {
 				const url = 'http://127.0.0.1:5000/businesses/register';
 				const options = {
 					business_name: companyName,
@@ -58,26 +91,29 @@ const SignupBusiness = () => {
 				const res = await axios.post(url, options);
 				const data = res.data;
 
-				if (res.status === 200) {
-					dispatch(setIsLoaded(true));
-
-					await axios.post('http://127.0.0.1:5000/verify-business-email', {
-						business_email: companyEmail,
-						token: data.token,
-					});
+				if (res.status === 200 && (!companyName || !companyPassword)) {
+					errorCreate('Enter company name and password');
+				} else if (res.status === 200 && !companyEmail) {
+					errorCreate('Enter email address');
+				} else if (res.status === 500) {
+					errorCreate("Couldn't register. Try again later");
+				} else {
+					setIsLoaded(true);
+					dispatch(setVerified(false));
+					successCreate('Registration successful! \n Verify your email to log in. Check your inbox for further instructions.');
 				}
 			} else {
-				dispatch(setIsLoaded(false));
+				console.log('dupa');
 			}
 		} catch (error) {
-			errorCreate('error LINE 73');
+			errorCreate('error LINE 92');
 			console.error(error);
 		}
 	}
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		await getCompany(companyNumber);
+		getCompany(companyNumber);
 	};
 
 	const handleInputChange = (e, setValue) => {

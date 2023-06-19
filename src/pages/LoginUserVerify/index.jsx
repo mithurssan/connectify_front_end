@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setUsername, setPassword, setIsLoaded, setVerified, setVerifyToken } from '../../actions';
+import { setToken, setUsername, setIsLoaded, setVerified, setVerifyToken } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 
@@ -96,10 +96,12 @@ const LoginUserVerify = () => {
 			const data = await res.data;
 
 			const user = data.find((u) => u.user_username === username);
+			console.log('LINE 99', user);
 			dispatch(setVerifyToken(user.user_verify_token));
 		} catch (error) {
 			if (error) {
 				errorCreate("User doesn't exist");
+				console.log(error);
 			}
 		}
 	}

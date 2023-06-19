@@ -3,6 +3,7 @@ export { default as Dashboard } from './Dashboard';
 export { default as LoginUser } from './LoginUser';
 export { default as LoginUserVerify } from './LoginUserVerify';
 export { default as LoginBusiness } from './LoginBusiness';
+export { default as LoginBusinessVerify } from './LoginBusinessVerify';
 export { default as SignupBusiness } from './SignupBusiness';
 export { default as SignupUser } from './SignupUser';
 export { default as Profile } from './Profile';

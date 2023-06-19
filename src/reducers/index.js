@@ -41,6 +41,7 @@ const initialBusinessState = {
 	companyEmail: '',
 	companyNumber: '',
 	companyPassword: '',
+	verifyToken: '',
 };
 
 export const signupBusinessReducer = (state = initialBusinessState, action) => {
@@ -53,6 +54,8 @@ export const signupBusinessReducer = (state = initialBusinessState, action) => {
 			return { ...state, companyEmail: action.payload };
 		case 'SET_BUSINESS_PASSWORD':
 			return { ...state, companyPassword: action.payload };
+		case 'SET_VERIFY_TOKEN':
+			return { ...state, verifyToken: action.payload };
 		default:
 			return state;
 	}

@@ -47,12 +47,11 @@ const LoginUser = () => {
 			pauseOnHover: true,
 			draggable: true,
 			progress: undefined,
-			theme: 'light',
+			theme: 'colored',
 		});
 
 	const loginUser = async () => {
 		dispatch(setIsLoaded(false));
-
 		try {
 			const url = 'http://127.0.0.1:5000/users/login';
 			const data = {
@@ -65,7 +64,7 @@ const LoginUser = () => {
 				dispatch(setToken(res.data.token));
 				navigate('/dashboard');
 			}
-			console.log(res.data.business_id);
+
 			const business_id = res.data.business_id;
 			const user_id = res.data.user_id;
 			if (business_id == null) {
