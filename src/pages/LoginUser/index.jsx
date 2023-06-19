@@ -40,6 +40,52 @@ const LoginUser = () => {
     }
   }, [verified, isLoaded])
 
+<<<<<<< HEAD
+	const errorCreate = (error) =>
+		toast.error(error, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+
+	const loginUser = async () => {
+		dispatch(setIsLoaded(false));
+		try {
+			const url = 'http://127.0.0.1:5000/users/login';
+			const data = {
+				user_username: username,
+				user_password: password,
+			};
+			const res = await axios.post(url, data);
+
+			if (verified) {
+				dispatch(setToken(res.data.token));
+				navigate('/dashboard');
+			}
+
+			const business_id = res.data.business_id;
+			const user_id = res.data.user_id;
+			if (business_id == null) {
+				navigate('/not-assigned');
+			} else {
+				localStorage.setItem('joinedBusiness', true);
+				localStorage.setItem('business_id', business_id);
+				localStorage.setItem('user_id', user_id);
+				navigate('/dashboard');
+			}
+		} catch (error) {
+			console.log(error, 'error');
+			if (error && password.length != 0) {
+				errorCreate('Incorrect credentials');
+			}
+		}
+	};
+=======
   const errorCreate = (error) =>
     toast.error(error, {
       position: 'top-center',
@@ -85,6 +131,7 @@ const LoginUser = () => {
       }
     }
   }
+>>>>>>> staging
 
   const handleSubmit = (e) => {
     e.preventDefault()

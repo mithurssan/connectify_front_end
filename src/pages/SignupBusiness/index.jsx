@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { setVerified } from '../../actions';
+import LoginImage from '../../assets/Connectify.jpg';
+import './style.css';
+=======
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
@@ -8,10 +19,117 @@ import { setVerified } from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
 import './style.css'
 import { Spinner } from '../../components'
+>>>>>>> staging
 
 const SignupBusiness = ({ handleSuccessfulRegistration }) => {
   const dispatch = useDispatch()
 
+<<<<<<< HEAD
+	const [companyName, setCompanyName] = useState('');
+	const [companyNumber, setCompanyNumber] = useState('');
+	const [companyPassword, setCompanyPassword] = useState('');
+	const [companyEmail, setCompanyEmail] = useState('');
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [data, setData] = useState('');
+	// const [isLoaded, setIsLoaded] = useState('false');
+
+	const verified = useSelector((state) => state.app.verified);
+
+	const errorCreate = (error) =>
+		toast.error(error, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+
+	const successCreate = (msg) =>
+		toast.success(msg, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+
+	useEffect(() => {
+		if (data) {
+			registerCompany();
+			setCompanyName('');
+			setCompanyPassword('');
+			setCompanyEmail('');
+			setCompanyNumber('');
+		}
+	}, [data]);
+
+	async function getCompany(number) {
+		try {
+			const url = `http://127.0.0.1:5000/api/company/${number}`;
+			const res = await axios.get(url);
+			const data = res.data;
+
+			if (companyName != data['company_name'] || companyNumber != data['company_number']) {
+				errorCreate('The company is not listed or recorded in Companies House.');
+			} else if (res.status === 200 && (!companyEmail || !companyPassword)) {
+				errorCreate('Enter email address and password');
+			} else {
+				setData(data);
+			}
+		} catch (error) {
+			if (error) {
+				errorCreate("Couldn't register. Try again later.");
+			}
+		}
+	}
+
+	async function registerCompany() {
+		console.log(data);
+		console.log(companyName, '===', data['company_name']);
+		console.log(companyNumber, '===', data['company_number']);
+		try {
+			if (data['company_name'] === companyName && data['company_number'] === companyNumber) {
+				const url = 'http://127.0.0.1:5000/businesses/register';
+				const options = {
+					business_name: companyName,
+					business_number: companyNumber,
+					business_email: companyEmail,
+					business_password: companyPassword,
+				};
+				const res = await axios.post(url, options);
+				const data = res.data;
+
+				if (res.status === 200 && (!companyName || !companyPassword)) {
+					errorCreate('Enter company name and password');
+				} else if (res.status === 200 && !companyEmail) {
+					errorCreate('Enter email address');
+				} else if (res.status === 500) {
+					errorCreate("Couldn't register. Try again later");
+				} else {
+					setIsLoaded(true);
+					dispatch(setVerified(false));
+					successCreate('Registration successful! \n Verify your email to log in. Check your inbox for further instructions.');
+				}
+			} else {
+				console.log('dupa');
+			}
+		} catch (error) {
+			errorCreate('error LINE 92');
+			console.error(error);
+		}
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		getCompany(companyNumber);
+	};
+=======
   const [companyName, setCompanyName] = useState('')
   const [companyNumber, setCompanyNumber] = useState('')
   const [companyPassword, setCompanyPassword] = useState('')
@@ -86,6 +204,7 @@ const SignupBusiness = ({ handleSuccessfulRegistration }) => {
     e.preventDefault()
     await getCompany(companyNumber)
   }
+>>>>>>> staging
 
   const handleInputChange = (e, setValue) => {
     setValue(e.target.value)

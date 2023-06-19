@@ -45,6 +45,19 @@ const LoginBusiness = () => {
     }
   }, [verified, isLoaded])
 
+<<<<<<< HEAD
+	const errorCreate = (error) =>
+		toast.error(error, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+=======
   const errorCreate = (error) =>
     toast.error(error, {
       position: 'top-center',
@@ -56,6 +69,7 @@ const LoginBusiness = () => {
       progress: undefined,
       theme: 'light',
     })
+>>>>>>> staging
 
   const loginBusiness = async () => {
     setIsLoaded(false)
@@ -67,6 +81,23 @@ const LoginBusiness = () => {
       }
       const res = await axios.post(url, options)
 
+<<<<<<< HEAD
+			if (verified) {
+				dispatch(setToken(res.data.token));
+				navigate('/dashboard');
+			}
+			const business_id = res.data.business_id;
+			localStorage.setItem('business_id', business_id);
+			localStorage.setItem('isBusiness', true);
+			localStorage.setItem('joinedBusiness', true);
+			navigate('/dashboard');
+		} catch (error) {
+			if (error && companyPassword.length != 0) {
+				errorCreate('Incorrect credentials');
+			}
+		}
+	};
+=======
       if (verified) {
         dispatch(setToken(res.data.token))
         navigate('/dashboard')
@@ -84,6 +115,7 @@ const LoginBusiness = () => {
       }
     }
   }
+>>>>>>> staging
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -160,6 +192,17 @@ const LoginBusiness = () => {
         </div>
       </form>
 
+<<<<<<< HEAD
+			<div className="login-register-image">
+				<img src={LoginImage} alt="login-page" className="image" />
+			</div>
+			<ToastContainer />
+		</div>
+	);
+};
+
+export default LoginBusiness;
+=======
       <div className='login-register-image'>
         <img src={LoginImage} alt='login-page' className='image' />
       </div>
@@ -169,3 +212,4 @@ const LoginBusiness = () => {
 }
 
 export default LoginBusiness
+>>>>>>> staging

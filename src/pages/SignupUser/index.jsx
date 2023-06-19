@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { setVerified } from '../../actions';
+import LoginImage from '../../assets/Connectify.jpg';
+import './style.css';
+=======
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -8,6 +19,7 @@ import { setVerified } from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
 import { Spinner } from '../../components'
 import './style.css'
+>>>>>>> staging
 
 const SignupUser = ({ handleSuccessfulRegistration }) => {
   const dispatch = useDispatch()
@@ -17,6 +29,33 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
   const [email, setEmail] = useState('')
   const [isLoaded, setIsLoaded] = useState(false)
 
+<<<<<<< HEAD
+	const verified = useSelector((state) => state.app.verified);
+
+	const errorCreate = (error) =>
+		toast.error(error, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+
+	const successCreate = (msg) =>
+		toast.success(msg, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+=======
   const errorCreate = (error) =>
     toast.error(error, {
       position: 'top-center',
@@ -28,6 +67,7 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
       progress: undefined,
       theme: 'light',
     })
+>>>>>>> staging
 
   async function registerUser() {
     try {
@@ -39,6 +79,31 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
       }
       const res = await axios.post(url, options)
 
+<<<<<<< HEAD
+			if (res.status === 200 && (!username || !password)) {
+				errorCreate('Enter username and password');
+			} else if (res.status === 200 && !email) {
+				errorCreate('Enter email address');
+			} else if (res.status === 500) {
+				errorCreate("Couldn't register. Try again later");
+			} else {
+				setIsLoaded(true);
+				dispatch(setVerified(false));
+				successCreate('Registration successful! \n Verify your email to log in. Check your inbox for further instructions.');
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		registerUser();
+		setEmail('');
+		setUsername('');
+		setPassword('');
+	};
+=======
       dispatch(setVerified(false))
       setIsLoaded(true)
       setTimeout(() => {
@@ -54,6 +119,7 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
     e.preventDefault()
     registerUser()
   }
+>>>>>>> staging
 
   const handleInputChange = (e, setValue) => {
     setValue(e.target.value)
