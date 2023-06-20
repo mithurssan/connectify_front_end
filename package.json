@@ -25,6 +25,7 @@
 		"react": "^18.2.0",
 		"react-big-calendar": "^1.8.1",
 		"react-chat-engine": "^1.11.28",
+		"react-chat-engine-advanced": "^0.1.28",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.9.0",
 		"react-loader-spinner": "^5.3.4",
@@ -62,6 +63,8 @@
 		"polyfill": "^0.1.0",
 		"redux-mock-store": "^1.5.4",
 		"vite": "^4.3.9",
+		"vite-plugin-react": "^4.0.1",
+		"vite-plugin-require-transform": "^1.0.17",
 		"vitest": "^0.32.0"
 	}
 }
