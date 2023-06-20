@@ -104,3 +104,26 @@
 	font-size: 15px;
 	color: #0a1a41;
 }
+
+.introjs-tooltipbuttons .introjs-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #785A9F; 
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+.introjs-tooltipbuttons .introjs-button.introjs-prevbutton {
+  background-color: #785A9F; 
+}
+
+.introjs-tooltipbuttons .introjs-button.introjs-skipbutton {
+  background-color: #785A9F; 
+}
+
+.introjs-tooltip {
+  font-family: 'Montserrat', sans-serif; 
+}

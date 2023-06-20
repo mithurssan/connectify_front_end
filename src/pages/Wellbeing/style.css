@@ -14,6 +14,7 @@
 
 .image-container {
   margin-left: 20px;
+  margin: 30px;
 }
 
 .image-container img {
@@ -40,6 +41,9 @@
 
 }
 
-
+.link {
+  text-decoration: none;
+  cursor: default;
+}
 
   
