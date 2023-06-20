@@ -14,8 +14,8 @@ const LoginUser = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [password, setPassword] = useState('');
-	const [isLoaded, setIsLoaded] = useState(false);
-
+	// const [isLoaded, setIsLoaded] = useState(false);
+	const isLoaded = useSelector((state) => state.app.isLoaded);
 	const username = useSelector((state) => state.user.username);
 	const verified = useSelector((state) => state.app.verified);
 
@@ -77,7 +77,8 @@ const LoginUser = () => {
 				localStorage.setItem('user_id', user_id);
 				navigate('/dashboard');
 			}
-		} catch (error) {
+		}
+		catch (error) {
 			console.log(error, 'error');
 			if (error && password.length != 0) {
 				errorCreate('Incorrect credentials');
@@ -91,11 +92,11 @@ const LoginUser = () => {
 		if (username.length === 0 || password.length === 0) {
 			errorCreate('Enter username and password');
 			setTimeout(() => {
-				setIsLoaded(false);
+				dispatch(setIsLoaded(false));
 			}, 500);
 		} else {
 			getUsers();
-			setIsLoaded(true);
+			dispatch(setIsLoaded(true));
 		}
 	};
 
