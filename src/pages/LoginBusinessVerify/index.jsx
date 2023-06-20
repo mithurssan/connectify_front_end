@@ -4,20 +4,18 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setCompanyName, setIsLoaded, setVerified } from '../../actions';
+import { setToken, setCompanyName, setIsLoaded, setVerified, setVerifyToken } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
-import { Spinner } from '../../components';
 
-const LoginBusiness = () => {
+const LoginBusinessVerify = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [companyPassword, setCompanyPassword] = useState('');
-	const [isLoaded, setIsLoaded] = useState(false);
 
 	const companyName = useSelector((state) => state.business.companyName);
-	const verified = useSelector((state) => state.app.verified);
-	// const isLoaded = useSelector((state) => state.app.isLoaded)
+	const verifyToken = useSelector((state) => state.business.verifyToken);
+	const isLoaded = useSelector((state) => state.app.isLoaded);
 
 	useEffect(() => {
 		const fetchToken = async () => {
@@ -35,10 +33,10 @@ const LoginBusiness = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		if (verified && isLoaded) {
-			loginBusiness();
+		if (verifyToken && isLoaded) {
+			loginBusinessForFirstTime();
 		}
-	}, [verified, isLoaded]);
+	}, [verifyToken, isLoaded]);
 
 	const errorCreate = (error) =>
 		toast.error(error, {
@@ -49,31 +47,36 @@ const LoginBusiness = () => {
 			pauseOnHover: true,
 			draggable: true,
 			progress: undefined,
-			theme: 'colored',
+			theme: 'light',
 		});
 
-	const loginBusiness = async () => {
-		setIsLoaded(false);
-		try {
-			const url = 'http://127.0.0.1:5000/businesses/login';
-			const options = {
-				business_name: companyName,
-				business_password: companyPassword,
-			};
-			const res = await axios.post(url, options);
+	const loginBusinessForFirstTime = async (verifyToken) => {
+		dispatch(setIsLoaded(false));
 
-			if (verified) {
+		const url = window.location.href;
+		const tokenUrl = url.split('/');
+		if (verifyToken != tokenUrl[5]) {
+			errorCreate('Wrong Credentials');
+		} else {
+			try {
+				const url = `http://127.0.0.1:5000/businesses/verify/${verifyToken}`;
+				const options = {
+					business_name: companyName,
+					business_password: companyPassword,
+				};
+				const res = await axios.post(url, options);
 				dispatch(setToken(res.data.token));
+				dispatch(setVerified(true));
+
+				const business_id = res.data.business_id;
+				localStorage.setItem('business_id', business_id);
+				localStorage.setItem('isBusiness', true);
+				localStorage.setItem('joinedBusiness', true);
 				navigate('/dashboard');
-			}
-			const business_id = res.data.business_id;
-			localStorage.setItem('business_id', business_id);
-			localStorage.setItem('isBusiness', true);
-			localStorage.setItem('joinedBusiness', true);
-			navigate('/dashboard');
-		} catch (error) {
-			if (error && companyPassword.length != 0) {
-				errorCreate('Incorrect credentials');
+			} catch (error) {
+				if (error && companyPassword.length != 0) {
+					errorCreate('Incorrect credentials');
+				}
 			}
 		}
 	};
@@ -83,12 +86,10 @@ const LoginBusiness = () => {
 
 		if (companyName.length === 0 || companyPassword.length === 0) {
 			errorCreate('Enter business name and password');
-			setTimeout(() => {
-				setIsLoaded(false);
-			}, 500);
+			dispatch(setIsLoaded(false));
 		} else {
 			getCompanies();
-			setIsLoaded(true);
+			dispatch(setIsLoaded(true));
 		}
 	};
 
@@ -100,7 +101,7 @@ const LoginBusiness = () => {
 
 			const business = data.find((b) => b.business_name === companyName);
 
-			dispatch(setVerified(business.business_verified));
+			dispatch(setVerifyToken(business.business_verify_token));
 		} catch (error) {
 			if (error) {
 				errorCreate("Business doesn't exist");
@@ -139,19 +140,10 @@ const LoginBusiness = () => {
 				/>
 
 				<input type="submit" value="Login" className="login-register-button" />
-				<div className="container">
-					<Link to="/login-user" className="sign-in-user">
-						Login as a User
-					</Link>
-				</div>
-				<div className="error-message-container">
-					{isLoaded && (
-						<div className="spinner" data-testid="spinner">
-							<Spinner />
-						</div>
-					)}
-				</div>
 			</form>
+
+			{/* {isLoaded && console.log('Correct Credentials')}
+			{error && console.log('Incorrect Credentials')} */}
 
 			<div className="login-register-image">
 				<img src={LoginImage} alt="login-page" className="image" />
@@ -161,4 +153,4 @@ const LoginBusiness = () => {
 	);
 };
 
-export default LoginBusiness;
+export default LoginBusinessVerify;

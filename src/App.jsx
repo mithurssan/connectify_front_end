@@ -8,6 +8,7 @@ import {
   LoginUse,
   LoginUseVerify,
   Spinner,
+  LoginPageVerify,
 } from './components'
 import { loadPersistedState } from './localStorage'
 import './App.css'
@@ -28,6 +29,10 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Pages.Home />} />
             <Route path='/login-register' element={<LoginPage />} />
+            <Route
+              path='/businesses/verify/:token'
+              element={<LoginPageVerify />}
+            />
             <Route path='/login-user' element={<LoginUse />} />
             <Route path='/users/verify/:token' element={<LoginUseVerify />} />
           </Routes>

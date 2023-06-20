@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./style.css"
 
@@ -6,7 +6,7 @@ const AddUserButton = () => {
     const businessId = localStorage.getItem('business_id');
     const [open, setOpen] = useState(false);
     const [username, setUsername] = useState('');
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState('success');
 
     const handleOpen = () => {
@@ -75,7 +75,7 @@ const AddUserButton = () => {
                             </button>
                         </div>
                         {message && (
-                            <p className={`message ${messageType === 'success' ? 'success' : 'error'}`}>
+                            <p className={`message ${messageType === 'success' ? 'user-success' : 'user-error'}`}>
                                 {message}
                             </p>
                         )}
