@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setCompanyName, setIsLoaded, setVerified } from '../../actions';
+import { setToken, setCompanyName, setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 import { Spinner } from '../../components';
@@ -17,7 +17,6 @@ const LoginBusiness = () => {
 
 	const companyName = useSelector((state) => state.business.companyName);
 	const verified = useSelector((state) => state.app.verified);
-	// const isLoaded = useSelector((state) => state.app.isLoaded)
 
 	useEffect(() => {
 		const fetchToken = async () => {
@@ -53,7 +52,6 @@ const LoginBusiness = () => {
 		});
 
 	const loginBusiness = async () => {
-		setIsLoaded(false);
 		try {
 			const url = 'http://127.0.0.1:5000/businesses/login';
 			const options = {
@@ -63,14 +61,14 @@ const LoginBusiness = () => {
 			const res = await axios.post(url, options);
 
 			if (verified) {
+				const business_id = res.data.business_id;
 				dispatch(setToken(res.data.token));
+
+				localStorage.setItem('business_id', business_id);
+				localStorage.setItem('isBusiness', true);
+				localStorage.setItem('joinedBusiness', true);
 				navigate('/dashboard');
 			}
-			const business_id = res.data.business_id;
-			localStorage.setItem('business_id', business_id);
-			localStorage.setItem('isBusiness', true);
-			localStorage.setItem('joinedBusiness', true);
-			navigate('/dashboard');
 		} catch (error) {
 			if (error && companyPassword.length != 0) {
 				errorCreate('Incorrect credentials');

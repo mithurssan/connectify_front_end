@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ChatEngine } from 'react-chat-engine';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import ChatFeed from '../../components/ChatFeed';
 import './style.css';
 
 const Chat = () => {
@@ -52,19 +51,7 @@ const Chat = () => {
 		}
 	}
 
-	return (
-		<div style={{ height: '100%' }}>
-			{password && (
-				<ChatEngine
-					projectID={id}
-					userName={username || companyName}
-					userSecret={password}
-					// renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
-					// onNewMessage={() => new Audio('https://chat-engine-assets.s3.amazonaws.com/click.mp3').play()}
-				/>
-			)}
-		</div>
-	);
+	return <div style={{ height: '100%' }}>{password && <ChatEngine projectID={id} userName={username || companyName} userSecret={password} />}</div>;
 };
 
 export default Chat;
