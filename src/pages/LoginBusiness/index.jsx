@@ -84,8 +84,10 @@ const LoginBusiness = () => {
 
 			if (verified) {
 				const business_id = res.data.business_id;
-				dispatch(setToken(res.data.token));
+				const business_name = res.data.business_name;
 
+				dispatch(setToken(res.data.token));
+				localStorage.setItem('business_name', business_name);
 				localStorage.setItem('business_id', business_id);
 				localStorage.setItem('isBusiness', true);
 				localStorage.setItem('joinedBusiness', true);

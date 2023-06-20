@@ -92,11 +92,13 @@ const LoginUser = () => {
 			}
 
 			const business_id = res.data.business_id;
+			const business_name = res.data.user_business_name;
 			const user_id = res.data.user_id;
 			if (business_id == null) {
 				navigate('/not-assigned');
 			} else {
 				localStorage.setItem('joinedBusiness', true);
+				localStorage.setItem('business_name', business_name);
 				localStorage.setItem('business_id', business_id);
 				localStorage.setItem('user_id', user_id);
 				navigate('/dashboard');

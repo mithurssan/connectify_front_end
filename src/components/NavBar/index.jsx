@@ -6,7 +6,7 @@ import { IconContext } from 'react-icons'
 import { Outlet, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeToken, setUsername, setPassword } from '../../actions'
+import { removeToken, setUsername, setPassword, setCompanyName, setCompanyEmail, setCompanyPassword, setCompanyNumber } from '../../actions'
 import { SidebarData } from '../SidebarData/index'
 import './style.css'
 
@@ -23,6 +23,10 @@ function Navbar() {
     dispatch(removeToken())
     dispatch(setUsername(''))
     dispatch(setPassword(''))
+    dispatch(setCompanyName(""))
+    dispatch(setCompanyEmail(""))
+    dispatch(setCompanyPassword(""))
+    dispatch(setCompanyNumber(""))
     localStorage.removeItem('reduxState')
   }
 

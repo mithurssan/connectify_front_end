@@ -4,6 +4,7 @@ import './style.css';
 
 const AddUserButton = () => {
 	const businessId = localStorage.getItem('business_id');
+	const businessName = localStorage.getItem('business_name');
 	const [open, setOpen] = useState(false);
 	const [username, setUsername] = useState('');
 	const [message, setMessage] = useState('');
@@ -25,6 +26,7 @@ const AddUserButton = () => {
 		axios
 			.patch(`http://127.0.0.1:5000/users/update/business/${username}`, {
 				business_id: businessId,
+				user_business_name: businessName,
 			})
 			.then(function (response) {
 				console.log(response.data);
