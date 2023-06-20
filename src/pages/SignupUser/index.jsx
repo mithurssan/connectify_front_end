@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,8 @@ import { setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import { Spinner } from '../../components';
 import './style.css';
+import introJs from 'intro.js';
+import 'intro.js/minified/introjs.min.css';
 
 const SignupUser = () => {
 	const dispatch = useDispatch();
@@ -68,6 +70,26 @@ const SignupUser = () => {
 			console.error(error);
 		}
 	}
+
+	useEffect(() => {
+		const intro = introJs();
+		intro.setOptions({
+			steps: [
+			  {
+				intro: 'Welcome to the user register page!',
+			  },
+			  {
+				element: '.business-container',
+				intro: 'Enter your information to be able to register as a user.',
+			  },
+			  {
+				element: '.login-register-button',
+				intro: 'Click here to register.',
+			  },
+			],
+		  });
+		  intro.start();
+	  }, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

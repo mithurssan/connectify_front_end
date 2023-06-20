@@ -8,6 +8,8 @@ import messages_icon from '../../assets/messages-icon.png';
 import planner_icon from '../../assets/planner-icon.png';
 import bookings_icon from '../../assets/bookings-icon.png';
 import "./style.css"
+import introJs from 'intro.js';
+import 'intro.js/minified/introjs.min.css';
 
 const Dashboard = () => {
 	const username = useSelector((state) => state.user.username);
@@ -31,6 +33,31 @@ const Dashboard = () => {
 		fetchPosts();
 		isBusiness ? (setCurrentUsername(businessName)) : (setCurrentUsername(username))
 	}, []);
+
+	useEffect(() => {
+		const intro = introJs();
+		intro.setOptions({
+			steps: [
+				{
+					intro: 'Welcome to the Dashboard!',
+				},
+				{
+					element: '.dashboard',
+					intro: 'Click on the icons to navigate to different sections.',
+				  },
+				{
+					element: '.add-user-btn',
+					intro: 'Click here to add a new user.',
+				},
+				{
+					element: '.add-post-btn',
+					intro: 'Click here to add a new post.',
+				},
+			]
+		});
+		
+		  intro.start();
+	  }, []);
 
 	const addPost = async (newPost) => {
 		try {
