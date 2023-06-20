@@ -75,10 +75,10 @@
     font-weight: bold;
 }
 
-.success {
+.user-success {
     color: green;
 }
 
-.error {
+.user-error {
     color: red;
 }
