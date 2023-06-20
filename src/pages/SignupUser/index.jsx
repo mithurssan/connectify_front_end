@@ -75,21 +75,21 @@ const SignupUser = () => {
 		const intro = introJs();
 		intro.setOptions({
 			steps: [
-			  {
-				intro: 'Welcome to the user register page!',
-			  },
-			  {
-				element: '.business-container',
-				intro: 'Enter your information to be able to register as a user.',
-			  },
-			  {
-				element: '.login-register-button',
-				intro: 'Click here to register.',
-			  },
+				{
+					intro: 'Welcome to the user register page!',
+				},
+				{
+					element: '.business-container',
+					intro: 'Enter your information to be able to register as a user.',
+				},
+				{
+					element: '.login-register-button',
+					intro: 'Click here to register.',
+				},
 			],
-		  });
-		  intro.start();
-	  }, []);
+		});
+		intro.start();
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { setToken, setUsername, setIsLoaded, setVerified } from '../../actions'
-import LoginImage from '../../assets/Connectify.jpg'
-import './style.css'
-import { Spinner } from '../../components'
-import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { setToken, setUsername, setIsLoaded, setVerified } from '../../actions';
+import LoginImage from '../../assets/Connectify.jpg';
+import './style.css';
+import { Spinner } from '../../components';
+import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 import introJs from 'intro.js';
 import 'intro.js/minified/introjs.min.css';
 
@@ -72,7 +72,7 @@ const LoginUser = () => {
 			draggable: true,
 			progress: undefined,
 			theme: 'colored',
-		})
+		});
 
 	const loginUser = async () => {
 		// dispatch(setIsLoaded(false));

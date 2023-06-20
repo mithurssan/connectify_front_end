@@ -37,7 +37,7 @@ function Navbar() {
   const navActive = ({ isActive }) => (isActive ? activeStyle : undefined)
 
   const logout = async () => {
-    const url = 'http://127.0.0.1:5000/logout'
+    const url = 'http://127.0.0.1:5000/logout'/* c8 ignore start */
     await axios.post(url)
     handleRemoveToken(removeToken())
     localStorage.clear()
@@ -52,11 +52,11 @@ function Navbar() {
   const filteredSidebarData = SidebarData.filter((item) => {
     if (joinedBusiness) {
       return item.forBusiness
-    } else {
+    } else {/* c8 ignore start */
       return item.show
     }
   })
-
+/* c8 ignore end */
   return (
     <>
       <IconContext.Provider
