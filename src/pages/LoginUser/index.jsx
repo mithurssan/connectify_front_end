@@ -53,6 +53,7 @@ const LoginUser = () => {
     })
 
   const loginUser = async () => {
+    setIsLoaded(false);
     try {
       const url = 'http://127.0.0.1:5000/users/login'
       const data = {
