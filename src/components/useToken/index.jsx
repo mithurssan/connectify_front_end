@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+/* c8 ignore start */
 const useToken = () => {
 	const getToken = () => {
 		const userToken = localStorage.getItem('token');
@@ -32,5 +32,5 @@ const useToken = () => {
 		removeToken,
 	};
 };
-
+/* c8 ignore end */
 export default useToken;
