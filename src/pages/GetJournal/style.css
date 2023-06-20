@@ -1,0 +1,158 @@
+.hey-there {
+  margin-top: 20px;
+  font-size: 40px;
+}
+.top-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.hey-there-container {
+  display: flex;
+  margin-top: 30px;
+  margin-left: 100px;
+}
+
+.wave-hello {
+  width: 120px;
+  margin-top: -1px;
+}
+
+.date-container {
+  margin-left: 220px;
+  font-size: 25px;
+  margin-top: -40px;
+}
+
+.journal-container {
+  margin-left: 20px;
+  width: auto;
+}
+
+.content-container {
+  border: 1.5px solid black;
+  border-radius: 5px;
+  margin: 1px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.content-journal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  width: 90%;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.date-edit-delete {
+  display: flex;
+}
+
+.edit-delete-journal {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  right: 80px;
+}
+
+.spinner-journal {
+  display: flex;
+}
+
+.delete-button {
+  width: 100px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-button:hover,
+.link-button:hover,
+.add-entries:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: 0.2s ease-in-out;
+}
+
+.delete-button {
+  background-color: #ad2323;
+  color: #ffffff;
+}
+.add-entries {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  font-size: 60px;
+  cursor: pointer;
+  background-color: #785a9f;
+  color: #ffffff;
+}
+
+.add-entry-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-journal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.content-journal2 {
+  height: 450px;
+  position: relative;
+}
+.scroll-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 90%;
+  margin: auto;
+  margin-top: 40px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.scroll-bar::-webkit-scrollbar {
+  width: 12px;
+  margin-left: auto; /* Add this line to move the scrollbar to the right */
+  margin-right: 0; /* Add this line to move the scrollbar to the right */
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color, #f99776);
+  border-radius: 6px;
+  height: 2vh;
+}
+
+.no-entry {
+  font-size: 25px;
+  display: flex;
+  padding-left: 30px;
+  padding-top: 80px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 400px;
+}
+
+.error-messages {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+}

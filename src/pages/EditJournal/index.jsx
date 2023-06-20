@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Spinner } from '../../components'
 import jwtDecode from 'jwt-decode'
+import Journal from '../../assets/journal.png'
+import './style.css'
 
 const EditJournal = () => {
   const [editJournal, setEditJournal] = useState({
@@ -121,18 +123,60 @@ const EditJournal = () => {
     event.preventDefault()
     editEntry()
   }
+
+  const goBack = () => {
+    navigate('/wellbeing/get-journal')
+  }
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>Date</label>
-        <input onChange={dateHandler} type='date' />
-        <label>Title</label>
-        <input onChange={titleHandler} type='text' />
-        <label>Content</label>
-        <input onChange={contentHandler} type='text' />
-        <button type='submit'>Update</button>
-        {loaded && <Spinner />}
-        <p>{message}</p>
+      <form onSubmit={handleSubmit} className='add-journal-container'>
+        <div className='date-add-journal-container'>
+          <label className='date-label'>Date</label>
+          <input
+            onChange={dateHandler}
+            type='date'
+            className='date-input'
+            style={{
+              color: 'grey',
+            }}
+          />
+        </div>
+        <div className='date-add-journal-container'>
+          <label className='title-label'>Title</label>
+          <input
+            onChange={titleHandler}
+            type='text'
+            placeholder='How do you feel today?'
+            className='add-journal-text'
+          />
+        </div>
+        <div className='date-add-journal-container'>
+          <label className='content-label'>Content</label>
+          <div className='image-container-add-journal'>
+            <textarea
+              onChange={contentHandler}
+              type='text'
+              placeholder="What's on your mind? Write it down."
+              className='text-area'
+            />
+
+            <img src={Journal} alt='journal-image' className='journal-image' />
+          </div>
+        </div>
+        <div className='add-journal-button-container'>
+          <button className='add-journal-button' onClick={goBack}>
+            View my entries
+          </button>
+          <button type='submit' className='add-journal-button'>
+            Save
+          </button>
+        </div>
+        {loaded && (
+          <div className='spinner-journal'>
+            <Spinner />
+          </div>
+        )}
+        <p className='error-messages'>{message}</p>
       </form>
     </>
   )
