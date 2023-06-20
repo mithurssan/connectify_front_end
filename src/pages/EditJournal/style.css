@@ -1,0 +1,9 @@
+.add-journal-container2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 5%;
+  gap: 20px;
+}

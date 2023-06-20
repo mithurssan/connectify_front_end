@@ -6,9 +6,9 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
-import Rota from '.';
+import Booking from '.';
 
-describe('Rota', () => {
+describe('Booking', () => {
   let mockAxios;
 
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe('Rota', () => {
 
     render(
       <BrowserRouter>
-        <Rota />
+        <Booking />
       </BrowserRouter>
     );
   });
@@ -66,6 +66,3 @@ describe('Rota', () => {
   });
 
 });
-
-
-
