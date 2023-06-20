@@ -8,6 +8,8 @@ import { setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 import { Spinner } from '../../components';
+import introJs from 'intro.js';
+import 'intro.js/minified/introjs.min.css';
 
 const SignupBusiness = ({ handleSuccessfulRegistration }) => {
 	const dispatch = useDispatch();
@@ -55,6 +57,26 @@ const SignupBusiness = ({ handleSuccessfulRegistration }) => {
 			setCompanyNumber('');
 		}
 	}, [data]);
+
+	useEffect(() => {
+		const intro = introJs();
+		intro.setOptions({
+			steps: [
+			  {
+				intro: 'Welcome to the business register page!',
+			  },
+			  {
+				element: '.business-container',
+				intro: 'Enter your information to be able to register as a business.',
+			  },
+			  {
+				element: '.login-register-button',
+				intro: 'Click here to register.',
+			  },
+			],
+		  });
+		  intro.start();
+	  }, []);
 
 	async function getCompany(number) {
 		try {
