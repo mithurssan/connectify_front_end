@@ -13,7 +13,7 @@ export default defineConfig({
 				if (requireSpecifier === 'react-chat-engine') {
 					return 'react-chat-engine/dist/index.js';
 				}
-				return requireSpecifier;
+				return false;
 			},
 		}),
 	],
