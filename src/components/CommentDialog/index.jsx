@@ -5,9 +5,9 @@ import "./style.css"
 
 const CommentDialog = ({ postId, onClose }) => {
     const userId = localStorage.getItem('user_id');
+    const businessName = localStorage.getItem('business_name');
     const isBusiness = localStorage.getItem("isBusiness")
     const userUsername = useSelector((state) => state.user.username);
-    const businessName = useSelector((state) => state.business.companyName);
     const username = isBusiness ? businessName : userUsername
 
     const [commentInput, setCommentInput] = useState('');
