@@ -1,0 +1,84 @@
+.add-journal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 5%;
+  gap: 20px;
+}
+
+.date-add-journal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.date-input,
+.add-journal-text,
+.text-area {
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.date-input {
+  max-width: 300px;
+  height: 3vh;
+  padding-left: 7px;
+}
+.add-journal-text {
+  height: 4vh;
+  padding-left: 10px;
+}
+.text-area {
+  height: 40vh;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.date-label,
+.title-label,
+.content-label {
+  font-size: 20px;
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.journal-image {
+  max-width: 40%;
+  max-height: 370px; /* Set a maximum height for the image */
+  object-fit: contain; /* Ensure the image scales down while maintaining aspect ratio */
+  position: relative;
+  width: 100%;
+  position: absolute;
+  left: 600px;
+  top: 20px;
+}
+
+.image-container-add-journal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.add-journal-button {
+  width: 200px;
+  height: 4vh;
+  border: none;
+  background-color: #785a9f;
+  color: #ffff;
+  font-size: 18px;
+  cursor: pointer;
+}
+.add-journal-button:hover {
+  transform: scale(1.1);
+}
+.add-journal-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

@@ -14,7 +14,7 @@ const LoginUser = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [password, setPassword] = useState('');
-	const [isLoaded, setIsLoaded] = useState('');
+	const [isLoaded, setIsLoaded] = useState(false);
 
 	const username = useSelector((state) => state.user.username);
 	const verified = useSelector((state) => state.app.verified);

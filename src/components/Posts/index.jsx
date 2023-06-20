@@ -7,6 +7,7 @@ const Posts = ({ posts }) => {
     const businessName = useSelector((state) => state.business.companyName);
     const [selectedPostId, setSelectedPostId] = useState(null);
     const [dialogVisible, setDialogVisible] = useState(false);
+    const latestPostsFirst = [...posts].reverse();
 
     const handleCommentButtonClick = (postId) => {
         setSelectedPostId(postId);
@@ -15,7 +16,7 @@ const Posts = ({ posts }) => {
 
     return (
         <div className="posts-container">
-            {posts.map((post, index) => (
+            {latestPostsFirst.map((post, index) => (
                 <div key={index} className="post">
                     <h3 className="post-title">{post.post_title}</h3>
                     <p className="post-content">{post.post_content}</p>
