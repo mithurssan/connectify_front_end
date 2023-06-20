@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { CommentDialog } from '../';
+import { MdArrowUpward } from 'react-icons/md';
+
 import axios from 'axios';
 import './style.css';
 
 const Posts = ({ posts, setPosts }) => {
-    const businessName = useSelector((state) => state.business.companyName);
+    const businessName = localStorage.getItem("business_name")
     const [selectedPostId, setSelectedPostId] = useState(null);
     const [dialogVisible, setDialogVisible] = useState(false);
     const latestPostsFirst = [...posts].reverse();
@@ -95,7 +97,7 @@ const Posts = ({ posts, setPosts }) => {
                 <div key={index} className="post">
                     <h3 className="post-title">{post.post_title}</h3>
                     <p className="post-content">{post.post_content}</p>
-                    <p className={`post-author ${post.username === businessName ? 'red-text' : ''}`}>
+                    <p className={`post-author ${post.username === businessName ? 'business-author' : ''}`}>
                         {post.username}
                     </p>
                     <p className="post-votes">
@@ -103,9 +105,13 @@ const Posts = ({ posts, setPosts }) => {
                             className={`upvote-button ${upvotedPosts.includes(post.post_id) ? 'active' : ''}`}
                             onClick={() => handleUpvote(post.post_id)}
                         >
-                            Upvote
-                        </button>{' '}
-                        {post.post_upvotes}
+                            <span className="upvote-icon">
+                                <MdArrowUpward />
+                            </span>
+                            <p className="num-upvotes">
+                                {post.post_upvotes}
+                            </p>
+                        </button>
                     </p>
                     <button className="comments-btn" onClick={() => handleCommentButtonClick(post.post_id)}>
                         Comments
