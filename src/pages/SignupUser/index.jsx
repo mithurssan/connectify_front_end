@@ -9,7 +9,7 @@ import LoginImage from '../../assets/Connectify.jpg';
 import { Spinner } from '../../components';
 import './style.css';
 
-const SignupUser = ({ handleSuccessfulRegistration }) => {
+const SignupUser = () => {
 	const dispatch = useDispatch();
 
 	const [username, setUsername] = useState('');
@@ -106,6 +106,11 @@ const SignupUser = ({ handleSuccessfulRegistration }) => {
 							<Spinner />
 						</div>
 					)}
+				</div>
+				<div className="container">
+					<Link to="/login-user" className="sign-up-business">
+						Sign Up as a User
+					</Link>
 				</div>
 			</form>
 
