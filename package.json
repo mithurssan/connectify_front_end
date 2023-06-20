@@ -60,6 +60,7 @@
 		"polyfill": "^0.1.0",
 		"redux-mock-store": "^1.5.4",
 		"vite": "^4.3.9",
+		"vite-plugin-require-transform": "^1.0.17",
 		"vitest": "^0.32.0"
 	}
 }
