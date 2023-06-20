@@ -7,6 +7,7 @@ import blog from '../../assets/image 24.png'
 import './style.css'
 import introJs from 'intro.js';
 import 'intro.js/minified/introjs.min.css';
+import { Chatbot } from '../../components'
 
 const Wellbeing = () => {
   useEffect(() => {
@@ -46,6 +47,10 @@ const Wellbeing = () => {
           <img src={group} alt='Group of people' />
         </div>
       </div>
+
+      <Chatbot/>
+      
+
       <div>
         <div className='image-grid'>
           <Link to='get-journal' className='link'>
