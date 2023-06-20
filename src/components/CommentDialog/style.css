@@ -47,6 +47,10 @@
     font-size: 14px;
 }
 
+.comment-username {
+    font-weight: bold;
+}
+
 .close-button {
     padding: 10px 20px;
     border-radius: 4px;

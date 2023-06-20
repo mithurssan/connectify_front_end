@@ -63,7 +63,7 @@ const CommentDialog = ({ postId, onClose }) => {
                         <div key={comment_id} className={`comment ${comment_username === businessName ? 'business-comment' : ''}`}
                         >
                             <p className="comment-content">{comment_content}</p>
-                            <p className="comment-content">{comment_username}</p>
+                            <p className="comment-username">{comment_username}</p>
 
                         </div>
                     ))
