@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setUsername, setIsLoaded, setVerified } from '../../actions';
+import { setToken, setUsername, setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 import { Spinner } from '../../components';
@@ -14,7 +14,7 @@ const LoginUser = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [password, setPassword] = useState('');
-	const [isLoaded, setIsLoaded] = useState(false);
+	const [isLoaded, setIsLoaded] = useState('');
 
 	const username = useSelector((state) => state.user.username);
 	const verified = useSelector((state) => state.app.verified);
@@ -53,7 +53,7 @@ const LoginUser = () => {
 		});
 
 	const loginUser = async () => {
-		dispatch(setIsLoaded(false));
+		// dispatch(setIsLoaded(false));
 		try {
 			const url = 'http://127.0.0.1:5000/users/login';
 			const data = {
@@ -64,7 +64,9 @@ const LoginUser = () => {
 
 			if (verified) {
 				dispatch(setToken(res.data.token));
-				navigate('/dashboard');
+				// navigate('/dashboard');
+			} else {
+				errorCreate('Verify your account');
 			}
 
 			const business_id = res.data.business_id;
@@ -106,7 +108,7 @@ const LoginUser = () => {
 			const data = await res.data;
 
 			const user = data.find((u) => u.user_username === username);
-
+			setIsLoaded(true);
 			dispatch(setVerified(user.user_verified));
 		} catch (error) {
 			if (error) {
