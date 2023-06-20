@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { setToken, setUsername, setIsLoaded, setVerified } from '../../actions'
-import LoginImage from '../../assets/Connectify.jpg'
-import './style.css'
-import { Spinner } from '../../components'
-import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { setToken, setUsername, setIsLoaded, setVerified } from '../../actions';
+import LoginImage from '../../assets/Connectify.jpg';
+import './style.css';
+import { Spinner } from '../../components';
+import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 import introJs from 'intro.js';
 import 'intro.js/minified/introjs.min.css';
 
@@ -42,37 +42,37 @@ const LoginUser = () => {
 		}
 	}, [verified, isLoaded]);
 
-  useEffect(() => {
+	useEffect(() => {
 		const intro = introJs();
 		intro.setOptions({
 			steps: [
-			  {
-				intro: 'Welcome to the user login page!',
-			  },
-			  {
-				element: '.user-container',
-				intro: 'Enter your information to be able to login as a user.',
-			  },
-			  {
-				element: '.login-register-button',
-				intro: 'Click here to log in.',
-			  },
+				{
+					intro: 'Welcome to the user login page!',
+				},
+				{
+					element: '.user-container',
+					intro: 'Enter your information to be able to login as a user.',
+				},
+				{
+					element: '.login-register-button',
+					intro: 'Click here to log in.',
+				},
 			],
-		  });
-		  intro.start();
-	  }, []);
+		});
+		intro.start();
+	}, []);
 
-  const errorCreate = (error) =>
-    toast.error(error, {
-      position: 'top-center',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored',
-    })
+	const errorCreate = (error) =>
+		toast.error(error, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
 
 	const loginUser = async () => {
 		// dispatch(setIsLoaded(false));
