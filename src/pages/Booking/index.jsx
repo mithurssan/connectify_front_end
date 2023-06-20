@@ -4,6 +4,8 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import './style.css';
+import introJs from 'intro.js';
+import 'intro.js/minified/introjs.min.css';
 
 const localizer = momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(Calendar);
@@ -27,6 +29,31 @@ const Booking = () => {
         console.error('Error fetching events:', error); 
       });
   }, []);
+
+  useEffect(() => {
+    const intro = introJs();
+    intro.setOptions({
+      steps: [
+        {
+          intro: 'Welcome to the Booking page!',
+        },
+        {
+          element: '.add-entry-container',
+          intro: 'Fill in the fields and click "Add Entry" to book a holiday that will be added to Rota.',
+        },
+        {
+          element: '.event-list-container',
+          intro: 'View and manage your holidays in this list.',
+        },
+        {
+          element: '.calendar-wrapper',
+          intro: 'Drag and drop holidays to change their dates.',
+        },
+      ],
+    });
+    intro.start();
+  }, []);
+
   const fetchEvents = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/rotas/');

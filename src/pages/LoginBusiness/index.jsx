@@ -8,6 +8,8 @@ import { setToken, setCompanyName, setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 import { Spinner } from '../../components';
+import introJs from 'intro.js';
+import 'intro.js/minified/introjs.min.css';
 
 const LoginBusiness = () => {
 	const dispatch = useDispatch();
@@ -38,6 +40,26 @@ const LoginBusiness = () => {
 			loginBusiness();
 		}
 	}, [verified, isLoaded]);
+
+	useEffect(() => {
+		const intro = introJs();
+		intro.setOptions({
+			steps: [
+				{
+					intro: 'Welcome to the business login page!',
+				},
+				{
+					element: '.business-container',
+					intro: 'Enter your information to be able to login as a business.',
+				},
+				{
+					element: '.login-register-button',
+					intro: 'Click here to log in.',
+				},
+			],
+		});
+		intro.start();
+	}, []);
 
 	const errorCreate = (error) =>
 		toast.error(error, {
