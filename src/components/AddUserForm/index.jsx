@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './style.css';
 
@@ -68,7 +68,7 @@ const AddUserButton = () => {
 								Add User
 							</button>
 						</div>
-						{message && <p className={`message ${messageType === 'success' ? 'success' : 'error'}`}>{message}</p>}
+						{message && <p className={`message ${messageType === 'success' ? 'user-success' : 'user-error'}`}>{message}</p>}
 					</form>
 				</div>
 			)}
