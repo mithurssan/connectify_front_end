@@ -44,20 +44,24 @@ const Dashboard = () => {
 				{
 					element: '.dashboard',
 					intro: 'Click on the icons to navigate to different sections.',
-				  },
-				{
-					element: '.add-user-btn',
-					intro: 'Click here to add a new user.',
 				},
+				...(isBusiness ?
+					[
+						{
+							element: '.add-user-btn',
+							intro: 'Click here to add a new user.',
+						},
+					]
+					: []),
 				{
 					element: '.add-post-btn',
 					intro: 'Click here to add a new post.',
 				},
 			]
 		});
-		
-		  intro.start();
-	  }, []);
+
+		intro.start();
+	}, []);
 
 	const addPost = async (newPost) => {
 		try {
