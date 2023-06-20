@@ -11,7 +11,7 @@ import { Spinner } from '../../components';
 import introJs from 'intro.js';
 import 'intro.js/minified/introjs.min.css';
 
-const SignupBusiness = ({ handleSuccessfulRegistration }) => {
+const SignupBusiness = () => {
 	const dispatch = useDispatch();
 
 	const [companyName, setCompanyName] = useState('');
@@ -20,7 +20,6 @@ const SignupBusiness = ({ handleSuccessfulRegistration }) => {
 	const [companyEmail, setCompanyEmail] = useState('');
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [data, setData] = useState('');
-	// const [isLoaded, setIsLoaded] = useState('false');
 
 	const verified = useSelector((state) => state.app.verified);
 
@@ -126,7 +125,7 @@ const SignupBusiness = ({ handleSuccessfulRegistration }) => {
 					successCreate('Registration successful! \n Verify your email to log in. Check your inbox for further instructions.');
 				}
 			} else {
-				console.log('dupa');
+				console.log('error');
 			}
 		} catch (error) {
 			errorCreate('error LINE 92');

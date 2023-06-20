@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setToken, setCompanyName, setIsLoaded, setVerified, setVerifyToken } from '../../actions';
@@ -12,10 +12,10 @@ const LoginBusinessVerify = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [companyPassword, setCompanyPassword] = useState('');
+	const [isLoaded, setIsLoaded] = useState(false);
 
 	const companyName = useSelector((state) => state.business.companyName);
 	const verifyToken = useSelector((state) => state.business.verifyToken);
-	const isLoaded = useSelector((state) => state.app.isLoaded);
 
 	useEffect(() => {
 		const fetchToken = async () => {
@@ -34,7 +34,7 @@ const LoginBusinessVerify = () => {
 
 	useEffect(() => {
 		if (verifyToken && isLoaded) {
-			loginBusinessForFirstTime();
+			loginBusinessForFirstTime(verifyToken);
 		}
 	}, [verifyToken, isLoaded]);
 
@@ -47,12 +47,10 @@ const LoginBusinessVerify = () => {
 			pauseOnHover: true,
 			draggable: true,
 			progress: undefined,
-			theme: 'light',
+			theme: 'colored',
 		});
 
 	const loginBusinessForFirstTime = async (verifyToken) => {
-		dispatch(setIsLoaded(false));
-
 		const url = window.location.href;
 		const tokenUrl = url.split('/');
 		if (verifyToken != tokenUrl[5]) {
@@ -86,10 +84,10 @@ const LoginBusinessVerify = () => {
 
 		if (companyName.length === 0 || companyPassword.length === 0) {
 			errorCreate('Enter business name and password');
-			dispatch(setIsLoaded(false));
+			setIsLoaded(false);
 		} else {
 			getCompanies();
-			dispatch(setIsLoaded(true));
+			setIsLoaded(true);
 		}
 	};
 

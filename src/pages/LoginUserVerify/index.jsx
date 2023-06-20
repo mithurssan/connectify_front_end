@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setUsername, setIsLoaded, setVerified, setVerifyToken } from '../../actions';
+import { setToken, setUsername, setVerified, setVerifyToken } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 
@@ -12,10 +12,10 @@ const LoginUser = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [password, setPassword] = useState('');
+	const [isLoaded, setIsLoaded] = useState(false);
 
 	const username = useSelector((state) => state.user.username);
-	const verified = useSelector((state) => state.app.verified);
-	const isLoaded = useSelector((state) => state.app.isLoaded);
+	const verifyToken = useSelector((state) => state.user.verifyToken);
 
 	useEffect(() => {
 		const fetchToken = async () => {
@@ -33,10 +33,10 @@ const LoginUser = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		if (verified && isLoaded) {
-			loginUser();
+		if (verifyToken && isLoaded) {
+			loginUserForFirstTime(verifyToken);
 		}
-	}, [verified, isLoaded]);
+	}, [verifyToken, isLoaded]);
 
 	const errorCreate = (error) =>
 		toast.error(error, {
@@ -47,39 +47,43 @@ const LoginUser = () => {
 			pauseOnHover: true,
 			draggable: true,
 			progress: undefined,
-			theme: 'light',
+			theme: 'colored',
 		});
 
-	const loginUser = async () => {
-		dispatch(setIsLoaded(false));
+	const loginUserForFirstTime = async () => {
+		// dispatch(setIsLoaded(false));
 
-		try {
-			const url = 'http://127.0.0.1:5000/users/login';
-			const data = {
-				user_username: username,
-				user_password: password,
-			};
-			const res = await axios.post(url, data);
-
-			if (verified) {
+		const url = window.location.href;
+		const tokenUrl = url.split('/');
+		if (verifyToken != tokenUrl[5]) {
+			errorCreate('Wrong Credentials');
+		} else {
+			try {
+				const url = `http://127.0.0.1:5000/users/verify/${verifyToken}`;
+				const data = {
+					user_username: username,
+					user_password: password,
+				};
+				const res = await axios.post(url, data);
 				dispatch(setToken(res.data.token));
-				navigate('/dashboard');
-			}
-			console.log(res.data.business_id);
-			const business_id = res.data.business_id;
-			const user_id = res.data.user_id;
-			if (business_id == null) {
-				navigate('/not-assigned');
-			} else {
-				localStorage.setItem('joinedBusiness', true);
-				localStorage.setItem('business_id', business_id);
-				localStorage.setItem('user_id', user_id);
-				navigate('/dashboard');
-			}
-		} catch (error) {
-			console.log(error, 'error');
-			if (error && password.length != 0) {
-				errorCreate('Incorrect credentials');
+				dispatch(setVerified(true));
+
+				const business_id = res.data.business_id;
+				const user_id = res.data.user_id;
+				if (business_id == null) {
+					navigate('/not-assigned');
+				} else {
+					localStorage.setItem('joinedBusiness', true);
+					localStorage.setItem('business_id', business_id);
+					localStorage.setItem('user_id', user_id);
+
+					navigate('/dashboard');
+				}
+			} catch (error) {
+				console.log(error, 'error');
+				if (error && password.length != 0) {
+					errorCreate('Incorrect credentials');
+				}
 			}
 		}
 	};
@@ -89,10 +93,10 @@ const LoginUser = () => {
 
 		if (username.length === 0 || password.length === 0) {
 			errorCreate('Enter username and password');
-			dispatch(setIsLoaded(false));
+			setIsLoaded(false);
 		} else {
 			getUsers();
-			dispatch(setIsLoaded(true));
+			setIsLoaded(true);
 		}
 	};
 
@@ -104,7 +108,9 @@ const LoginUser = () => {
 
 			const user = data.find((u) => u.user_username === username);
 
-			dispatch(setVerified(user.user_verified));
+			dispatch(setVerifyToken(user.user_verify_token));
+			// dispatch(setVerified(true));
+			setIsLoaded(true);
 		} catch (error) {
 			if (error) {
 				errorCreate("User doesn't exist");
@@ -126,11 +132,6 @@ const LoginUser = () => {
 				<input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="user-text" />
 
 				<input type="submit" value="Login" className="login-register-button" />
-				<div className="container">
-					<Link to="/login-register" className="sign-in-business">
-						Login as a Business
-					</Link>
-				</div>
 			</form>
 
 			<div className="login-register-image">
