@@ -112,7 +112,7 @@ const Dashboard = () => {
 					{isBusiness && <AddUserForm />}
 				</div>
 				<div className="add-post-btn">
-					<PostForm onAddPost={addPost} />
+					<PostForm onAddPost={addPost}/>
 				</div>
 			</div>
 			<Posts posts={posts} setPosts={setPosts} />
