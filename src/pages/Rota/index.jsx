@@ -206,16 +206,13 @@ const Rota = () => {
     return (
       <div key={event.id} className="event-container">
         <span>{event.title}</span>
-        {isBusiness && (
           <button onClick={() => handleDeleteEntry(event)}>Delete</button>
-        )}
       </div>
     );
   });
 /* c8 ignore end */
   return (
     <div className="calendar-container">
-    {isBusiness && (
       <div className="add-entry-container">
         <input
           type="text"
@@ -237,7 +234,6 @@ const Rota = () => {
         />
         <button onClick={handleAddEntry}>Add Entry</button>
       </div>
-      )}
       <div className="event-list-container">{eventComponents}</div>
       <div className="calendar-wrapper">
         <DragAndDropCalendar
