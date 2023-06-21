@@ -15,20 +15,21 @@
   margin-bottom: 10px;
 }
 
-.add-entry-container input[type="text"]{
+.add-entry-container input[type='text'] {
   font-family: 'Montserrat', sans-serif;
   margin: 5px;
   padding: 8px;
   border-radius: 25px;
 }
 .add-entry-container button {
-  background-color: #785A9F;
+  background-color: #785a9f;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   border: none;
   padding: 8px;
   margin-right: 10px;
   border-radius: 25px;
+  width: 8vw;
 }
 
 .event-list-container {
@@ -60,7 +61,7 @@
 }
 
 .event-container button {
-  background-color: #785A9F;
+  background-color: #785a9f;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   border: none;
@@ -70,20 +71,20 @@
 }
 
 .calendar-wrapper {
-  height: 800px; 
+  height: 800px;
   width: 1400px;
 }
 
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active {
-  background-color: #785A9F!important;
+  background-color: #785a9f !important;
   color: #fff !important;
   font-family: 'Montserrat', sans-serif;
 }
 
 .rbc-event {
-  background-color: #785A9F !important;
-  color: #fff  !important;
+  background-color: #785a9f !important;
+  color: #fff !important;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -97,19 +98,19 @@
   border: none;
   border-radius: 10px;
   color: #fff;
-  background-color: #785A9F; 
+  background-color: #785a9f;
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
 }
 
 .introjs-tooltipbuttons .introjs-button.introjs-prevbutton {
-  background-color: #785A9F; 
+  background-color: #785a9f;
 }
 
 .introjs-tooltipbuttons .introjs-button.introjs-skipbutton {
-  background-color: #785A9F; 
+  background-color: #785a9f;
 }
 
 .introjs-tooltip {
-  font-family: 'Montserrat', sans-serif; 
+  font-family: 'Montserrat', sans-serif;
 }

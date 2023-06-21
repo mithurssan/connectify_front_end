@@ -187,10 +187,10 @@ const GetJournal = () => {
             </div>
           </div>
         </div>
-        {message}
+        <p className='journal-message'> {message}</p>
       </div>
-      <div className='add-entry-container'>
-        <button className='add-entries' onClick={addEntries}>
+      <div className='add-entry-journal-container'>
+        <button className='add-entries-button ' onClick={addEntries}>
           +
         </button>
       </div>

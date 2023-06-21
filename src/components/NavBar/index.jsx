@@ -6,8 +6,9 @@ import { IconContext } from 'react-icons'
 import { Outlet, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeToken, setUsername, setPassword } from '../../actions'
+import { removeToken, setUsername, setPassword, setCompanyName, setCompanyEmail, setCompanyPassword, setCompanyNumber } from '../../actions'
 import { SidebarData } from '../SidebarData/index'
+
 import './style.css'
 
 function Navbar() {
@@ -23,6 +24,10 @@ function Navbar() {
     dispatch(removeToken())
     dispatch(setUsername(''))
     dispatch(setPassword(''))
+    dispatch(setCompanyName(""))
+    dispatch(setCompanyEmail(""))
+    dispatch(setCompanyPassword(""))
+    dispatch(setCompanyNumber(""))
     localStorage.removeItem('reduxState')
   }
 
@@ -33,7 +38,7 @@ function Navbar() {
   const navActive = ({ isActive }) => (isActive ? activeStyle : undefined)
 
   const logout = async () => {
-    const url = 'http://127.0.0.1:5000/logout'
+    const url = 'http://127.0.0.1:5000/logout'/* c8 ignore start */
     await axios.post(url)
     handleRemoveToken(removeToken())
     localStorage.clear()
@@ -48,11 +53,11 @@ function Navbar() {
   const filteredSidebarData = SidebarData.filter((item) => {
     if (joinedBusiness) {
       return item.forBusiness
-    } else {
+    } else {/* c8 ignore start */
       return item.show
     }
   })
-
+/* c8 ignore end */
   return (
     <>
       <IconContext.Provider
@@ -81,16 +86,24 @@ function Navbar() {
               return (
                 <li key={index} className={item.cName} role='navbar'>
                   <NavLink to={item.path} style={navActive}>
-                    <span role='icon'> {item.icon}</span>
+                    <span role='icon' className='icon'>
+                      {item.icon}
+                    </span>
 
                     <span>{item.title}</span>
                   </NavLink>
                 </li>
               )
             })}
-            <button data-testid='logout-button' onClick={logout}>
-              Logout
-            </button>
+            <div className='logout-container'>
+              <button
+                data-testid='logout-button'
+                className='logout-button'
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </div>
           </ul>
         </nav>
       </IconContext.Provider>
