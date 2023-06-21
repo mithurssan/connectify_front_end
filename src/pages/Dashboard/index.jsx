@@ -7,17 +7,17 @@ import rota_icon from '../../assets/rota-icon.png';
 import messages_icon from '../../assets/messages-icon.png';
 import planner_icon from '../../assets/planner-icon.png';
 import bookings_icon from '../../assets/bookings-icon.png';
-import "./style.css"
+import './style.css';
 import introJs from 'intro.js';
 import 'intro.js/minified/introjs.min.css';
 
 const Dashboard = () => {
 	const username = useSelector((state) => state.user.username);
 	const businessName = useSelector((state) => state.business.companyName);
-	const isBusiness = localStorage.getItem("isBusiness")
-	const businessId = localStorage.getItem("business_id")
-	const userId = localStorage.getItem("user_id")
-	const [currentUsername, setCurrentUsername] = useState("");
+	const isBusiness = localStorage.getItem('isBusiness');
+	const businessId = localStorage.getItem('business_id');
+	const userId = localStorage.getItem('user_id');
+	const [currentUsername, setCurrentUsername] = useState('');
 	const [posts, setPosts] = useState([]);
 
 	const fetchPosts = async () => {
@@ -31,7 +31,7 @@ const Dashboard = () => {
 	};
 	useEffect(() => {
 		fetchPosts();
-		isBusiness ? (setCurrentUsername(businessName)) : (setCurrentUsername(username))
+		isBusiness ? setCurrentUsername(businessName) : setCurrentUsername(username);
 	}, []);
 
 	useEffect(() => {
@@ -45,19 +45,19 @@ const Dashboard = () => {
 					element: '.dashboard',
 					intro: 'Click on the icons to navigate to different sections.',
 				},
-				...(isBusiness ?
-					[
-						{
-							element: '.add-user-btn',
-							intro: 'Click here to add a new user.',
-						},
-					]
+				...(isBusiness
+					? [
+							{
+								element: '.add-user-btn',
+								intro: 'Click here to add a new user.',
+							},
+					  ]
 					: []),
 				{
 					element: '.add-post-btn',
 					intro: 'Click here to add a new post.',
 				},
-			]
+			],
 		});
 
 		intro.start();
@@ -83,13 +83,17 @@ const Dashboard = () => {
 			{isBusiness ? (
 				<>
 					<div className="welcome">
-						<h1><span className="wave">👋</span>Welcome, {businessName}!</h1>
+						<h1>
+							<span className="wave">👋</span>Welcome, {businessName}!
+						</h1>
 					</div>
 				</>
 			) : (
 				<>
 					<div className="welcome">
-						<h1><span className="wave">👋</span>Welcome, {username}!</h1>
+						<h1>
+							<span className="wave">👋</span>Welcome, {username}!
+						</h1>
 					</div>
 				</>
 			)}
@@ -100,7 +104,7 @@ const Dashboard = () => {
 				<Link to="/chat">
 					<DashboardIcons title="Messages" image={messages_icon} />
 				</Link>
-				<Link to="/wellbeing/get-journal" >
+				<Link to="/wellbeing/get-journal">
 					<DashboardIcons title="Journal" image={planner_icon} />
 				</Link>
 				<Link to="/bookings">
@@ -108,9 +112,7 @@ const Dashboard = () => {
 				</Link>
 			</div>
 			<div className="action-btns">
-				<div className="add-user-btn">
-					{isBusiness && <AddUserForm />}
-				</div>
+				<div className="add-user-btn">{isBusiness && <AddUserForm />}</div>
 				<div className="add-post-btn">
 					<PostForm onAddPost={addPost} />
 				</div>

@@ -1,171 +1,171 @@
-@font-face {
+/* @font-face {
   font-family: 'Montserrat';
   src: url(path/to/font/Montserrat-Regular.ttf) format('truetype');
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: 'Montserrat';
   src: url(path/to/font/Montserrat-Regular.ttf) format('truetype');
-}
+} */
 
 .container-login-register {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  width: 100%;
-  height: 100%;
-  background-color: #f99776;
-  position: relative;
+	display: grid;
+	grid-template-columns: 40% 60%;
+	width: 100%;
+	height: 100%;
+	background-color: #f99776;
+	position: relative;
 }
 
 .user-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  box-sizing: border-box;
-  max-width: 800px;
-  position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	box-sizing: border-box;
+	max-width: 800px;
+	position: relative;
 
-  padding-left: 5%;
-  padding-right: 5%;
-  position: relative;
+	padding-left: 5%;
+	padding-right: 5%;
+	position: relative;
 }
 
 .user-text,
 .login-register-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 600px;
-  height: 6%;
-  border: none;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: 600px;
+	height: 6%;
+	border: none;
+	width: 100%;
 }
 
 .user-text:focus {
-  outline: none;
+	outline: none;
 }
 
 .user-text {
-  font-size: 20px;
+	font-size: 20px;
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .user-label {
-  font-size: 16px;
-  font-weight: 900;
-  color: #0a1a41;
-  align-self: flex-start;
-  margin-left: 0;
-  margin-top: 18px;
-  font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	font-weight: 900;
+	color: #0a1a41;
+	align-self: flex-start;
+	margin-left: 0;
+	margin-top: 18px;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .login-register-button {
-  margin-top: 20px;
-  background-color: #785a9f;
-  border: none;
-  color: white;
-  font-size: 15px;
-  font-weight: 900;
-  cursor: pointer;
-  width: 100%;
+	margin-top: 20px;
+	background-color: #785a9f;
+	border: none;
+	color: white;
+	font-size: 15px;
+	font-weight: 900;
+	cursor: pointer;
+	width: 100%;
 }
 
 .login-register-button:hover {
-  background-color: transparent;
-  border: 2px solid #785a9f;
-  transform: scale(1.1);
-  transition: 0.3s ease-in-out;
-  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+	background-color: transparent;
+	border: 2px solid #785a9f;
+	transform: scale(1.1);
+	transition: 0.3s ease-in-out;
+	box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .container {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 .sign-in-business {
-  color: #ffffff;
-  font-size: 30px;
-  font-family: 'Montserrat', sans-serif;
-  text-decoration: none;
-  font-weight: 900;
-  padding-top: 80px;
+	color: #ffffff;
+	font-size: 30px;
+	font-family: 'Montserrat', sans-serif;
+	text-decoration: none;
+	font-weight: 900;
+	padding-top: 80px;
 }
 
 .sign-in-business:hover {
-  color: #785a9f;
-  transition: 0.3s ease-in-out;
-  text-decoration: underline;
+	color: #785a9f;
+	transition: 0.3s ease-in-out;
+	text-decoration: underline;
 }
 
 .login-register-image {
-  position: relative;
+	position: relative;
 }
 
 .not-recognised {
-  font-size: 15px;
+	font-size: 15px;
 }
 .error-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 
 .error-message-container {
-  position: absolute;
-  top: 500px;
-  margin-left: -10px;
+	position: absolute;
+	top: 500px;
+	margin-left: -10px;
 }
 
 .not-recognised {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: -80px;
-  margin-top: 20px;
-  width: 250px;
-  font-size: 18px;
-  color: #0a1a41;
-  text-align: center;
-  transition: 0.5s ease-in-out;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: -80px;
+	margin-top: 20px;
+	width: 250px;
+	font-size: 18px;
+	color: #0a1a41;
+	text-align: center;
+	transition: 0.5s ease-in-out;
 }
 .show-password-user {
-  position: absolute;
-  top: 50%;
-  right: 7%;
-  cursor: pointer;
-  font-size: 15px;
-  color: #0a1a41;
+	position: absolute;
+	top: 50%;
+	right: 7%;
+	cursor: pointer;
+	font-size: 15px;
+	color: #0a1a41;
 }
 
 .introjs-tooltipbuttons .introjs-button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  background-color: #785A9F; 
-  font-family: 'Montserrat', sans-serif;
-  cursor: pointer;
+	margin-top: 10px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 10px;
+	color: #fff;
+	background-color: #785a9f;
+	font-family: 'Montserrat', sans-serif;
+	cursor: pointer;
 }
 
 .introjs-tooltipbuttons .introjs-button.introjs-prevbutton {
-  background-color: #785A9F; 
+	background-color: #785a9f;
 }
 
 .introjs-tooltipbuttons .introjs-button.introjs-skipbutton {
-  background-color: #785A9F; 
+	background-color: #785a9f;
 }
 
 .introjs-tooltip {
-  font-family: 'Montserrat', sans-serif; 
+	font-family: 'Montserrat', sans-serif;
 }
