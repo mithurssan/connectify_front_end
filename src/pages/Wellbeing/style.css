@@ -21,7 +21,7 @@
 }
 
 .image-container img {
-  max-width: 600px;
+  max-width: 400px;
   height: auto;
 }
 
@@ -33,7 +33,7 @@
 .image-grid {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 80px;
   gap: 200px;
 }
 
@@ -47,6 +47,7 @@
 .link {
   text-decoration: none;
   color: #0a1a41;
+  font-size: 10px;
 }
 
 .box-welbeing {
@@ -56,7 +57,7 @@
 }
 .link {
   text-decoration: none;
-  cursor: default;
+  cursor: pointer;
 }
 .box-welbeing:hover,
 .box-chat:hover {
@@ -69,3 +70,18 @@
 .welbeing-title {
   font-size: 22px;
 }
+
+.welbeing-image {
+  height: 170px;
+  width: 170px;
+}
+
+.icon-title {
+  font-size: 20px;
+}
+
+/* .welbeing-chat {
+  height: 180px;
+  width: 180px;
+  margin-left: 12px;
+} */

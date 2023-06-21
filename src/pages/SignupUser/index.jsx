@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { setVerified } from '../../actions'
+import { setVerified, setEmails } from '../../actions'
 import LoginImage from '../../assets/Connectify.jpg'
 import { Spinner } from '../../components'
 import './style.css'
@@ -152,11 +152,6 @@ const SignupUser = () => {
               <Spinner />
             </div>
           )}
-        </div>
-        <div className='container'>
-          <Link to='/login-user' className='sign-up-business'>
-            Sign Up as a User
-          </Link>
         </div>
       </form>
 

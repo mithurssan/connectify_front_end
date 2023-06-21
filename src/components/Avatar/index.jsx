@@ -88,14 +88,7 @@ export const ImageSelector = () => {
                   onClick={() => selectImage(Avatar5)}
                 />
               </Col>
-              <Col xs={6} md={2}>
-                <img
-                  src={Avatar6}
-                  alt='Image 6'
-                  className='img-fluid '
-                  onClick={() => selectImage(Avatar6)}
-                />
-              </Col>
+
               <Col xs={6} md={2}>
                 <img
                   src={Avatar7}
@@ -104,23 +97,23 @@ export const ImageSelector = () => {
                   onClick={() => selectImage(Avatar7)}
                 />
               </Col>
-              <Col xs={6} md={2}>
+              {/* <Col xs={6} md={2}>
                 <img
                   src={Avatar8}
                   alt='Image 6'
                   className='img-fluid '
                   onClick={() => selectImage(Avatar8)}
                 />
-              </Col>
-              <Col xs={6} md={2}>
+              </Col> */}
+              {/* <Col xs={6} md={2}>
                 <img
                   src={Avatar9}
                   alt='Image 6'
                   className='img-fluid '
                   onClick={() => selectImage(Avatar9)}
                 />
-              </Col>
-              <Col xs={6} md={2}>
+              </Col> */}
+              {/* <Col xs={6} md={2}>
                 <img
                   src={Avatar10}
                   alt='Image 6'
@@ -135,7 +128,7 @@ export const ImageSelector = () => {
                   className='img-fluid '
                   onClick={() => selectImage(Avatar11)}
                 />
-              </Col>
+              </Col> */}
             </Row>
           </Container>
         </Modal.Body>

@@ -55,11 +55,17 @@ const Wellbeing = () => {
         <div className='image-grid'>
           <Link to='get-journal' className='link'>
             <div className='box-welbeing'>
-              <img src={journal} alt='Journal' width={250} height={250} />
-              <h3>Journal</h3>
+              <img
+                src={journal}
+                alt='Journal'
+                width={250}
+                height={250}
+                className='welbeing-image'
+              />
+              <h3 className='icon-title'>Journal</h3>
             </div>
           </Link>
-
+          {/* 
           <Link to='chat' className='link'>
             <div className='box-welbeing'>
               <img
@@ -67,15 +73,22 @@ const Wellbeing = () => {
                 alt='Chat with the therapist'
                 width={250}
                 height={250}
+                className='welbeing-chat'
               />
-              <h3>Chat with the therapist</h3>
+              <h3 className='icon-title'>Chat with the therapist</h3>
             </div>
-          </Link>
+          </Link> */}
 
           <Link to='blogs' className='link'>
             <div className='box-welbeing'>
-              <img src={blog} alt='Blogs' width={250} height={250} />
-              <h3>Blogs</h3>
+              <img
+                src={blog}
+                alt='Blogs'
+                width={250}
+                height={250}
+                className='welbeing-image'
+              />
+              <h3 className='icon-title'>Blogs</h3>
             </div>
           </Link>
         </div>
