@@ -61,27 +61,28 @@ const SignupBusiness = () => {
 		const intro = introJs();
 		intro.setOptions({
 			steps: [
-			  {
-				intro: 'Welcome to the business register page!',
-			  },
-			  {
-				element: '.business-container',
-				intro: 'Enter your information to be able to register as a business.',
-			  },
-			  {
-				element: '.login-register-button',
-				intro: 'Click here to register.',
-			  },
+				{
+					intro: 'Welcome to the business register page!',
+				},
+				{
+					element: '.business-container',
+					intro: 'Enter your information to be able to register as a business.',
+				},
+				{
+					element: '.login-register-button',
+					intro: 'Click here to register.',
+				},
 			],
-		  });
-		  intro.start();
-	  }, []);
+		});
+		intro.start();
+	}, []);
 
 	async function getCompany(number) {
 		try {
 			const url = `http://127.0.0.1:5000/api/company/${number}`;
 			const res = await axios.get(url);
 			const data = res.data;
+			console.log(res);
 
 			if (companyName != data['company_name'] || companyNumber != data['company_number']) {
 				errorCreate('The company is not listed or recorded in Companies House.');
