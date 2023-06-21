@@ -16,6 +16,7 @@ const Rota = () => {
   const [endDate, setEndDate] = useState('');
   const [content, setContent] = useState('');
   const [isBusiness, setIsBusiness] = useState(false);
+  const businessId = localStorage.getItem('business_id');
 /* c8 ignore start */
   useEffect(() => {
     fetchEvents()
@@ -138,9 +139,6 @@ const Rota = () => {
       return;
     }
     try {
-      const storedEvents = localStorage.getItem('events');
-      const formattedEvents = formatEvents(JSON.parse(storedEvents));
-      const businessId = formattedEvents[0]?.business_id;
 
       const newEntry = {
         business_id: businessId,
