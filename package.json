@@ -44,8 +44,7 @@
 		"redux-persist": "^6.0.0",
 		"redux-thunk": "^2.4.2",
 		"slick-carousel": "^1.8.1",
-		"uuid": "^9.0.0",
-		"websocket": "^1.0.34"
+		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.22.5",

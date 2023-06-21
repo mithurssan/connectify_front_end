@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './style.css';
 import { MultiChatSocket, MultiChatWindow, useMultiChatLogic } from 'react-chat-engine-advanced';
-import w3cwebsocket from 'websocket';
 
 const Chat = () => {
 	const username = useSelector((state) => state.user.username);
