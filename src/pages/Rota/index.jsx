@@ -16,11 +16,19 @@ const Rota = () => {
 	const [endDate, setEndDate] = useState('');
 	const [content, setContent] = useState('');
 	const [isBusiness, setIsBusiness] = useState(false);
-	const [dataE, setData] = useState([]);
+	const businessId = localStorage.getItem('business_id');
 	/* c8 ignore start */
 	useEffect(() => {
-		fetchEvents();
-		console.log('LINE 23', dataE);
+		fetchEvents()
+			.then((data) => {
+				console.log('Fetched events:', data);
+				const formattedEvents = formatEvents(data);
+				console.log('Formatted events:', formattedEvents);
+				setEvents(formattedEvents);
+			})
+			.catch((error) => {
+				console.error('Error fetching events:', error);
+			});
 	}, []);
 
 	useEffect(() => {
@@ -51,9 +59,7 @@ const Rota = () => {
 		try {
 			const response = await fetch('http://127.0.0.1:5000/rotas/');
 			const data = await response.json();
-			console.log('LINE 63', data);
-			setData(data);
-			console.log('LINE65', dataE);
+
 			const formattedEvents = formatEvents(data);
 			console.log('Formatted events:', formattedEvents);
 			setEvents(formattedEvents);
@@ -132,10 +138,6 @@ const Rota = () => {
 			return;
 		}
 		try {
-			const storedEvents = localStorage.getItem('events');
-			const formattedEvents = formatEvents(JSON.parse(storedEvents));
-			const businessId = formattedEvents[0]?.business_id;
-
 			const newEntry = {
 				business_id: businessId,
 				rota_start_date: startDate,
