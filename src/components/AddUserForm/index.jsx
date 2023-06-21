@@ -54,19 +54,19 @@ const AddUserButton = () => {
 
 	return (
 		<div>
-			<button className="add-user-button" onClick={handleOpen}>
+			<button className="add-user-button" onClick={handleOpen} data-testid="add-user-button">
 				Add User
 			</button>
 			{open && (
 				<div className="dialog-container">
-					<form onSubmit={handleSubmit} className="dialog-form">
+					<form onSubmit={handleSubmit} className="dialog-form" role='dialog'>
 						<h2 className="dialog-title">Add User to Business</h2>
 						<input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} className="dialog-input" required />
 						<div className="dialog-actions">
-							<button type="button" className="cancel-button" onClick={handleClose}>
+							<button type="button" className="cancel-button" onClick={handleClose} data-testid="cancel-button">
 								Cancel
 							</button>
-							<button type="submit" className="add-button">
+							<button type="submit" className="add-button" data-testid="submit-button">
 								Add User
 							</button>
 						</div>
