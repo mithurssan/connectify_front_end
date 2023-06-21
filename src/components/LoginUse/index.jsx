@@ -15,7 +15,7 @@ const LoginUse = () => {
     setTimeout(() => {
       setSignIn(false)
       setSlideAnimation('')
-    }, 300)
+    }, 400)
   }
 
   const activateRegister = () => {
@@ -23,11 +23,7 @@ const LoginUse = () => {
     setTimeout(() => {
       setSignIn(true)
       setSlideAnimation('')
-    }, 300)
-  }
-  const handleSuccessfulRegistration = () => {
-    activateSignIn()
-    navigate('/login-user')
+    }, 400)
   }
 
   return (
@@ -51,13 +47,7 @@ const LoginUse = () => {
             </p>
           </div>
         </div>
-        {!signIn ? (
-          <LoginUser />
-        ) : (
-          <SignupUser
-            handleSuccessfulRegistration={handleSuccessfulRegistration}
-          />
-        )}
+        {!signIn ? <LoginUser /> : <SignupUser />}
       </div>
     </div>
   )

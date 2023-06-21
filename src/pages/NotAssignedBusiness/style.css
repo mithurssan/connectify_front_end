@@ -1,0 +1,12 @@
+.not-assigned-container {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 200px;
+  height: 100vh;
+}
+
+.not-assigned-message {
+  text-align: center;
+  font-size: 25px;
+}

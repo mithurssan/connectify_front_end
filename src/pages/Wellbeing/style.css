@@ -1,15 +1,18 @@
-.wellbeing-page{
+.wellbeing-page {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
 .heading {
-  font-size: 70px;
+  font-size: 50px;
+  margin-top: 50px;
+  color: #0a1a41;
 }
 .section {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 35px;
+  margin-top: 80px;
 }
 
 .image-container {
@@ -18,18 +21,19 @@
 }
 
 .image-container img {
-  width: auto;
+  max-width: 400px;
   height: auto;
 }
 
 .image-description {
   margin-top: 0;
+  font-size: 22px;
 }
 
 .image-grid {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 80px;
   gap: 200px;
 }
 
@@ -38,12 +42,46 @@
   flex-direction: column;
   align-items: center;
   margin: 0 15px;
-
 }
 
 .link {
   text-decoration: none;
-  cursor: default;
+  color: #0a1a41;
+  font-size: 10px;
 }
 
-  
+.box-welbeing {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.link {
+  text-decoration: none;
+  cursor: pointer;
+}
+.box-welbeing:hover,
+.box-chat:hover {
+  transform: scale(1.1);
+}
+.chat-image {
+  margin-bottom: 20px;
+}
+
+.welbeing-title {
+  font-size: 22px;
+}
+
+.welbeing-image {
+  height: 170px;
+  width: 170px;
+}
+
+.icon-title {
+  font-size: 20px;
+}
+
+/* .welbeing-chat {
+  height: 180px;
+  width: 180px;
+  margin-left: 12px;
+} */
