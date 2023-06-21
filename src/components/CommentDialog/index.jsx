@@ -44,7 +44,7 @@ const CommentDialog = ({ postId, onClose }) => {
     };
 
     return (
-        <div className="dialog-container">
+        <div className="dialog-container" role="dialog-container">
             <div className="comment-dialog">
                 <form className="comment-form" onSubmit={handleCommentSubmit}>
                     <input

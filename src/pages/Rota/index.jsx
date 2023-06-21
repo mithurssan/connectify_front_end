@@ -57,20 +57,16 @@ const Rota = () => {
 
 	const fetchEvents = async () => {
 		try {
-			const response = await fetch('http://127.0.0.1:5000/rotas/');
+			const response = await fetch(`http://127.0.0.1:5000/rotas/get/${businessId}`);
 			const data = await response.json();
-
-			const formattedEvents = formatEvents(data);
-			console.log('Formatted events:', formattedEvents);
-			setEvents(formattedEvents);
+			return data;
 		} catch (error) {
 			throw new Error('Error fetching events');
 		}
 	};
 
-	const formatEvents = (dataW) => {
-		console.log(dataW);
-		return dataW.map((event) => {
+	const formatEvents = (data) => {
+		return data.map((event) => {
 			const start = moment(event.rota_start_date, 'DD-MM-YYYY').toDate();
 			const end = moment(event.rota_end_date, 'DD-MM-YYYY').toDate();
 			return {
