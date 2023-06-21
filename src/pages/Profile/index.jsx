@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react'
 import { Spinner } from '../../components'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUsername, setEmails } from '../../actions'
+import { AvatarSelector } from '../../components'
+import ProfileImage from '../../assets/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpeg'
+import './style.css'
 
 const Profile = () => {
   const [updateUserProfile, setUpdateUserProfile] = useState({
@@ -9,12 +15,42 @@ const Profile = () => {
     userName: '',
     userEmail: '',
     userPassword: '',
+    deleteProfileId: '',
     loaded: false,
     message: '',
+    deleteMessage: '',
+    showSuccess: '',
+    showPassword: false,
   })
 
-  const { userName, userEmail, userPassword, message, loaded } =
-    updateUserProfile
+  const username = useSelector((state) => state.user.username)
+  const email = useSelector((state) => state.user.email)
+
+  const dispatch = useDispatch()
+  const {
+    userName,
+    userEmail,
+    userPassword,
+    message,
+    loaded,
+    deleteProfileId,
+    showPassword,
+  } = updateUserProfile
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token)
+        setUpdateUserProfile((prevState) => ({
+          ...prevState,
+          deleteProfileId: decodedToken.user_id,
+        }))
+      } catch (error) {
+        console.log('Error decoding token:', error)
+      }
+    }
+  }, [])
 
   const userNameHandler = (e) => {
     setUpdateUserProfile((prevState) => ({
@@ -56,14 +92,34 @@ const Profile = () => {
             },
           }
         )
-        console.log('hello', response.data)
 
         if (response.status === 201 || response.status === 200) {
           setUpdateUserProfile((prevState) => ({
             ...prevState,
             message: 'User profile updated successfully',
+          }))
+
+          setTimeout(() => {
+            setUpdateUserProfile((prevState) => ({
+              ...prevState,
+              message: '',
+            }))
+          }, 800)
+
+          setUpdateUserProfile((prevState) => ({
+            ...prevState,
             loaded: true,
           }))
+
+          setTimeout(() => {
+            setUpdateUserProfile((prevState) => ({
+              ...prevState,
+              loaded: false,
+            }))
+          }, 800)
+
+          dispatch(setUsername(data.user_username))
+          dispatch(setEmails(data.user_email))
         } else {
           throw new Error('There was a problem in updating your profile.')
         }
@@ -118,44 +174,116 @@ const Profile = () => {
     updateProfile(decodedToken.user_id)
     clearInputHandler()
   }
+  const showPasswordHandler = () => {
+    setUpdateUserProfile((prevState) => ({
+      ...prevState,
+      showPassword: !prevState.showPassword,
+    }))
+  }
+
+  const deleteProfile = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:5000/users/delete/${id}`)
+      setUpdateUserProfile((prevState) => ({
+        ...prevState,
+        loaded: true,
+      }))
+      setTimeout(() => {
+        setUpdateUserProfile((prevState) => ({
+          ...prevState,
+          message: 'Profile has been deleted successfully',
+        }))
+      }, 500)
+      setTimeout(() => {
+        localStorage.clear()
+        window.location.href = '/'
+      }, 1000)
+    } catch (error) {
+      if (error.response) {
+        setUpdateUserProfile((prevState) => ({
+          ...prevState,
+          message: error.response.data.message,
+        }))
+      } else {
+        setUpdateUserProfile((prevState) => ({
+          ...prevState,
+          message: error.message,
+        }))
+      }
+    }
+  }
 
   return (
     <>
-      <form
-        onSubmit={updateProfileSubmitHandler}
-        className='add-journal-container'
-      >
-        <div className='date-add-journal-container'>
-          <label className='date-label'>UserName</label>
-          <input
-            className='date-input'
-            onChange={userNameHandler}
-            type='text'
-            value={userName}
-          />
-        </div>
-        <div className='date-add-journal-container'>
-          <label className='title-label'>Email</label>
-          <input
-            className='add-journal-text'
-            onChange={userEmailHandler}
-            type='text'
-            value={userEmail}
-          />
-        </div>
-        <div className='date-add-journal-container'>
-          <label className='content-label'>Password</label>
+      <div className='edit-profile-container'>
+        <h1 className='edit-profile'>Edit Your Profile</h1>
+        <div className='form-picture-container'>
+          <div className='avatar-selector'>
+            <AvatarSelector />
+            <div className='user-details'>
+              <p className='edit-profile-username-email'>
+                <strong>Username:</strong> {username}
+              </p>
+              <p className='edit-profile-username-email'>
+                <strong>Email:</strong> {email}
+              </p>
+            </div>
+          </div>
+          <div className='form-edit-profile'>
+            <div className='form-edit-user-profile'>
+              <div className='date-add-journal-container'>
+                <label className='date-label'>Username</label>
+                <input
+                  className='add-journal-text'
+                  onChange={userNameHandler}
+                  type='text'
+                  value={userName}
+                />
+              </div>
 
-          <input
-            onChange={userPasswordHandler}
-            type='password'
-            value={userPassword}
-          />
-        </div>
-        <div className='add-journal-button-container'>
-          <button className='add-journal-button' type='submit'>
-            Save
-          </button>
+              <div className='date-add-journal-container'>
+                <label className='title-label'>Email</label>
+                <input
+                  className='add-journal-text'
+                  onChange={userEmailHandler}
+                  type='text'
+                  value={userEmail}
+                />
+              </div>
+              <div className='date-add-journal-container'>
+                <label className='content-label'>Password</label>
+                <div className='show-hide-password-edit-container'>
+                  <input
+                    className='add-journal-text'
+                    onChange={userPasswordHandler}
+                    type={showPassword ? 'text' : 'password'}
+                    value={userPassword}
+                  />
+                  <p
+                    className='show-hide-edit-form-profile'
+                    onClick={showPasswordHandler}
+                  >
+                    {showPassword ? 'Hide' : 'Show'}
+                  </p>
+                </div>
+              </div>
+
+              <div className='add-journal-button-container2'>
+                <button
+                  className='add-journal-button'
+                  onClick={updateProfileSubmitHandler}
+                >
+                  Update My Profile
+                </button>
+                <button
+                  className='add-journal-button'
+                  onClick={() => deleteProfile(deleteProfileId)}
+                >
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {loaded && (
@@ -163,8 +291,8 @@ const Profile = () => {
             <Spinner />
           </div>
         )}
-        <p className='error-messages'>{message}</p>
-      </form>
+        <p className='profile-messages'>{message}</p>
+      </div>
     </>
   )
 }

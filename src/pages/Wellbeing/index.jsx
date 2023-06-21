@@ -23,29 +23,30 @@ const Wellbeing = () => {
       </div>
       <div>
         <div className='image-grid'>
-          <Link to='get-journal'>
-            <div className='box1'>
-              <img src={journal} alt='Journal' width={250} height={250} />
-              <h3>Journal</h3>
+          <Link to='get-journal' className='link'>
+            <div className='box-welbeing'>
+              <img src={journal} alt='Journal' width={150} height={150} />
+              <h3 className='welbeing-title'>Journal</h3>
             </div>
           </Link>
 
-          <Link to='chat'>
-            <div className='box2'>
+          <Link to='chat' className='link'>
+            <div className='box-chat'>
               <img
                 src={chat}
                 alt='Chat with the therapist'
-                width={250}
-                height={250}
+                width={150}
+                height={150}
+                className='chat-image'
               />
-              <h3>Chat with the therapist</h3>
+              <h3 className='welbeing-title'>Chat with the therapist</h3>
             </div>
           </Link>
 
-          <Link to='blogs'>
-            <div className='box3'>
-              <img src={blog} alt='Blogs' width={250} height={250} />
-              <h3>Blogs</h3>
+          <Link to='blogs' className='link'>
+            <div className='box-welbeing'>
+              <img src={blog} alt='Blogs' width={150} height={150} />
+              <h3 className='welbeing-title'>Blogs</h3>
             </div>
           </Link>
         </div>

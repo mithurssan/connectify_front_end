@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeToken, setUsername, setPassword } from '../../actions'
 import { SidebarData } from '../SidebarData/index'
+
 import './style.css'
 
 function Navbar() {
@@ -81,16 +82,24 @@ function Navbar() {
               return (
                 <li key={index} className={item.cName} role='navbar'>
                   <NavLink to={item.path} style={navActive}>
-                    <span role='icon'> {item.icon}</span>
+                    <span role='icon' className='icon'>
+                      {item.icon}
+                    </span>
 
                     <span>{item.title}</span>
                   </NavLink>
                 </li>
               )
             })}
-            <button data-testid='logout-button' onClick={logout}>
-              Logout
-            </button>
+            <div className='logout-container'>
+              <button
+                data-testid='logout-button'
+                className='logout-button'
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </div>
           </ul>
         </nav>
       </IconContext.Provider>

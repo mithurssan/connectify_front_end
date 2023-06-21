@@ -17,6 +17,7 @@ const LoginUser = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
   const username = useSelector((state) => state.user.username)
+
   const verified = useSelector((state) => state.app.verified)
 
   useEffect(() => {

@@ -15,14 +15,14 @@
   margin-bottom: 10px;
 }
 
-.add-entry-container input[type="text"]{
+.add-entry-container input[type='text'] {
   font-family: 'Montserrat', sans-serif;
   margin: 5px;
   padding: 8px;
   border-radius: 25px;
 }
-.add-entry-container button {
-  background-color: #785A9F;
+.add-entry-container {
+  background-color: #785a9f;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   border: none;
@@ -51,7 +51,7 @@
 }
 
 .event-container button {
-  background-color: #785A9F;
+  background-color: #785a9f;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
   border: none;
@@ -61,25 +61,23 @@
 }
 
 .calendar-wrapper {
-  height: 800px; 
+  height: 800px;
   width: 1400px;
 }
 
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active {
-  background-color: #785A9F!important;
+  background-color: #785a9f !important;
   color: #fff !important;
   font-family: 'Montserrat', sans-serif;
 }
 
 .rbc-event {
-  background-color: #785A9F !important;
-  color: #fff  !important;
+  background-color: #785a9f !important;
+  color: #fff !important;
   font-family: 'Montserrat', sans-serif;
 }
 
 .rbc-btn-group {
   font-family: 'Montserrat', sans-serif;
 }
-
-
