@@ -90,6 +90,9 @@
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
   font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .sign-in-user:hover {
   color: #785a9f;

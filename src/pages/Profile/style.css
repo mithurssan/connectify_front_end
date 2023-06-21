@@ -1,0 +1,58 @@
+.edit-profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-picture-container {
+  display: flex;
+  margin-top: 5%;
+  gap: 50px;
+}
+.form-edit-user-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 8%;
+}
+
+.avatar-selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  align-items: center;
+}
+
+.add-journal-button-container2 {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+.edit-profile-username-email {
+  font-size: 20px;
+}
+
+.show-hide-password-edit-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.show-hide-edit-form-profile {
+  position: absolute;
+  top: 8px;
+  left: 370px;
+  cursor: pointer;
+  color: #0a1a41;
+}
+
+.profile-messages {
+  font-size: 20px;
+  margin-top: 40px;
+  font-weight: 900;
+}
