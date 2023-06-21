@@ -21,7 +21,7 @@
   padding: 8px;
   border-radius: 25px;
 }
-.add-entry-container {
+.add-entry-container button {
   background-color: #785a9f;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
@@ -29,6 +29,7 @@
   padding: 8px;
   margin-right: 10px;
   border-radius: 25px;
+  width: 8vw;
 }
 
 .event-list-container {

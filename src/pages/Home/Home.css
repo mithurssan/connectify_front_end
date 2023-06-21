@@ -250,16 +250,20 @@ h1 {
 
 .landing-btn,
 .employer-btn {
-  width: 13vw;
-  height: 6vh;
+  position: absolute;
+  top: 10px;
+  width: 10vw;
   padding: 10px 15px;
+  border: 2px solid black;
   box-shadow: none;
   font-weight: bold;
-  border-radius: 30px;
-  font-size: 15px;
+  border-radius: 100px;
+  font-size: 0.8vw;
   z-index: 9999;
   transition: all 0.3s ease;
   border: none;
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
 .landing-btn {
@@ -278,12 +282,4 @@ h1 {
 .employer-btn:hover {
   cursor: pointer;
   transform: scale(1.1);
-}
-
-.btn-holder {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
 }

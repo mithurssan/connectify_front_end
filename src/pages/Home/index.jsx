@@ -12,18 +12,6 @@ const Home = () => {
       <h1 className='heading'>Connectify</h1>
       <p className='one-platform'>One Platform, Limitless Connection</p>
 
-      <div className='btn-holder'>
-        <Link to='/login-user'>
-          <button className='landing-btn' id='signinemployee-btn'>
-            Sign in as an employee
-          </button>
-        </Link>
-        <Link to='/login-register'>
-          <button className='employer-btn' id='employer-btn'>
-            Sign in as an employer
-          </button>
-        </Link>
-      </div>
       <div className='home-image-container'>
         <img
           className='homepage-image'
@@ -129,6 +117,18 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className='btn-holder'>
+        <Link to='/login-user'>
+          <button className='landing-btn' id='signinemployee-btn'>
+            Sign in as an employee
+          </button>
+        </Link>
+        <Link to='/login-register'>
+          <button className='employer-btn' id='employer-btn'>
+            Sign in as an employer
+          </button>
+        </Link>
       </div>
     </div>
   )
