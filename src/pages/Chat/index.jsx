@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { ChatEngine } from 'react-chat-engine';
+import React, { useState, useEffect } from 'react';
+// import { ChatEngine } from 'react-chat-engine';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import ChatFeed from '../../components/ChatFeed';
 import './style.css';
+import { MultiChatSocket, MultiChatWindow, useMultiChatLogic } from 'react-chat-engine-advanced';
 
 const Chat = () => {
 	const username = useSelector((state) => state.user.username);
 	const companyName = useSelector((state) => state.business.companyName);
-	const [password, setPassword] = useState('');
+	const [secret, setSecret] = useState('');
 
 	const id = '7f8e7fee-521a-4f50-8d9a-9028fc529c34';
 	const isBusiness = localStorage.getItem('isBusiness');
@@ -24,7 +24,7 @@ const Chat = () => {
 			const business = data.find((b) => b.business_name === companyName);
 
 			if (business) {
-				setPassword(business.business_password);
+				// setPassword(business.business_password);
 			} else {
 				console.log('Business not found');
 			}
@@ -42,7 +42,7 @@ const Chat = () => {
 			const user = data.find((u) => u.user_username === username);
 
 			if (user) {
-				setPassword(user.user_password);
+				setSecret(user.user_password);
 				console.log('User password:', user.user_password);
 			} else {
 				console.log('User not found');
@@ -52,18 +52,13 @@ const Chat = () => {
 		}
 	}
 
+	const chatProps = useMultiChatLogic('7f8e7fee-521a-4f50-8d9a-9028fc529c34', username, '$2b$12$81tKILcvI1titJ/CUkW8hey8/kz4sXHkGv4I5fc1mFt0KPyttwuBq');
+
 	return (
-		<div style={{ height: '100%' }}>
-			{password && (
-				<ChatEngine
-					projectID={id}
-					userName={username || companyName}
-					userSecret={password}
-					// renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
-					// onNewMessage={() => new Audio('https://chat-engine-assets.s3.amazonaws.com/click.mp3').play()}
-				/>
-			)}
-		</div>
+		<>
+			<MultiChatWindow {...chatProps} />
+			<MultiChatSocket {...chatProps} />
+		</>
 	);
 };
 

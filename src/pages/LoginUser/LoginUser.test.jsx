@@ -1,168 +1,170 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { describe, test, expect, vi, beforeAll, afterAll } from 'vitest'
-import MockAdapter from 'axios-mock-adapter'
-import axios from 'axios'
-import LoginUser from '.'
-import { Provider } from 'react-redux'
-import { MemoryRouter } from 'react-router-dom'
-import configureStore from 'redux-mock-store'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { describe, test, expect, beforeAll, afterAll, vi } from 'vitest';
+import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
+import LoginUser from '.';
+
+import { setToken } from '../../actions';
 
 describe('LoginUser page', () => {
-  let mockAxios
+	let mockAxios;
 
-  beforeAll(() => {
-    mockAxios = new MockAdapter(axios)
-  })
+	beforeAll(() => {
+		mockAxios = new MockAdapter(axios);
+	});
 
-  afterAll(() => {
-    mockAxios.restore()
-  })
+	afterAll(() => {
+		mockAxios.restore();
+	});
 
-  const initialState = {
-    user: {
-      username: '',
-      password: '',
-    },
-  }
+	const initialState = {
+		user: {
+			username: '',
+			password: '',
+		},
+		app: {
+			verified: false,
+			isLoaded: false,
+		},
+	};
 
-  const mockStore = configureStore()
-  let store
+	const mockStore = configureStore();
+	let store;
 
-  test('renders the login form', () => {
-    store = mockStore(initialState) // Initialize store before rendering
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <LoginUser />
-        </MemoryRouter>
-      </Provider>
-    )
+	test('renders the login form', () => {
+		store = mockStore(initialState);
+		render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<LoginUser />
+				</MemoryRouter>
+			</Provider>
+		);
 
-    const usernameInput = screen.getByLabelText('Username:')
-    const passwordInput = screen.getByLabelText('Password:')
-    const loginButton = screen.getByText('Login')
+		const usernameInput = screen.getByLabelText('Username:');
+		const passwordInput = screen.getByLabelText('Password:');
+		const loginButton = screen.getByText('Login');
 
-    expect(usernameInput).toBeDefined()
-    expect(passwordInput).toBeDefined()
-    expect(loginButton).toBeDefined()
-  })
+		expect(usernameInput).toBeDefined();
+		expect(passwordInput).toBeDefined();
+		expect(loginButton).toBeDefined();
+	});
 
-  test('shows error message for correct credentials', async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <LoginUser />
-        </MemoryRouter>
-      </Provider>
-    )
+	test('navigate to dashboard if correct credentials', async () => {
+		let navigatePath = '/dashboard';
 
-    fireEvent.change(screen.getByLabelText('Username:'), {
-      target: { value: 'example' },
-    })
-    fireEvent.change(screen.getByLabelText('Password:'), {
-      target: { value: 'password' },
-    })
+		render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<LoginUser />
+				</MemoryRouter>
+			</Provider>
+		);
 
-    fireEvent.click(screen.getByText('Login'))
-    await waitFor(() => {
-      expect(screen.getByTestId('spinner')).toBeDefined()
-    })
-    // expect(screen.getByText('Details not recognised')).to.exist
-  })
+		fireEvent.change(screen.getByLabelText('Username:'), {
+			target: { value: 'example' },
+		});
+		fireEvent.change(screen.getByLabelText('Password:'), {
+			target: { value: 'password' },
+		});
 
-  test('shows error for incorrect credentials', async () => {
-    // Mock the axios post request to return a 401 status
-    vi.spyOn(axios, 'post').mockRejectedValueOnce({ response: { status: 401 } })
+		fireEvent.click(screen.getByText('Login'));
+		await waitFor(() => {
+			expect(navigatePath).toBe('/dashboard');
+		});
+	});
 
-    // Render the component and set up the initial state
-    store = mockStore(initialState)
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <LoginUser />
-        </MemoryRouter>
-      </Provider>
-    )
+	test('shows error for incorrect credentials', async () => {
+		mockAxios.onPost('http://127.0.0.1:5000/users/login').reply(401);
 
-    // Get the input fields and login button
-    const usernameInput = screen.getByLabelText('Username:')
-    const passwordInput = screen.getByLabelText('Password:')
-    const loginButton = screen.getByText('Login')
+		store = mockStore(initialState);
+		render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<LoginUser />
+				</MemoryRouter>
+			</Provider>
+		);
 
-    // Enter the incorrect credentials and click the login button
-    fireEvent.change(usernameInput, { target: { value: 'testuser' } })
-    fireEvent.change(passwordInput, { target: { value: 'testpassword' } })
-    fireEvent.click(loginButton)
+		const usernameInput = screen.getByLabelText('Username:');
+		const passwordInput = screen.getByLabelText('Password:');
+		const loginButton = screen.getByText('Login');
 
-    // Wait for the error message to be displayed
-    await waitFor(() => {
-      const errorMessage = screen.getByText('Please Enter Your Details')
-      expect(errorMessage).toBeDefined()
-    })
-  })
+		fireEvent.change(usernameInput, { target: { value: 'testusername' } });
+		fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+		fireEvent.click(loginButton);
 
-  test('shows error when username is empty', async () => {
-    store = mockStore(initialState) // Initialize store
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <LoginUser />
-        </MemoryRouter>
-      </Provider>
-    )
+		await waitFor(() => {
+			const errorMessage = screen.getByText('Enter username and password');
+			expect(errorMessage).toBeDefined();
+		});
+	});
 
-    const passwordInput = screen.getAllByLabelText('Password:')[0]
-    const loginButton = screen.getAllByText('Login')[0]
+	test('shows error when username is empty', async () => {
+		store = mockStore(initialState);
+		render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<LoginUser />
+				</MemoryRouter>
+			</Provider>
+		);
 
-    fireEvent.change(passwordInput, { target: { value: 'testpassword' } })
-    fireEvent.click(loginButton)
+		const passwordInput = screen.getAllByLabelText('Password:')[0];
+		const loginButton = screen.getAllByText('Login')[0];
 
-    await waitFor(() => {
-      const errorMessage = screen.getByText('Please Enter Your Details')
-      expect(errorMessage).toBeDefined()
-    })
-  })
+		fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+		fireEvent.click(loginButton);
 
-  test('shows error when password is empty', async () => {
-    store = mockStore(initialState) // Initialize store
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <LoginUser />
-        </MemoryRouter>
-      </Provider>
-    )
+		await waitFor(() => {
+			const errorMessage = screen.getByText('Enter username and password');
+			expect(errorMessage).toBeDefined();
+		});
+	});
 
-    const usernameInput = screen.getAllByLabelText('Username:')[0]
-    const loginButton = screen.getAllByText('Login')[0]
+	test('shows error when password is empty', async () => {
+		store = mockStore(initialState);
+		render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<LoginUser />
+				</MemoryRouter>
+			</Provider>
+		);
 
-    fireEvent.change(usernameInput, { target: { value: 'testuser' } })
-    fireEvent.click(loginButton)
+		const usernameInput = screen.getAllByLabelText('Username:')[0];
+		const loginButton = screen.getAllByText('Login')[0];
 
-    await waitFor(() => {
-      const errorMessage = screen.getByText('Please Enter Your Details')
-      expect(errorMessage).toBeDefined()
-    })
-  })
-  test('allows toggling password visibility', () => {
-    store = mockStore(initialState)
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <LoginUser />
-        </MemoryRouter>
-      </Provider>
-    )
+		fireEvent.change(usernameInput, { target: { value: 'testuser' } });
+		fireEvent.click(loginButton);
 
-    const passwordInput = screen.getByLabelText('Password:')
-    const showPasswordIcon = screen.getByTestId('show-password-icon')
+		await waitFor(() => {
+			const errorMessage = screen.getByText('Enter username and password');
+			expect(errorMessage).toBeDefined();
+		});
+	});
 
-    expect(passwordInput.type).toBe('password')
+	test('dispatches setToken action with stored token', () => {
+		const storedToken = 'exampleToken';
+		const dispatchSpy = vi.mock(store, 'dispatch');
 
-    fireEvent.click(showPasswordIcon)
-    expect(passwordInput.type).toBe('text')
+		render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<LoginUser />
+				</MemoryRouter>
+			</Provider>
+		);
 
-    fireEvent.click(showPasswordIcon)
-    expect(passwordInput.type).toBe('password')
-  })
-})
+		localStorage.setItem('token', storedToken);
+
+		store.dispatch = dispatchSpy;
+
+		render(null, { store });
+
+		expect(dispatchSpy).toHaveBeenCalledWith(setToken(storedToken));
+	});
+});

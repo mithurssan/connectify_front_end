@@ -4,6 +4,8 @@ import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import './style.css'
+import introJs from 'intro.js'
+import 'intro.js/minified/introjs.min.css'
 
 const localizer = momentLocalizer(moment)
 const DragAndDropCalendar = withDragAndDrop(Calendar)
@@ -27,6 +29,32 @@ const Rota = () => {
         console.error('Error fetching events:', error)
       })
   }, [])
+
+  useEffect(() => {
+    const intro = introJs()
+    intro.setOptions({
+      steps: [
+        {
+          intro: 'Welcome to the Calendar page!',
+        },
+        {
+          element: '.add-entry-container',
+          intro:
+            'Fill in the fields and click "Add Entry" to create a new event.',
+        },
+        {
+          element: '.event-list-container',
+          intro: 'View and manage your events in this list.',
+        },
+        {
+          element: '.calendar-wrapper',
+          intro: 'Drag and drop events to change their dates.',
+        },
+      ],
+    })
+    intro.start()
+  }, [])
+
   const fetchEvents = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/rotas/')
@@ -179,40 +207,34 @@ const Rota = () => {
     return (
       <div key={event.id} className='event-container'>
         <span>{event.title}</span>
-        {isBusiness && (
-          <button onClick={() => handleDeleteEntry(event)}>Delete</button>
-        )}
+        <button onClick={() => handleDeleteEntry(event)}>Delete</button>
       </div>
     )
   })
   /* c8 ignore end */
   return (
     <div className='calendar-container'>
-      {isBusiness && (
-        <div className='add-entry-container'>
-          <input
-            type='text'
-            placeholder='Start Date (DD-MM-YYYY)'
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-          <input
-            type='text'
-            placeholder='End Date (DD-MM-YYYY)'
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-          <input
-            type='text'
-            placeholder='Content'
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-          <button onClick={handleAddEntry} className='add-booking-button'>
-            Add Entry
-          </button>
-        </div>
-      )}
+      <div className='add-entry-container'>
+        <input
+          type='text'
+          placeholder='Start Date (DD-MM-YYYY)'
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+        <input
+          type='text'
+          placeholder='End Date (DD-MM-YYYY)'
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
+        <input
+          type='text'
+          placeholder='Content'
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <button onClick={handleAddEntry}>Add Entry</button>
+      </div>
       <div className='event-list-container'>{eventComponents}</div>
       <div className='calendar-wrapper'>
         <DragAndDropCalendar

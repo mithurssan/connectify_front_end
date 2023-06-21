@@ -9,6 +9,8 @@ import LoginImage from '../../assets/Connectify.jpg'
 import './style.css'
 import { Spinner } from '../../components'
 import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
+import introJs from 'intro.js'
+import 'intro.js/minified/introjs.min.css'
 
 const LoginUser = () => {
   const dispatch = useDispatch()
@@ -17,7 +19,6 @@ const LoginUser = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
   const username = useSelector((state) => state.user.username)
-
   const verified = useSelector((state) => state.app.verified)
 
   useEffect(() => {
@@ -41,6 +42,26 @@ const LoginUser = () => {
     }
   }, [verified, isLoaded])
 
+  useEffect(() => {
+    const intro = introJs()
+    intro.setOptions({
+      steps: [
+        {
+          intro: 'Welcome to the user login page!',
+        },
+        {
+          element: '.user-container',
+          intro: 'Enter your information to be able to login as a user.',
+        },
+        {
+          element: '.login-register-button',
+          intro: 'Click here to log in.',
+        },
+      ],
+    })
+    intro.start()
+  }, [])
+
   const errorCreate = (error) =>
     toast.error(error, {
       position: 'top-center',
@@ -54,6 +75,7 @@ const LoginUser = () => {
     })
 
   const loginUser = async () => {
+    // dispatch(setIsLoaded(false));
     try {
       const url = 'http://127.0.0.1:5000/users/login'
       const data = {
@@ -64,15 +86,19 @@ const LoginUser = () => {
 
       if (verified) {
         dispatch(setToken(res.data.token))
-        navigate('/dashboard')
+        // navigate('/dashboard');
+      } else {
+        errorCreate('Verify your account')
       }
 
       const business_id = res.data.business_id
+      const business_name = res.data.user_business_name
       const user_id = res.data.user_id
       if (business_id == null) {
         navigate('/not-assigned')
       } else {
         localStorage.setItem('joinedBusiness', true)
+        localStorage.setItem('business_name', business_name)
         localStorage.setItem('business_id', business_id)
         localStorage.setItem('user_id', user_id)
         navigate('/dashboard')
@@ -106,7 +132,7 @@ const LoginUser = () => {
       const data = await res.data
 
       const user = data.find((u) => u.user_username === username)
-
+      setIsLoaded(true)
       dispatch(setVerified(user.user_verified))
     } catch (error) {
       if (error) {

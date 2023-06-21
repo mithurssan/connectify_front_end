@@ -4,10 +4,12 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setCompanyName, setIsLoaded, setVerified } from '../../actions';
+import { setToken, setCompanyName, setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 import { Spinner } from '../../components';
+import introJs from 'intro.js';
+import 'intro.js/minified/introjs.min.css';
 
 const LoginBusiness = () => {
 	const dispatch = useDispatch();
@@ -17,7 +19,6 @@ const LoginBusiness = () => {
 
 	const companyName = useSelector((state) => state.business.companyName);
 	const verified = useSelector((state) => state.app.verified);
-	// const isLoaded = useSelector((state) => state.app.isLoaded)
 
 	useEffect(() => {
 		const fetchToken = async () => {
@@ -40,6 +41,26 @@ const LoginBusiness = () => {
 		}
 	}, [verified, isLoaded]);
 
+	useEffect(() => {
+		const intro = introJs();
+		intro.setOptions({
+			steps: [
+				{
+					intro: 'Welcome to the business login page!',
+				},
+				{
+					element: '.business-container',
+					intro: 'Enter your information to be able to login as a business.',
+				},
+				{
+					element: '.login-register-button',
+					intro: 'Click here to log in.',
+				},
+			],
+		});
+		intro.start();
+	}, []);
+
 	const errorCreate = (error) =>
 		toast.error(error, {
 			position: 'top-center',
@@ -53,7 +74,6 @@ const LoginBusiness = () => {
 		});
 
 	const loginBusiness = async () => {
-		setIsLoaded(false);
 		try {
 			const url = 'http://127.0.0.1:5000/businesses/login';
 			const options = {
@@ -63,14 +83,16 @@ const LoginBusiness = () => {
 			const res = await axios.post(url, options);
 
 			if (verified) {
+				const business_id = res.data.business_id;
+				const business_name = res.data.business_name;
+
 				dispatch(setToken(res.data.token));
+				localStorage.setItem('business_name', business_name);
+				localStorage.setItem('business_id', business_id);
+				localStorage.setItem('isBusiness', true);
+				localStorage.setItem('joinedBusiness', true);
 				navigate('/dashboard');
 			}
-			const business_id = res.data.business_id;
-			localStorage.setItem('business_id', business_id);
-			localStorage.setItem('isBusiness', true);
-			localStorage.setItem('joinedBusiness', true);
-			navigate('/dashboard');
 		} catch (error) {
 			if (error && companyPassword.length != 0) {
 				errorCreate('Incorrect credentials');
