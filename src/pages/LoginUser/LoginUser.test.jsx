@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, test, expect, beforeAll, afterAll, vi } from 'vitest';
 import MockAdapter from 'axios-mock-adapter';
@@ -6,6 +7,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import LoginUser from '.';
+import { toast } from 'react-toastify';
 
 import { setToken } from '../../actions';
 
@@ -47,10 +49,12 @@ describe('LoginUser page', () => {
 		const usernameInput = screen.getByLabelText('Username:');
 		const passwordInput = screen.getByLabelText('Password:');
 		const loginButton = screen.getByText('Login');
+		const linkToBusiness = screen.getByText('Login as a Business');
 
 		expect(usernameInput).toBeDefined();
 		expect(passwordInput).toBeDefined();
 		expect(loginButton).toBeDefined();
+		expect(linkToBusiness).toBeDefined();
 	});
 
 	test('navigate to dashboard if correct credentials', async () => {
@@ -149,6 +153,7 @@ describe('LoginUser page', () => {
 
 	test('dispatches setToken action with stored token', () => {
 		const storedToken = 'exampleToken';
+		store = mockStore(initialState);
 		const dispatchSpy = vi.mock(store, 'dispatch');
 
 		render(
@@ -166,5 +171,31 @@ describe('LoginUser page', () => {
 		render(null, { store });
 
 		expect(dispatchSpy).toHaveBeenCalledWith(setToken(storedToken));
+	});
+
+	test('calls toast.error with the correct parameters', async () => {
+		const mockToastError = vi.spyOn(toast, 'error');
+
+		store = mockStore(initialState);
+		render(
+			<Provider store={store}>
+				<MemoryRouter>
+					<LoginUser />
+				</MemoryRouter>
+			</Provider>
+		);
+
+		const errorMessage = 'Test error message';
+
+		expect(mockToastError).toHaveBeenCalledWith(errorMessage, {
+			position: 'top-center',
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
 	});
 });
