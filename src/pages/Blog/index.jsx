@@ -1,6 +1,6 @@
 import React from 'react'
 import BlogPost from '../../assets/blogTop.png'
-import { blogs } from '../../components/BlogDetails/blog'
+import { blogs } from '../../components/BlogDetails'
 import { Link } from 'react-router-dom'
 import './style.css'
 
