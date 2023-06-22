@@ -44,6 +44,10 @@ const LoginBusiness = () => {
 	}, [verified, isLoaded]);
 
 	useEffect(() => {
+		const pageName = 'business-login';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
+	
+		if (!hasShownIntro) {
 		const intro = introJs();
 		intro.setOptions({
 			steps: [
@@ -61,6 +65,8 @@ const LoginBusiness = () => {
 			],
 		});
 		intro.start();
+		localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
+	}
 	}, []);
 
 	const errorCreate = (error) =>

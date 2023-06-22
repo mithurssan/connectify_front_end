@@ -93,6 +93,7 @@ const SignupUser = () => {
 		intro.start();
 	}, []);
 
+<<<<<<< HEAD
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setIsLoaded(true);
@@ -101,6 +102,33 @@ const SignupUser = () => {
 		setUsername('');
 		setPassword('');
 	};
+=======
+  useEffect(() => {
+    const pageName = 'user-signup';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
+	
+		if (!hasShownIntro) {
+    const intro = introJs()
+    intro.setOptions({
+      steps: [
+        {
+          intro: 'Welcome to the user register page!',
+        },
+        {
+          element: '.business-container',
+          intro: 'Enter your information to be able to register as a user.',
+        },
+        {
+          element: '.login-register-button',
+          intro: 'Click here to register.',
+        },
+      ],
+    })
+    intro.start()
+    localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
+  }
+  }, [])
+>>>>>>> staging
 
 	const handleInputChange = (e, setValue) => {
 		setValue(e.target.value);

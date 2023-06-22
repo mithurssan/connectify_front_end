@@ -11,6 +11,10 @@ import { Chatbot } from '../../components'
 
 const Wellbeing = () => {
   useEffect(() => {
+    const pageName = 'wellbeing';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
+	
+		if (!hasShownIntro) {
     const intro = introJs()
     intro.setOptions({
       steps: [
@@ -28,6 +32,8 @@ const Wellbeing = () => {
       ],
     })
     intro.start()
+    localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
+  }
   }, [])
   return (
     <div className='wellbeing-page'>
