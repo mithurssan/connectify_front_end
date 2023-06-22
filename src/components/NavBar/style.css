@@ -86,7 +86,7 @@ span {
 	padding-left: 20px;
 	font-size: 30px;
 	color: #0a1a41;
-	font-family: 'Alfa Slab One', sans-serif;
+	font-family: 'Alfa Slab One', sans-serif !important;
 }
 
 .nav-text {
