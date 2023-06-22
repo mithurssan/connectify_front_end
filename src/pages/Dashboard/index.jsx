@@ -37,36 +37,35 @@ const Dashboard = () => {
 	useEffect(() => {
 		const pageName = 'dashboard';
 		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
-	
+
 		if (!hasShownIntro) {
-		const intro = introJs();
-		intro.setOptions({
-			steps: [
-				{
-					intro: 'Welcome to the Dashboard!',
-				},
-				{
-					element: '.dashboard',
-					intro: 'Click on the icons to navigate to different sections.',
-				},
-				...(isBusiness
-					? [
-							{
-								element: '.add-user-btn',
-								intro: 'Click here to add a new user.',
-							},
-					  ]
-					: []),
-				{
-					element: '.add-post-btn',
-					intro: 'Click here to add a new post.',
-				},
-			],
-		});
-		intro.start();
-		localStorage.setItem(`hasShownIntro_${pageName}`, 'true');	
-	}
-		
+			const intro = introJs();
+			intro.setOptions({
+				steps: [
+					{
+						intro: 'Welcome to the Dashboard!',
+					},
+					{
+						element: '.dashboard',
+						intro: 'Click on the icons to navigate to different sections.',
+					},
+					...(isBusiness
+						? [
+								{
+									element: '.add-user-btn',
+									intro: 'Click here to add a new user.',
+								},
+						  ]
+						: []),
+					{
+						element: '.add-post-btn',
+						intro: 'Click here to add a new post.',
+					},
+				],
+			});
+			intro.start();
+			localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
+		}
 	}, []);
 
 	const addPost = async (newPost) => {
@@ -89,7 +88,7 @@ const Dashboard = () => {
 			{isBusiness ? (
 				<>
 					<div className="welcome">
-						<h1>
+						<h1 className="heading">
 							<span className="wave">👋</span>Welcome, {businessName}!
 						</h1>
 					</div>

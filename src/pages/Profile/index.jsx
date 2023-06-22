@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUsername, setEmails } from '../../actions';
+import { setUsername, setEmails, setCompanyName, setCompanyEmail } from '../../actions';
 import { AvatarSelector } from '../../components';
 import ProfileImage from '../../assets/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpeg';
 import './style.css';
@@ -26,6 +26,8 @@ const Profile = () => {
 
 	const username = useSelector((state) => state.user.username);
 	const email = useSelector((state) => state.user.email);
+	const companyName = useSelector((state) => state.business.companyName);
+	const companyEmail = useSelector((state) => state.business.companyEmail);
 
 	const dispatch = useDispatch();
 	const { userName, userEmail, userPassword, message, loaded, deleteProfileId, showPassword } = updateUserProfile;
@@ -222,10 +224,10 @@ const Profile = () => {
 						<AvatarSelector />
 						<div className="user-details">
 							<p className="edit-profile-username-email">
-								<strong>Username:</strong> {username}
+								<strong>Username:</strong> {username} {companyName}
 							</p>
 							<p className="edit-profile-username-email">
-								<strong>Email:</strong> {email}
+								<strong>Email:</strong> {email} {companyEmail}
 							</p>
 						</div>
 					</div>
