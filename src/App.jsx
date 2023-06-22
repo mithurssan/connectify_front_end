@@ -46,7 +46,7 @@ const App = () => {
             <Route path='/wellbeing' element={<Pages.Wellbeing />} />
             <Route path='/profile' element={<Pages.Profile />} />
             <Route path='/bookings' element={<Pages.Booking />} />
-            <Route path='/chat' element={<Pages.Chat />} />
+            {/* <Route path='/chat' element={<Pages.Chat />} /> */}
             <Route
               path='/not-assigned'
               element={<Pages.NotAssignedBusiness />}

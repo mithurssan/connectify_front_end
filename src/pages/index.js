@@ -11,7 +11,7 @@ export { default as Rota } from './Rota';
 export { default as Wellbeing } from './Wellbeing';
 export { default as NotFound } from './NotFound';
 export { default as Booking } from './Booking';
-export { default as Chat } from './Chat';
+// export { default as Chat } from './Chat';
 export { default as AddJournal } from './AddJournal/index.jsx';
 export { default as GetJournal } from './GetJournal/index.jsx';
 export { default as EditJournal } from './EditJournal';
