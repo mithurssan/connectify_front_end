@@ -17,7 +17,7 @@ const CommentDialog = ({ postId, onClose }) => {
         try {
             const response = await axios.get(`http://127.0.0.1:5000/comments/post/${postId}`);
             const commentsData = response.data;
-            setComments(commentsData.reverse());
+            setComments(commentsData);
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
@@ -44,9 +44,9 @@ const CommentDialog = ({ postId, onClose }) => {
     };
 
     return (
-        <div className="dialog-container">
+        <div className="dialog-container" role="dialog-container">
             <div className="comment-dialog">
-                <form className="comment-form" onSubmit={handleCommentSubmit}>
+                <form className="comment-form" onSubmit={handleCommentSubmit} role="comment-form">
                     <input
                         type="text"
                         value={commentInput}

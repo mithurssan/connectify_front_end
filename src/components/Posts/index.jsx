@@ -10,7 +10,6 @@ const Posts = ({ posts, setPosts }) => {
     const businessName = localStorage.getItem("business_name")
     const [selectedPostId, setSelectedPostId] = useState(null);
     const [dialogVisible, setDialogVisible] = useState(false);
-    const latestPostsFirst = [...posts].reverse();
     const [upvotedPosts, setUpvotedPosts] = useState([]);
     const userId = localStorage.getItem('user_id');
 
@@ -92,9 +91,9 @@ const Posts = ({ posts, setPosts }) => {
     };
 
     return (
-        <div className="posts-container">
-            {latestPostsFirst.map((post, index) => (
-                <div key={index} className="post">
+        <div className="posts-container" role="post">
+            {posts.map((post, index) => (
+                <div key={index} className="post" >
                     <h3 className="post-title">{post.post_title}</h3>
                     <p className="post-content">{post.post_content}</p>
                     <p className={`post-author ${post.username === businessName ? 'business-author' : ''}`}>
@@ -103,23 +102,24 @@ const Posts = ({ posts, setPosts }) => {
                     <p className="post-votes">
                         <button
                             className={`upvote-button ${upvotedPosts.includes(post.post_id) ? 'active' : ''}`}
+                            role="upvote-button"
                             onClick={() => handleUpvote(post.post_id)}
                         >
                             <span className="upvote-icon">
                                 <MdArrowUpward />
                             </span>
-                            <p className="num-upvotes">
+                            <p className="num-upvotes" role="num-upvotes">
                                 {post.post_upvotes}
                             </p>
                         </button>
                     </p>
-                    <button className="comments-btn" onClick={() => handleCommentButtonClick(post.post_id)}>
+                    <button className="comments-btn" role="comments-btn" onClick={() => handleCommentButtonClick(post.post_id)}>
                         Comments
                     </button>
                 </div>
             ))}
             {dialogVisible && (
-                <CommentDialog postId={selectedPostId} onClose={() => setDialogVisible(false)} />
+                <CommentDialog postId={selectedPostId} onClose={() => setDialogVisible(false)}/>
             )}
         </div>
     );

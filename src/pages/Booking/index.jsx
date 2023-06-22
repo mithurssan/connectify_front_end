@@ -16,6 +16,7 @@ const Booking = () => {
   const [endDate, setEndDate] = useState('');
   const [content, setContent] = useState('');
   const [isBusiness, setIsBusiness] = useState(false);
+  const businessId = localStorage.getItem('business_id');
 /* c8 ignore start */
   useEffect(() => {
     fetchEvents()
@@ -56,7 +57,7 @@ const Booking = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/rotas/');
+      const response = await fetch(`http://127.0.0.1:5000/rotas/get/${businessId}`)
       const data = await response.json();
       return data;
     } catch (error) {
@@ -138,9 +139,6 @@ const Booking = () => {
       return;
     }
     try {
-      const storedEvents = localStorage.getItem('events');
-      const formattedEvents = formatEvents(JSON.parse(storedEvents));
-      const businessId = formattedEvents[0]?.business_id;
 
       const newEntry = {
         business_id: businessId,
