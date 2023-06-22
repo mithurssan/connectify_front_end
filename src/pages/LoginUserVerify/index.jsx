@@ -70,15 +70,15 @@ const LoginUser = () => {
 				dispatch(setVerified(true));
 				const business_id = res.data.business_id;
 				const user_id = res.data.user_id;
-				localStorage.setItem('joinedBusiness', true);
 				localStorage.setItem('business_id', business_id);
 				localStorage.setItem('user_id', user_id);
 				dispatch(setPassword(res.data.user_password));
-
+				
 				if (business_id == null) {
 					navigate('/not-assigned');
 				} else {
 					navigate('/dashboard');
+					localStorage.setItem('joinedBusiness', true);
 				}
 			} catch (error) {
 				console.log(error, 'error');

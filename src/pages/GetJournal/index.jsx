@@ -178,7 +178,7 @@ const GetJournal = () => {
           <div className='content-journal2'>
             <div className='content-journal'>
               {loading ? (
-                <div className='spinner-journal'>
+                <div className='spinner-journal' data-testid='spinner'>
                   <Spinner />
                 </div>
               ) : (
