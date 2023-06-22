@@ -53,8 +53,7 @@
   width: 95%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-self: start;
   gap: 10px;
   padding: 0 45px 0 45px;
   border-radius: 4px;
@@ -106,5 +105,16 @@ span {
   font-weight: 800;
   height: 60px;
   width: 280px;
-  transform: translate(-18px, 0px);
+  transform: translate(-18px, -10px);
+}
+
+.logout-icon {
+  width: 30px;
+  height: 30px;
+  transform: translate(25px, 6px);
+}
+
+.logout-container {
+  display: flex;
+  flex-direction: row;
 }

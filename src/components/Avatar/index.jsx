@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal, Container, Row, Col, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
@@ -22,7 +22,15 @@ export const ImageSelector = () => {
   const selectImage = (imagePath) => {
     setShowModal(false)
     setAvatarImages(imagePath)
+    localStorage.setItem('profile-page', imagePath)
   }
+
+  useEffect(() => {
+    const storedImagePath = localStorage.getItem('profile-page')
+    if (storedImagePath) {
+      setAvatarImages(storedImagePath)
+    }
+  }, [])
 
   return (
     <div className='avatar-character'>
