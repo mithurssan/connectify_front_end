@@ -85,7 +85,7 @@ const SignupBusiness = () => {
 
 	async function getCompany(number) {
 		try {
-			const url = `http://127.0.0.1:5000/api/company/${number}`;
+			const url = `https://connectify-server-b31a.onrender.com/api/company/${number}`;
 			const res = await axios.get(url);
 			const data = res.data;
 
@@ -109,7 +109,7 @@ const SignupBusiness = () => {
 		console.log(companyNumber, '===', data['company_number']);
 		try {
 			if (data['company_name'] === companyName && data['company_number'] === companyNumber) {
-				const url = 'http://127.0.0.1:5000/businesses/register';
+				const url = 'https://connectify-server-b31a.onrender.com/businesses/register';
 				const options = {
 					business_name: companyName,
 					business_number: companyNumber,

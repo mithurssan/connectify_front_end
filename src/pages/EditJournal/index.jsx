@@ -47,7 +47,7 @@ const EditJournal = () => {
         console.log(data)
 
         const response = await axios.put(
-          `http://127.0.0.1:5000/entries/update/${id}`,
+          `https://connectify-server-b31a.onrender.com/entries/update/${id}`,
           data,
           {
             headers: {

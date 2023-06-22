@@ -60,7 +60,7 @@ describe('EditJournal', () => {
 
   it('submits the form and updates state on successful API response', async () => {
     mockAxios
-      .onPut('http://127.0.0.1:5000/entries/update/123')
+      .onPut('https://connectify-server-b31a.onrender.com/entries/update/123')
       .reply(200, { message: 'Entry updated successfully' })
 
     render(

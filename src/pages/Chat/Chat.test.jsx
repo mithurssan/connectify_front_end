@@ -14,7 +14,7 @@
 
 // 		// const companyName = 'Company B';
 // 		const result = await getCompanies();
-// 		expect(axios.get).toHaveBeenCalledWith('http://127.0.0.1:5000/businesses/');
+// 		expect(axios.get).toHaveBeenCalledWith('https://connectify-server-b31a.onrender.com/businesses/');
 // 		expect(result).toEqual({ business_name: 'Company B', business_password: 'passwordB' });
 // 	});
 

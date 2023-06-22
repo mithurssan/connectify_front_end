@@ -88,7 +88,7 @@ describe('Dashboard for Users and Business', () => {
             content: 'This is a test post.',
         };
 
-        mockAxios.onPost('http://127.0.0.1:5000/posts/add').reply(200);
+        mockAxios.onPost('https://connectify-server-b31a.onrender.com/posts/add').reply(200);
 
         fireEvent.click(screen.getByRole('create-post-btn'));
 

@@ -12,7 +12,7 @@ import configureStore from 'redux-mock-store';
 expect.extend(matchers);
 
 const axiosMock = new MockAdapter(axios);
-axiosMock.onPatch('http://127.0.0.1:5000/users/update/business/JohnDoe').reply(200, { data: 'mocked response' });
+axiosMock.onPatch('https://connectify-server-b31a.onrender.com/users/update/business/JohnDoe').reply(200, { data: 'mocked response' });
 
 describe('AddUserForm', () => {
   const mockStore = configureStore();
@@ -46,7 +46,7 @@ describe('AddUserForm', () => {
   });  
  
   it('should display error message on form submission error', async () => {
-    axiosMock.onPatch('http://127.0.0.1:5000/users/update/business/JohnDoe').reply(404, { error: 'User not found.' });
+    axiosMock.onPatch('https://connectify-server-b31a.onrender.com/users/update/business/JohnDoe').reply(404, { error: 'User not found.' });
 
     fireEvent.click(screen.getByTestId('add-user-button'));
     const usernameInput = screen.getByPlaceholderText('Username');

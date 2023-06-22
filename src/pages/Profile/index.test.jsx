@@ -12,8 +12,8 @@ import configureStore from 'redux-mock-store';
 expect.extend(matchers);
 
 const axiosMock = new MockAdapter(axios);
-axiosMock.onPatch('http://127.0.0.1:5000/users/update/USER_ID').reply(201, {});
-axiosMock.onDelete('http://127.0.0.1:5000/users/delete/USER_ID').reply(200, {});
+axiosMock.onPatch('https://connectify-server-b31a.onrender.com/users/update/USER_ID').reply(201, {});
+axiosMock.onDelete('https://connectify-server-b31a.onrender.com/users/delete/USER_ID').reply(200, {});
 
 describe('Profile', () => {
   const mockStore = configureStore();
@@ -78,12 +78,12 @@ describe('Profile', () => {
 
     await waitFor(() => {
       expect(axiosMock.history.delete.length).toBe(1);
-      expect(axiosMock.history.delete[0].url).toBe('http://127.0.0.1:5000/users/delete/USER_ID');
+      expect(axiosMock.history.delete[0].url).toBe('https://connectify-server-b31a.onrender.com/users/delete/USER_ID');
       expect(window.location.href).toBe('/');
     });
   });
   it('should display an error message when profile update fails', async () => {
-    axiosMock.onPatch('http://127.0.0.1:5000/users/update/USER_ID').reply(500, {});
+    axiosMock.onPatch('https://connectify-server-b31a.onrender.com/users/update/USER_ID').reply(500, {});
   
     const usernameInput = screen.getByLabelText('Username');
     const emailInput = screen.getByLabelText('Email');
@@ -100,7 +100,7 @@ describe('Profile', () => {
     });
   });
   it('should display an error message when profile deletion fails', async () => {
-    axiosMock.onDelete('http://127.0.0.1:5000/users/delete/USER_ID').reply(500, {});
+    axiosMock.onDelete('https://connectify-server-b31a.onrender.com/users/delete/USER_ID').reply(500, {});
   
     fireEvent.click(screen.getByText('Delete Account'));
   

@@ -21,7 +21,7 @@
 
 // 	async function getCompanies() {
 // 		try {
-// 			const url = 'http://127.0.0.1:5000/businesses/';
+// 			const url = 'https://connectify-server-b31a.onrender.com/businesses/';
 // 			const res = await axios.get(url);
 // 			const data = await res.data;
 
@@ -39,7 +39,7 @@
 
 // 	async function getUsers() {
 // 		try {
-// 			const url = 'http://127.0.0.1:5000/users/';
+// 			const url = 'https://connectify-server-b31a.onrender.com/users/';
 // 			const res = await axios.get(url);
 // 			const data = await res.data;
 

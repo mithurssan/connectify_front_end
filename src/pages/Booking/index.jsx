@@ -63,7 +63,7 @@ const Booking = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/rotas/get/${businessId}`)
+      const response = await fetch(`https://connectify-server-b31a.onrender.com/rotas/get/${businessId}`)
       const data = await response.json();
       return data;
     } catch (error) {
@@ -111,7 +111,7 @@ const Booking = () => {
       console.log('Updating event:', formattedEvent);
 
       const response = await fetch(
-        `http://127.0.0.1:5000/rotas/update/${formattedEvent.id}`,
+        `https://connectify-server-b31a.onrender.com/rotas/update/${formattedEvent.id}`,
         {
           method: 'PUT',
           headers: {
@@ -153,7 +153,7 @@ const Booking = () => {
         rota_content: content,
       };
 
-      const response = await fetch('http://127.0.0.1:5000/rotas/add', {
+      const response = await fetch('https://connectify-server-b31a.onrender.com/rotas/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ const Booking = () => {
   const handleDeleteEntry = async (event) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:5000/rotas/delete/${event.id}`,
+        `https://connectify-server-b31a.onrender.com/rotas/delete/${event.id}`,
         {
           method: 'DELETE',
         }

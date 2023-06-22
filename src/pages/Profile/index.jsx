@@ -78,7 +78,7 @@ const Profile = () => {
 				};
 				console.log(data);
 
-				const response = await axios.patch(`http://127.0.0.1:5000/users/update/${id}`, data, {
+				const response = await axios.patch(`https://connectify-server-b31a.onrender.com/users/update/${id}`, data, {
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
@@ -174,7 +174,7 @@ const Profile = () => {
 
 	const deleteProfile = async (id) => {
 		try {
-			await axios.delete(`http://127.0.0.1:5000/users/delete/${id}`);
+			await axios.delete(`https://connectify-server-b31a.onrender.com/users/delete/${id}`);
 			setUpdateUserProfile((prevState) => ({
 				...prevState,
 				loaded: true,

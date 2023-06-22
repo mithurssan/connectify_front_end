@@ -63,7 +63,7 @@ const Rota = () => {
 
 	const fetchEvents = async () => {
 		try {
-			const response = await fetch(`http://127.0.0.1:5000/rotas/get/${businessId}`);
+			const response = await fetch(`https://connectify-server-b31a.onrender.com/rotas/get/${businessId}`);
 			const data = await response.json();
 			return data;
 		} catch (error) {
@@ -108,7 +108,7 @@ const Rota = () => {
 
 			console.log('Updating event:', formattedEvent);
 
-			const response = await fetch(`http://127.0.0.1:5000/rotas/update/${formattedEvent.id}`, {
+			const response = await fetch(`https://connectify-server-b31a.onrender.com/rotas/update/${formattedEvent.id}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ const Rota = () => {
 				rota_content: content,
 			};
 
-			const response = await fetch('http://127.0.0.1:5000/rotas/add', {
+			const response = await fetch('https://connectify-server-b31a.onrender.com/rotas/add', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -181,7 +181,7 @@ const Rota = () => {
 
 	const handleDeleteEntry = async (event) => {
 		try {
-			const response = await fetch(`http://127.0.0.1:5000/rotas/delete/${event.id}`, {
+			const response = await fetch(`https://connectify-server-b31a.onrender.com/rotas/delete/${event.id}`, {
 				method: 'DELETE',
 			});
 

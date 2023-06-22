@@ -75,11 +75,11 @@ describe('SignupBusiness page', () => {
 
     await waitFor(() => {
       // expect(axios.get).toHaveBeenCalledWith(
-      //   'http://127.0.0.1:5000/api/company/123456',
+      //   'https://connectify-server-b31a.onrender.com/api/company/123456',
       //   mockData
       // )
       expect(axios.post).toHaveBeenCalledWith(
-        'http://127.0.0.1:5000/businesses/register',
+        'https://connectify-server-b31a.onrender.com/businesses/register',
         {
           business_name: 'TEST COMPANY',
           business_number: '123456',
@@ -130,11 +130,11 @@ describe('SignupBusiness page', () => {
     await waitFor(() => {
       // expect(axios.get).toHaveBeenCalled()
       // expect(axios.get).toHaveBeenCalledWith(
-      //   'http://127.0.0.1:5000/api/company/123456',
+      //   'https://connectify-server-b31a.onrender.com/api/company/123456',
       //   mockData
       // )
       expect(axios.post).toHaveBeenCalledWith(
-        'http://127.0.0.1:5000/businesses/register',
+        'https://connectify-server-b31a.onrender.com/businesses/register',
         {
           business_name: 'TEST COMPANY',
           business_number: '123456',

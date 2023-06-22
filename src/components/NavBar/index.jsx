@@ -51,7 +51,7 @@ function Navbar() {
 	const navActive = ({ isActive }) => (isActive ? activeStyle : undefined);
 
 	const logout = async () => {
-		const url = 'http://127.0.0.1:5000/logout'; /* c8 ignore start */
+		const url = 'https://connectify-server-b31a.onrender.com/logout'; /* c8 ignore start */
 		await axios.post(url);
 		handleRemoveToken(removeToken());
 		localStorage.clear();

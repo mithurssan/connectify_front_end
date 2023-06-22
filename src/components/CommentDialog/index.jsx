@@ -15,7 +15,7 @@ const CommentDialog = ({ postId, onClose }) => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:5000/comments/post/${postId}`);
+            const response = await axios.get(`https://connectify-server-b31a.onrender.com/comments/post/${postId}`);
             const commentsData = response.data;
             setComments(commentsData);
         } catch (error) {
@@ -30,7 +30,7 @@ const CommentDialog = ({ postId, onClose }) => {
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`http://127.0.0.1:5000/comments/add`, {
+            await axios.post(`https://connectify-server-b31a.onrender.com/comments/add`, {
                 user_id: userId,
                 post_id: postId,
                 comment_username: username,

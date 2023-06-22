@@ -82,7 +82,7 @@ describe('LoginUser page', () => {
 	});
 
 	test('shows error for incorrect credentials', async () => {
-		mockAxios.onPost('http://127.0.0.1:5000/users/login').reply(401);
+		mockAxios.onPost('https://connectify-server-b31a.onrender.com/users/login').reply(401);
 
 		store = mockStore(initialState);
 		render(

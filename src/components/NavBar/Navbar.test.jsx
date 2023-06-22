@@ -77,7 +77,7 @@ describe('Navbar component', () => {
     userEvent.click(logoutButton)
 
     await waitFor(() => {
-      expect(postMock).toHaveBeenCalledWith('http://127.0.0.1:5000/logout')
+      expect(postMock).toHaveBeenCalledWith('https://connectify-server-b31a.onrender.com/logout')
       expect(screen.getByText('Home')).toBeInTheDocument()
     })
 

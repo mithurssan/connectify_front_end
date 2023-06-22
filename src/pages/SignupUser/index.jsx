@@ -47,7 +47,7 @@ const SignupUser = () => {
 
 	async function registerUser() {
 		try {
-			const url = 'http://127.0.0.1:5000/users/register';
+			const url = 'https://connectify-server-b31a.onrender.com/users/register';
 			const options = {
 				user_username: username,
 				user_email: email,

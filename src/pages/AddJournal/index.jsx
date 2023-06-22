@@ -68,7 +68,7 @@ const AddJournal = () => {
         console.log(data)
 
         const response = await axios.post(
-          'http://127.0.0.1:5000/entries/add',
+          'https://connectify-server-b31a.onrender.com/entries/add',
           data,
           {
             headers: {

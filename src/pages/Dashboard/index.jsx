@@ -22,7 +22,7 @@ const Dashboard = () => {
 
 	const fetchPosts = async () => {
 		try {
-			const response = await axios.get(`http://127.0.0.1:5000/posts/get/${businessId}`);
+			const response = await axios.get(`https://connectify-server-b31a.onrender.com/posts/get/${businessId}`);
 			const data = response.data;
 			setPosts(data);
 		} catch (error) {
@@ -70,7 +70,7 @@ const Dashboard = () => {
 
 	const addPost = async (newPost) => {
 		try {
-			await axios.post('http://127.0.0.1:5000/posts/add', {
+			await axios.post('https://connectify-server-b31a.onrender.com/posts/add', {
 				user_id: userId,
 				business_id: businessId,
 				username: currentUsername,

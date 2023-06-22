@@ -37,7 +37,7 @@ describe('GetJournal', () => {
     ]
 
     mockAxios
-      .onGet('http://127.0.0.1:5000/entries/user/1')
+      .onGet('https://connectify-server-b31a.onrender.com/entries/user/1')
       .reply(200, mockJournalData)
 
     render(
@@ -52,7 +52,7 @@ describe('GetJournal', () => {
   })
 
   it('displays error message on failed API request', async () => {
-    mockAxios.onGet('http://127.0.0.1:5000/entries/user/1').reply(500)
+    mockAxios.onGet('https://connectify-server-b31a.onrender.com/entries/user/1').reply(500)
 
     render(
       <MemoryRouter>
@@ -68,7 +68,7 @@ describe('GetJournal', () => {
   })
 
   it('displays "no entry" message when API request returns an empty array', async () => {
-    mockAxios.onGet('http://127.0.0.1:5000/entries/user/1').reply(200, [])
+    mockAxios.onGet('https://connectify-server-b31a.onrender.com/entries/user/1').reply(200, [])
 
     render(
       <MemoryRouter>
@@ -99,10 +99,10 @@ describe('GetJournal', () => {
     ]
 
     mockAxios
-      .onGet('http://127.0.0.1:5000/entries/user/1')
+      .onGet('https://connectify-server-b31a.onrender.com/entries/user/1')
       .reply(200, mockJournalData)
 
-    mockAxios.onDelete('http://127.0.0.1:5000/entries/delete/1').reply(200)
+    mockAxios.onDelete('https://connectify-server-b31a.onrender.com/entries/delete/1').reply(200)
 
     render(
       <MemoryRouter>
@@ -117,7 +117,7 @@ describe('GetJournal', () => {
 
     expect(mockAxios.history.delete.length).toBe(1)
     expect(mockAxios.history.delete[0].url).toBe(
-      'http://127.0.0.1:5000/entries/delete/1'
+      'https://connectify-server-b31a.onrender.com/entries/delete/1'
     )
 
     await screen.findByText('Entry has been deleted successfully')

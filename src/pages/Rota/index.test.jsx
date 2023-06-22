@@ -40,12 +40,12 @@ describe('Rota', () => {
       rota_content: 'Assigned to user: test1',
     };
 
-    mockAxios.onPut(`http://127.0.0.1:5000/rotas/${event.rota_id}`).reply(200);
+    mockAxios.onPut(`https://connectify-server-b31a.onrender.com/rotas/${event.rota_id}`).reply(200);
 
   });
 
   it('handles error when fetching events', async () => {
-    mockAxios.onGet('http://127.0.0.1:5000/rotas/').reply(500);
+    mockAxios.onGet('https://connectify-server-b31a.onrender.com/rotas/').reply(500);
 
     await expect(screen.findByText('Assigned to user: test1')).rejects.toThrow();
 
@@ -61,7 +61,7 @@ describe('Rota', () => {
       rota_content: 'Assigned to user: test1',
     };
 
-    mockAxios.onPut(`http://127.0.0.1:5000/rotas/${event.rota_id}`).reply(500);
+    mockAxios.onPut(`https://connectify-server-b31a.onrender.com/rotas/${event.rota_id}`).reply(500);
 
   });
 

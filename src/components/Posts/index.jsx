@@ -16,7 +16,7 @@ const Posts = ({ posts, setPosts }) => {
     useEffect(() => {
         const fetchUpvotedPosts = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:5000/users/${userId}`);
+                const response = await axios.get(`https://connectify-server-b31a.onrender.com/users/${userId}`);
                 const { upvoted_posts } = response.data;
                 setUpvotedPosts(JSON.parse(upvoted_posts));
                 localStorage.setItem('upvotedPosts', upvoted_posts);
@@ -37,8 +37,8 @@ const Posts = ({ posts, setPosts }) => {
         try {
             const isAlreadyUpvoted = upvotedPosts.includes(postId);
             if (isAlreadyUpvoted) {
-                await axios.patch(`http://127.0.0.1:5000/posts/update/${postId}/cancel_upvote`);
-                await axios.post(`http://127.0.0.1:5000/users/posts/cancel_upvote`, {
+                await axios.patch(`https://connectify-server-b31a.onrender.com/posts/update/${postId}/cancel_upvote`);
+                await axios.post(`https://connectify-server-b31a.onrender.com/users/posts/cancel_upvote`, {
                     user_id: userId,
                     post_id: postId,
                 });
@@ -62,8 +62,8 @@ const Posts = ({ posts, setPosts }) => {
                     JSON.stringify(upvotedPosts.filter((id) => id !== postId))
                 );/* c8 ignore end */
             } else {
-                await axios.patch(`http://127.0.0.1:5000/posts/update/${postId}/upvote`);
-                await axios.post(`http://127.0.0.1:5000/users/posts/upvote`, {
+                await axios.patch(`https://connectify-server-b31a.onrender.com/posts/update/${postId}/upvote`);
+                await axios.post(`https://connectify-server-b31a.onrender.com/users/posts/upvote`, {
                     user_id: userId,
                     post_id: postId,
                 });

@@ -17,7 +17,7 @@ const GetJournal = () => {
     try {
       const token = localStorage.getItem('token')
       const decodedToken = jwtDecode(token)
-      const response = `http://127.0.0.1:5000/entries/user/${decodedToken.user_id}`
+      const response = `https://connectify-server-b31a.onrender.com/entries/user/${decodedToken.user_id}`
       const get = await axios.get(response)
       if (get.status === 200) {
         setJournal(get.data)
@@ -47,7 +47,7 @@ const GetJournal = () => {
   const deleteEntry = async (id) => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:5000/entries/delete/${id}`
+        `https://connectify-server-b31a.onrender.com/entries/delete/${id}`
       )
       if (response.status === 200) {
         window.location.reload(true)

@@ -66,7 +66,7 @@ describe('Posts Component', () => {
             },
         ];
 
-        mockAxios.onGet('http://127.0.0.1:5000/posts').reply(200, postsData);
+        mockAxios.onGet('https://connectify-server-b31a.onrender.com/posts').reply(200, postsData);
 
         render(<Posts posts={postsData} setPosts={() => { }} />);
 

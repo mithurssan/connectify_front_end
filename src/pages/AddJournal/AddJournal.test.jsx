@@ -65,7 +65,7 @@ describe('AddJournal', () => {
   test('adds a new journal entry', async () => {
     mockAxios
       .onPost(
-        'http://127.0.0.1:5000/entries/add',
+        'https://connectify-server-b31a.onrender.com/entries/add',
         {
           user_id: '1',
           entry_date: '2023-06-21',

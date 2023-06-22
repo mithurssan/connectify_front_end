@@ -61,7 +61,7 @@ const LoginUser = () => {
 			errorCreate('Wrong Credentials');
 		} else {
 			try {
-				const url = `http://127.0.0.1:5000/users/verify/${verifyToken}`;
+				const url = `https://connectify-server-b31a.onrender.com/users/verify/${verifyToken}`;
 				const data = {
 					user_username: username,
 					user_password: password,
@@ -104,7 +104,7 @@ const LoginUser = () => {
 
 	async function getUsers() {
 		try {
-			const url = 'http://127.0.0.1:5000/users/';
+			const url = 'https://connectify-server-b31a.onrender.com/users/';
 			const res = await axios.get(url);
 			const data = await res.data;
 

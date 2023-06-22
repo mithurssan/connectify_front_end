@@ -24,7 +24,7 @@ const AddUserButton = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		axios
-			.patch(`http://127.0.0.1:5000/users/update/business/${username}`, {
+			.patch(`https://connectify-server-b31a.onrender.com/users/update/business/${username}`, {
 				business_id: businessId,
 				user_business_name: businessName,
 			})
