@@ -15,19 +15,19 @@ const Booking = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [content, setContent] = useState('');
-  const [isBusiness, setIsBusiness] = useState(false);
+  const isBusiness = localStorage.getItem("isBusiness")
   const businessId = localStorage.getItem('business_id');
-/* c8 ignore start */
+  /* c8 ignore start */
   useEffect(() => {
     fetchEvents()
       .then((data) => {
-        console.log('Fetched events:', data); 
+        console.log('Fetched events:', data);
         const formattedEvents = formatEvents(data);
-        console.log('Formatted events:', formattedEvents); 
+        console.log('Formatted events:', formattedEvents);
         setEvents(formattedEvents);
       })
       .catch((error) => {
-        console.error('Error fetching events:', error); 
+        console.error('Error fetching events:', error);
       });
   }, []);
 
@@ -68,7 +68,7 @@ const Booking = () => {
   const formatEvents = (data) => {
     return data.map((event) => {
       const start = moment(event.rota_start_date, 'DD-MM-YYYY').toDate();
-    const end = moment(event.rota_end_date, 'DD-MM-YYYY').toDate();
+      const end = moment(event.rota_end_date, 'DD-MM-YYYY').toDate();
       return {
         id: event.rota_id,
         business_id: event.business_id,
@@ -80,7 +80,7 @@ const Booking = () => {
   };
 
   const handleEventDrop = async ({ event, start, end }) => {
-    const updatedEvent = { ...event, start, end }; 
+    const updatedEvent = { ...event, start, end };
 
     try {
       await updateEvent(updatedEvent);
@@ -96,11 +96,11 @@ const Booking = () => {
 
   const updateEvent = async (event) => {
     try {
-    const formattedEvent = {
-      ...event,
-      start: moment(event.start).format('DD-MM-YYYY'),
-      end: moment(event.end).format('DD-MM-YYYY'),
-    };
+      const formattedEvent = {
+        ...event,
+        start: moment(event.start).format('DD-MM-YYYY'),
+        end: moment(event.end).format('DD-MM-YYYY'),
+      };
 
       console.log('Updating event:', formattedEvent);
 
@@ -204,35 +204,37 @@ const Booking = () => {
     return (
       <div key={event.id} className="event-container">
         <span>{event.title}</span>
-          <button onClick={() => handleDeleteEntry(event)}>Delete</button>
+        <button onClick={() => handleDeleteEntry(event)}>Delete</button>
       </div>
     );
   });
-/* c8 ignore end */
+  /* c8 ignore end */
   return (
     <div className="calendar-container">
-      <div className="add-entry-container">
-        <input
-          type="text"
-          placeholder="From (DD-MM-YYYY)"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="To (DD-MM-YYYY)"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Reason"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-        <button onClick={handleAddEntry}>Add Entry</button>
-      </div>
-      <div className="event-list-container">{eventComponents}</div>
+      {!isBusiness && <>
+        <div className="add-entry-container">
+          <input
+            type="text"
+            placeholder="From (DD-MM-YYYY)"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="To (DD-MM-YYYY)"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Reason"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          <button onClick={handleAddEntry}>Add Entry</button>
+        </div>
+        <div className="event-list-container">{eventComponents}</div>
+      </>}
       <div className="calendar-wrapper">
         <DragAndDropCalendar
           localizer={localizer}
