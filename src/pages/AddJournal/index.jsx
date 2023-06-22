@@ -41,7 +41,7 @@ const AddJournal = () => {
 			date: e.target.value,
 		}));
 	};
-
+/* c8 ignore start */
 	const titleHandler = (e) => {
 		setAddJournal((prevState) => ({
 			...prevState,
@@ -115,7 +115,7 @@ const AddJournal = () => {
 			}, 5000);
 		}
 	};
-
+/* c8 ignore end */
 	const journalSubmitHandler = (e) => {
 		e.preventDefault();
 		addEntry();

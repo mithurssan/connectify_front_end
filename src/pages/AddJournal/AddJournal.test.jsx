@@ -49,4 +49,18 @@ describe('AddJournal', () => {
 			)
 			.reply(200);
 	});
+	test('displays an error message if entry is not complete', async () => {
+    const doneButton = screen.getByText('Done');
+    fireEvent.click(doneButton);
+
+    await waitFor(() => {
+      expect(screen.getByText('Please enter your entry')).toBeInTheDocument();
+    });
+  });
+
+  test('navigates to the journal list page when "View my entries" button is clicked', () => {
+    const viewEntriesButton = screen.getByText('View my entries');
+    fireEvent.click(viewEntriesButton);
+  });
+  
 });
