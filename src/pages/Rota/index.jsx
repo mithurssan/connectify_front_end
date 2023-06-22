@@ -33,6 +33,9 @@ const Rota = () => {
 	}, []);
 
 	useEffect(() => {
+		const hasShownIntro = localStorage.getItem('hasShownIntro');
+	
+		if (!hasShownIntro) {
 		const intro = introJs();
 		intro.setOptions({
 			steps: [
@@ -54,6 +57,8 @@ const Rota = () => {
 			],
 		});
 		intro.start();
+		localStorage.setItem('hasShownIntro', 'true');
+	}
 	}, []);
 
 	const fetchEvents = async () => {

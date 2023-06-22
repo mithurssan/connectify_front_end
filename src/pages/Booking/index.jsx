@@ -32,6 +32,9 @@ const Booking = () => {
   }, []);
 
   useEffect(() => {
+    const hasShownIntro = localStorage.getItem('hasShownIntro');
+	
+		if (!hasShownIntro) {
     const intro = introJs();
     intro.setOptions({
       steps: [
@@ -53,6 +56,8 @@ const Booking = () => {
       ],
     });
     intro.start();
+    localStorage.setItem('hasShownIntro', 'true');
+	}
   }, []);
 
   const fetchEvents = async () => {

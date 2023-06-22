@@ -58,6 +58,9 @@ const SignupBusiness = () => {
 	}, [data]);
 
 	useEffect(() => {
+		const hasShownIntro = localStorage.getItem('hasShownIntro');
+	
+		if (!hasShownIntro) {
 		const intro = introJs();
 		intro.setOptions({
 			steps: [
@@ -75,6 +78,8 @@ const SignupBusiness = () => {
 			],
 		});
 		intro.start();
+		localStorage.setItem('hasShownIntro', 'true');
+	}
 	}, []);
 
 	async function getCompany(number) {

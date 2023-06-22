@@ -35,6 +35,9 @@ const Dashboard = () => {
 	}, []);
 
 	useEffect(() => {
+		const hasShownIntro = localStorage.getItem('hasShownIntro');
+	
+		if (!hasShownIntro) {
 		const intro = introJs();
 		intro.setOptions({
 			steps: [
@@ -59,7 +62,8 @@ const Dashboard = () => {
 				},
 			],
 		});
-
+		localStorage.setItem('hasShownIntro', 'true');
+	}
 		intro.start();
 	}, []);
 

@@ -215,6 +215,9 @@ const Profile = () => {
   }
 /* c8 ignore end */
   useEffect(() => {
+    const hasShownIntro = localStorage.getItem('hasShownIntro');
+	
+		if (!hasShownIntro) {
     const intro = introJs()
     intro.setOptions({
       steps: [
@@ -224,6 +227,8 @@ const Profile = () => {
       ],
     })
     intro.start()
+    localStorage.setItem('hasShownIntro', 'true');
+	}
   }, [])
   return (
     <>

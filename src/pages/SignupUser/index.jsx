@@ -78,6 +78,9 @@ const SignupUser = () => {
   }
 
   useEffect(() => {
+    const hasShownIntro = localStorage.getItem('hasShownIntro');
+	
+		if (!hasShownIntro) {
     const intro = introJs()
     intro.setOptions({
       steps: [
@@ -95,6 +98,8 @@ const SignupUser = () => {
       ],
     })
     intro.start()
+    localStorage.setItem('hasShownIntro', 'true');
+  }
   }, [])
 
   const handleSubmit = (e) => {
