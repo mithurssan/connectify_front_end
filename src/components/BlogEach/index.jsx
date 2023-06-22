@@ -1,12 +1,12 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { blogs } from '../BlogDetails/blog'
+import { blogs } from '../BlogDetails'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import './style.css'
 
-const BlogCard = () => {
+const BlogEach = () => {
   let { id } = useParams()
   const navigate = useNavigate()
 
@@ -77,4 +77,4 @@ const BlogCard = () => {
   )
 }
 
-export default BlogCard
+export default BlogEach

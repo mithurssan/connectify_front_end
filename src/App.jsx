@@ -8,9 +8,10 @@ import {
   LoginUse,
   LoginUseVerify,
   LoginPageVerify,
-  BlogCard,
+  BlogEach,
 } from './components'
 import { loadPersistedState } from './localStorage'
+
 import './App.css'
 
 const App = () => {
@@ -60,7 +61,7 @@ const App = () => {
             />
             <Route path='/edit-journal/:id' element={<Pages.EditJournal />} />
             <Route path='/wellbeing/blogs' element={<Pages.Blog />} />
-            <Route path='/blogs-card/:id' element={<BlogCard />} />
+            <Route path='/blogs-card/:id' element={<BlogEach />} />
             <Route path='*' element={<Pages.NotFound />} />
           </Route>
 
