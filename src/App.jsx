@@ -11,6 +11,7 @@ import {
   BlogCard,
 } from './components'
 import { loadPersistedState } from './localStorage'
+
 import './App.css'
 
 const App = () => {
