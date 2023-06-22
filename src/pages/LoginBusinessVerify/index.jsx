@@ -4,17 +4,18 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setCompanyName, setIsLoaded, setVerified, setVerifyToken } from '../../actions';
+import { setToken, setCompanyName, setCompanyPassword, setIsLoaded, setVerified, setVerifyToken } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 
 const LoginBusinessVerify = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [companyPassword, setCompanyPassword] = useState('');
+	// const [companyPassword, setCompanyPassword] = useState('');
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	const companyName = useSelector((state) => state.business.companyName);
+	const companyPassword = useSelector((state) => state.business.companyPassword);
 	const verifyToken = useSelector((state) => state.business.verifyToken);
 
 	useEffect(() => {
@@ -70,6 +71,7 @@ const LoginBusinessVerify = () => {
 				localStorage.setItem('business_id', business_id);
 				localStorage.setItem('isBusiness', true);
 				localStorage.setItem('joinedBusiness', true);
+				dispatch(setCompanyPassword(res.data.business_password));
 				navigate('/dashboard');
 			} catch (error) {
 				if (error && companyPassword.length != 0) {
@@ -132,7 +134,7 @@ const LoginBusinessVerify = () => {
 					id="password"
 					value={companyPassword}
 					onChange={(e) => {
-						setCompanyPassword(e.target.value);
+						dispatch(setCompanyPassword(e.target.value));
 					}}
 					className="business-text"
 				/>

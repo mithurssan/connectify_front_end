@@ -4,17 +4,18 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setUsername, setVerified, setVerifyToken } from '../../actions';
+import { setToken, setUsername, setPassword, setVerified, setVerifyToken } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 
 const LoginUser = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [password, setPassword] = useState('');
+	// const [password, setPassword] = useState('');
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	const username = useSelector((state) => state.user.username);
+	const password = useSelector((state) => state.user.password);
 	const verifyToken = useSelector((state) => state.user.verifyToken);
 
 	useEffect(() => {
@@ -55,7 +56,7 @@ const LoginUser = () => {
 
 		const url = window.location.href;
 		const tokenUrl = url.split('/');
-		if (verifyToken != tokenUrl[5]) {
+		if (verifyToken !== tokenUrl[5]) {
 			errorCreate('Wrong Credentials');
 		} else {
 			try {
@@ -67,16 +68,16 @@ const LoginUser = () => {
 				const res = await axios.post(url, data);
 				dispatch(setToken(res.data.token));
 				dispatch(setVerified(true));
-
 				const business_id = res.data.business_id;
 				const user_id = res.data.user_id;
+				localStorage.setItem('joinedBusiness', true);
+				localStorage.setItem('business_id', business_id);
+				localStorage.setItem('user_id', user_id);
+				dispatch(setPassword(res.data.user_password));
+
 				if (business_id == null) {
 					navigate('/not-assigned');
 				} else {
-					localStorage.setItem('joinedBusiness', true);
-					localStorage.setItem('business_id', business_id);
-					localStorage.setItem('user_id', user_id);
-
 					navigate('/dashboard');
 				}
 			} catch (error) {
@@ -95,8 +96,8 @@ const LoginUser = () => {
 			errorCreate('Enter username and password');
 			setIsLoaded(false);
 		} else {
-			getUsers();
 			setIsLoaded(true);
+			getUsers();
 		}
 	};
 
@@ -109,8 +110,8 @@ const LoginUser = () => {
 			const user = data.find((u) => u.user_username === username);
 
 			dispatch(setVerifyToken(user.user_verify_token));
-			// dispatch(setVerified(true));
-			setIsLoaded(true);
+
+			// setIsLoaded(true);
 		} catch (error) {
 			if (error) {
 				errorCreate("User doesn't exist");
@@ -129,7 +130,7 @@ const LoginUser = () => {
 				<label htmlFor="password" className="user-label">
 					Password:
 				</label>
-				<input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="user-text" />
+				<input type="password" id="password" value={password} onChange={(e) => dispatch(setPassword(e.target.value))} className="user-text" />
 
 				<input type="submit" value="Login" className="login-register-button" />
 			</form>
