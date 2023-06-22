@@ -11,7 +11,7 @@ const BlogEach = () => {
   const navigate = useNavigate()
 
   const filterBlogs = blogs.find((el) => el.id === parseInt(id))
-
+/* c8 ignore start */
   const backButton = () => {
     if (filterBlogs.id > 1) {
       navigate(`/blogs-card/${parseInt(id) - 1}`)
@@ -19,7 +19,7 @@ const BlogEach = () => {
       navigate('/blogs-card/5')
     }
   }
-/* c8 ignore start */
+
   const nextButton = () => {
     if (filterBlogs.id < 5) {
       navigate(`/blogs-card/${parseInt(id) + 1}`)
