@@ -1,6 +1,6 @@
 import React from 'react'
 import BlogPost from '../../assets/blogTop.png'
-import { blogs } from '../../components/BlogDetails/blog'
+import { blogs } from '../../components/BlogDetails'
 import { Link } from 'react-router-dom'
 import './style.css'
 
@@ -21,15 +21,13 @@ const Blog = () => {
         </div>
         <div className='blog-details-container'>
           {blogs.map(({ id, title, date, image, details }) => (
-            <Link to={`/blogs-card/${id}`} className='link'>
-              <div className='each-blog-container' key={id}>
+            <Link to={`/blogs-card/${id}`} className='link' key={id}>
+              <div className='each-blog-container'>
                 <div className='blog-description-container'>
                   <div className='title-blog'>{title}</div>
                   <span className='date-blog'>{date}</span>
-
                   <p className='blog-details'>{details}</p>
                 </div>
-
                 <div className='blog-image-container'>
                   <img src={image} alt='blog-image' className='image-blog' />
                 </div>
