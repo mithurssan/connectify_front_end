@@ -126,7 +126,9 @@ const SignupBusiness = () => {
 				} else if (res.status === 500) {
 					errorCreate("Couldn't register. Try again later");
 				} else {
-					setIsLoaded(true);
+					// setTimeout(() => {
+					// 	setIsLoaded(false);
+					// }, 600);
 					dispatch(setVerified(false));
 					successCreate('Registration successful! \n Verify your email to log in. Check your inbox for further instructions.');
 				}
@@ -141,6 +143,7 @@ const SignupBusiness = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setIsLoaded(true);
 		getCompany(companyNumber);
 	};
 
@@ -150,7 +153,7 @@ const SignupBusiness = () => {
 
 	return (
 		<div className="container-login-register">
-			<form onSubmit={handleSubmit} className="business-container">
+			<form onSubmit={handleSubmit} className="business-container business-container-new">
 				<label htmlFor="name" className="business-label">
 					Company name:
 				</label>
@@ -172,7 +175,7 @@ const SignupBusiness = () => {
 				<input type="password" id="password" value={companyPassword} onChange={(e) => handleInputChange(e, setCompanyPassword)} className="business-text" />
 
 				<input type="submit" value="Register" className="login-register-button" />
-				<div className="error-message-container">
+				<div className="error-message-container error-message-container-new">
 					{isLoaded && (
 						<div className="spinner" data-testid="spinner">
 							<Spinner />

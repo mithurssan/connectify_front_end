@@ -4,13 +4,13 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setUsername, setPassword, setIsLoaded, setVerified } from '../../actions';
+import { setToken, setUsername, setPassword, setIsLoaded, setEmails, setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
-import './style.css';
 import { Spinner } from '../../components';
 import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
 import introJs from 'intro.js';
 import 'intro.js/minified/introjs.min.css';
+import './style.css';
 
 const LoginUser = () => {
 	const dispatch = useDispatch();
@@ -20,6 +20,7 @@ const LoginUser = () => {
 
 	const username = useSelector((state) => state.user.username);
 	const password = useSelector((state) => state.user.password);
+	const email = useSelector((state) => state.user.email);
 	const verified = useSelector((state) => state.app.verified);
 
 	useEffect(() => {
@@ -102,6 +103,8 @@ const LoginUser = () => {
 				localStorage.setItem('business_id', business_id);
 				localStorage.setItem('user_id', user_id);
 				dispatch(setPassword(res.data.user_password));
+			} else if (!verified) {
+				errorCreate('Verify your account');
 			}
 			const business_id = res.data.business_id;
 
@@ -140,6 +143,7 @@ const LoginUser = () => {
 
 			const user = data.find((u) => u.user_username === username);
 			setIsLoaded(true);
+			dispatch(setEmails(user.user_email));
 			dispatch(setVerified(user.user_verified));
 		} catch (error) {
 			if (error) {
@@ -159,7 +163,7 @@ const LoginUser = () => {
 				<label htmlFor="password" className="user-label">
 					Password:
 				</label>
-				<input type="password" id="password" value={password} onChange={(e) => dispatch(setPassword(e.target.value))} className="user-text" />
+				<input type="password" value={password} onChange={(e) => dispatch(setPassword(e.target.value))} className="user-text" />
 				<input type="submit" value="Login" className="login-register-button" />
 				<div className="container">
 					<Link to="/login-register" className="sign-in-user">

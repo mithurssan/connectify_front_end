@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setUsername, setPassword, setVerified, setVerifyToken } from '../../actions';
+import { setToken, setUsername, setPassword, setVerified, setEmails, setVerifyToken } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 
@@ -16,6 +16,7 @@ const LoginUser = () => {
 
 	const username = useSelector((state) => state.user.username);
 	const password = useSelector((state) => state.user.password);
+	const email = useSelector((state) => state.user.email);
 	const verifyToken = useSelector((state) => state.user.verifyToken);
 
 	useEffect(() => {
@@ -73,7 +74,7 @@ const LoginUser = () => {
 				localStorage.setItem('business_id', business_id);
 				localStorage.setItem('user_id', user_id);
 				dispatch(setPassword(res.data.user_password));
-				
+
 				if (business_id == null) {
 					navigate('/not-assigned');
 				} else {
@@ -110,7 +111,7 @@ const LoginUser = () => {
 			const user = data.find((u) => u.user_username === username);
 
 			dispatch(setVerifyToken(user.user_verify_token));
-
+			dispatch(setEmails(user.user_email));
 			// setIsLoaded(true);
 		} catch (error) {
 			if (error) {

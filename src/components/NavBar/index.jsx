@@ -79,7 +79,9 @@ function Navbar() {
 					color: '#0A1A41',
 				}}>
 				<div className="navbar">
-					<h1 className="connectify">Connectify</h1>
+					<Link to="/dashboard" className="conn-logo">
+						<h1 className="connectify">Connectify</h1>
+					</Link>
 
 					<Link to="#" className="menu-bars">
 						<FaIcons.FaBars onClick={showSidebar} role="menu" />

@@ -5,7 +5,7 @@ const LoginPageVerify = () => {
 	return (
 		<div className="login-wrapper">
 			<div className={'mainContent'}>
-				<div className="topbar">
+				<div className="topbar topbar-ver">
 					<div className="signup-box">
 						<p className={'sign-in-focused'}>SIGN IN</p>
 					</div>
