@@ -15,7 +15,6 @@ const Rota = () => {
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [content, setContent] = useState('');
-	// const [isBusiness, setIsBusiness] = useState(false);
 	const isBusiness = localStorage.getItem("isBusiness")
 	const businessId = localStorage.getItem('business_id');
 	/* c8 ignore start */
