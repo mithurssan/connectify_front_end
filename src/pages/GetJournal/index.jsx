@@ -191,7 +191,7 @@ const GetJournal = () => {
       </div>
       <div className='add-entry-journal-container'>
         <button className='add-entries-button ' onClick={addEntries}>
-          <span className='entry-add-plus'>+</span>
+          Add Journal
         </button>
       </div>
     </>
