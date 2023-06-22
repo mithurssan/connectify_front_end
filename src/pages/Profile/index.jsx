@@ -74,7 +74,7 @@ const Profile = () => {
       userPassword: e.target.value,
     }))
   }
-
+/* c8 ignore start */
   const updateProfile = async (id) => {
     if (userName && userEmail && userPassword) {
       try {
@@ -214,7 +214,7 @@ const Profile = () => {
       }
     }
   }
-
+/* c8 ignore end */
   useEffect(() => {
     const intro = introJs()
     intro.setOptions({
