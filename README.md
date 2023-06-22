@@ -5,8 +5,6 @@ This is a all-in-one application for companies and businesses of all sizes that 
 
 In today's modern workplace, businesses often face the challenge of using multiple tools for different organizational tasks. Communication might happen through messaging apps like WhatsApp or Slack, while finance and payslip management rely on software like Sage HR. Meanwhile, traditional methods such as pen and paper or email are still used for booking time off or reporting emergencies/sick days. This fragmented approach can be overwhelming and inefficient, leading to confusion and wasted time.
 
-To address these issues and streamline organizational processes, we developed this app. 
-
 ## Features
 - Rota Management: Employees can view the complany schedule when planning events
 - Booking events: Users can book make a booking request
