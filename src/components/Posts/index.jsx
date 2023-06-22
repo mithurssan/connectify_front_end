@@ -10,7 +10,6 @@ const Posts = ({ posts, setPosts }) => {
     const businessName = localStorage.getItem("business_name")
     const [selectedPostId, setSelectedPostId] = useState(null);
     const [dialogVisible, setDialogVisible] = useState(false);
-    const latestPostsFirst = [...posts].reverse();
     const [upvotedPosts, setUpvotedPosts] = useState([]);
     const userId = localStorage.getItem('user_id');
 
@@ -93,7 +92,7 @@ const Posts = ({ posts, setPosts }) => {
 
     return (
         <div className="posts-container" role="post">
-            {latestPostsFirst.map((post, index) => (
+            {posts.map((post, index) => (
                 <div key={index} className="post" >
                     <h3 className="post-title">{post.post_title}</h3>
                     <p className="post-content">{post.post_content}</p>
