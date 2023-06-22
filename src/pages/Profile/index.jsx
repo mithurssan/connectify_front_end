@@ -20,7 +20,6 @@ const Profile = () => {
     message: '',
     deleteMessage: '',
     showSuccess: '',
-    showPassword: false,
   })
 
   const username = useSelector((state) => state.user.username)
@@ -257,15 +256,9 @@ const Profile = () => {
                   <input
                     className='add-journal-text'
                     onChange={userPasswordHandler}
-                    type={showPassword ? 'text' : 'password'}
+                    type='password'
                     value={userPassword}
                   />
-                  <p
-                    className='show-hide-edit-form-profile'
-                    onClick={showPasswordHandler}
-                  >
-                    {showPassword ? 'Hide' : 'Show'}
-                  </p>
                 </div>
               </div>
 
