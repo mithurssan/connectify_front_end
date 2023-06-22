@@ -170,7 +170,6 @@ const Profile = () => {
 		}));
 	};
 
-<<<<<<< HEAD
 	const deleteProfile = async (id) => {
 		try {
 			await axios.delete(`http://127.0.0.1:5000/users/delete/${id}`);
@@ -236,84 +235,6 @@ const Profile = () => {
 								<label className="date-label">Username</label>
 								<input className="add-journal-text" onChange={userNameHandler} type="text" value={userName} />
 							</div>
-=======
-  const deleteProfile = async (id) => {
-    try {
-      await axios.delete(`http://127.0.0.1:5000/users/delete/${id}`)
-      setUpdateUserProfile((prevState) => ({
-        ...prevState,
-        loaded: true,
-      }))
-      setTimeout(() => {
-        setUpdateUserProfile((prevState) => ({
-          ...prevState,
-          message: 'Profile has been deleted successfully',
-        }))
-      }, 500)
-      setTimeout(() => {
-        localStorage.clear()
-        window.location.href = '/'
-      }, 1000)
-    } catch (error) {
-      if (error.response) {
-        setUpdateUserProfile((prevState) => ({
-          ...prevState,
-          message: error.response.data.message,
-        }))
-      } else {
-        setUpdateUserProfile((prevState) => ({
-          ...prevState,
-          message: error.message,
-        }))
-      }
-    }
-  }
-/* c8 ignore end */
-  useEffect(() => {
-    const pageName = 'profile';
-		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
-	
-		if (!hasShownIntro) {
-    const intro = introJs()
-    intro.setOptions({
-      steps: [
-        { element: '.edit-profile', intro: 'Welcome to your profile! This is the edit profile section.' },
-        { element: '.avatar-selector', intro: 'This is where you can view your avatar.' },
-        { element: '.form-edit-profile', intro: 'This is where you can update and delete your account.'}
-      ],
-    })
-    intro.start()
-    localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
-	}
-  }, [])
-  return (
-    <>
-      <div className='edit-profile-container'>
-        <h1 className='edit-profile'>Edit Your Profile</h1>
-        <div className='form-picture-container'>
-          <div className='avatar-selector'>
-            <AvatarSelector />
-            <div className='user-details'>
-              <p className='edit-profile-username-email'>
-                <strong>Username:</strong> {username}
-              </p>
-              <p className='edit-profile-username-email'>
-                <strong>Email:</strong> {email}
-              </p>
-            </div>
-          </div>
-          <div className='form-edit-profile'>
-            <div className='form-edit-user-profile'>
-              <div className='date-add-journal-container'>
-                <label className='date-label'>Username</label>
-                <input
-                  className='add-journal-text'
-                  onChange={userNameHandler}
-                  type='text'
-                  value={userName}
-                />
-              </div>
->>>>>>> staging
 
 							<div className="date-add-journal-container">
 								<label className="title-label">Email</label>
