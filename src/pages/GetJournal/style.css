@@ -89,11 +89,11 @@
   color: #ffffff;
 }
 .add-entries-button {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 200px;
+  height: 60px;
+  color: #ffffff;
   border: none;
-  font-size: 55px;
+  font-size: 20px;
   cursor: pointer;
   background-color: #785a9f;
 }
@@ -157,11 +157,11 @@
   font-size: 20px;
 }
 
-.entry-add-plus {
+/* .entry-add-plus {
   text-align: center;
   color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 18px;
-}
+} */
