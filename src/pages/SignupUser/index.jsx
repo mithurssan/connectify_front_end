@@ -63,6 +63,10 @@ const SignupUser = () => {
         errorCreate("Couldn't register. Try again later")
       } else {
         setIsLoaded(true)
+
+        setTimeout(() => {
+          setIsLoaded(false)
+        }, 600)
         dispatch(setVerified(false))
         successCreate(
           'Registration successful! \n Verify your email to log in. Check your inbox for further instructions.'

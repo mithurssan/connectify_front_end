@@ -17,11 +17,11 @@
 
 .image-container {
   margin-left: 20px;
-  margin: 30px;
+  margin: 10px;
 }
 
 .image-container img {
-  max-width: 400px;
+  max-width: 500px;
   height: auto;
 }
 
@@ -78,6 +78,7 @@
 
 .icon-title {
   font-size: 20px;
+  margin-top: 10px;
 }
 
 /* .welbeing-chat {

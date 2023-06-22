@@ -259,8 +259,9 @@ const Profile = () => {
                 <input
                   className='add-journal-text'
                   onChange={userEmailHandler}
-                  type='text'
+                  type='email'
                   value={userEmail}
+                  required
                 />
               </div>
               <div className='date-add-journal-container'>

@@ -7,10 +7,11 @@ import {
   LoginPage,
   LoginUse,
   LoginUseVerify,
-  Spinner,
   LoginPageVerify,
+  BlogEach,
 } from './components'
 import { loadPersistedState } from './localStorage'
+
 import './App.css'
 
 const App = () => {
@@ -59,6 +60,8 @@ const App = () => {
               element={<Pages.AddJournal />}
             />
             <Route path='/edit-journal/:id' element={<Pages.EditJournal />} />
+            <Route path='/wellbeing/blogs' element={<Pages.Blog />} />
+            <Route path='/blogs-card/:id' element={<BlogEach />} />
             <Route path='*' element={<Pages.NotFound />} />
           </Route>
 

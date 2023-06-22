@@ -10,6 +10,7 @@ export default defineConfig({
 		environment: 'jsdom',
 	},
 	build: {
+		assetsInlineLimit: '1',
 		rollupOptions: {
 			plugins: [
 				babel({

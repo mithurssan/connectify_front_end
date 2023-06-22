@@ -96,7 +96,6 @@
   font-size: 55px;
   cursor: pointer;
   background-color: #785a9f;
-  color: #ffffff;
 }
 
 .add-entry-journal-container {
@@ -116,6 +115,7 @@
   height: 450px;
   position: relative;
 }
+
 .scroll-bar {
   display: flex;
   flex-direction: column;
@@ -155,4 +155,13 @@
   text-align: center;
   font-weight: 900;
   font-size: 20px;
+}
+
+.entry-add-plus {
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 18px;
 }
