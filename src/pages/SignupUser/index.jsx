@@ -78,7 +78,8 @@ const SignupUser = () => {
   }
 
   useEffect(() => {
-    const hasShownIntro = localStorage.getItem('hasShownIntro');
+    const pageName = 'user-signup';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
 	
 		if (!hasShownIntro) {
     const intro = introJs()
@@ -98,7 +99,7 @@ const SignupUser = () => {
       ],
     })
     intro.start()
-    localStorage.setItem('hasShownIntro', 'true');
+    localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
   }
   }, [])
 

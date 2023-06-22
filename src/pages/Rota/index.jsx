@@ -32,7 +32,8 @@ const Rota = () => {
 	}, []);
 
 	useEffect(() => {
-		const hasShownIntro = localStorage.getItem('hasShownIntro');
+		const pageName = 'rota';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
 	
 		if (!hasShownIntro) {
 		const intro = introJs();
@@ -56,7 +57,7 @@ const Rota = () => {
 			],
 		});
 		intro.start();
-		localStorage.setItem('hasShownIntro', 'true');
+		localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
 	}
 	}, []);
 

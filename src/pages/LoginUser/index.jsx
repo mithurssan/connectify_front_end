@@ -44,7 +44,8 @@ const LoginUser = () => {
 	}, [verified, isLoaded]);
 
 	useEffect(() => {
-		const hasShownIntro = localStorage.getItem('hasShownIntro');
+		const pageName = 'user-login';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
 	
 		if (!hasShownIntro) {
 		  const intro = introJs();
@@ -65,7 +66,7 @@ const LoginUser = () => {
 		  });
 		  intro.start();
 	
-		  localStorage.setItem('hasShownIntro', 'true');
+		  localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
 		}
 	  }, []);
 

@@ -215,7 +215,8 @@ const Profile = () => {
   }
 /* c8 ignore end */
   useEffect(() => {
-    const hasShownIntro = localStorage.getItem('hasShownIntro');
+    const pageName = 'profile';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
 	
 		if (!hasShownIntro) {
     const intro = introJs()
@@ -227,7 +228,7 @@ const Profile = () => {
       ],
     })
     intro.start()
-    localStorage.setItem('hasShownIntro', 'true');
+    localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
 	}
   }, [])
   return (

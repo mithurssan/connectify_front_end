@@ -58,7 +58,8 @@ const SignupBusiness = () => {
 	}, [data]);
 
 	useEffect(() => {
-		const hasShownIntro = localStorage.getItem('hasShownIntro');
+		const pageName = 'business-signup';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
 	
 		if (!hasShownIntro) {
 		const intro = introJs();
@@ -78,7 +79,7 @@ const SignupBusiness = () => {
 			],
 		});
 		intro.start();
-		localStorage.setItem('hasShownIntro', 'true');
+		localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
 	}
 	}, []);
 
