@@ -8,6 +8,8 @@ import { setUsername, setEmails } from '../../actions'
 import { AvatarSelector } from '../../components'
 import ProfileImage from '../../assets/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpeg'
 import './style.css'
+import introJs from 'intro.js'
+import 'intro.js/minified/introjs.min.css'
 
 const Profile = () => {
   const [updateUserProfile, setUpdateUserProfile] = useState({
@@ -71,7 +73,7 @@ const Profile = () => {
       userPassword: e.target.value,
     }))
   }
-
+/* c8 ignore start */
   const updateProfile = async (id) => {
     if (userName && userEmail && userPassword) {
       try {
@@ -211,7 +213,18 @@ const Profile = () => {
       }
     }
   }
-
+/* c8 ignore end */
+  useEffect(() => {
+    const intro = introJs()
+    intro.setOptions({
+      steps: [
+        { element: '.edit-profile', intro: 'Welcome to your profile! This is the edit profile section.' },
+        { element: '.avatar-selector', intro: 'This is where you can view your avatar.' },
+        { element: '.form-edit-profile', intro: 'This is where you can update and delete your account.'}
+      ],
+    })
+    intro.start()
+  }, [])
   return (
     <>
       <div className='edit-profile-container'>

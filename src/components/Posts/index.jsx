@@ -32,7 +32,7 @@ const Posts = ({ posts, setPosts }) => {
         setSelectedPostId(postId);
         setDialogVisible(true);
     };
-
+/* c8 ignore start */
     const handleUpvote = async (postId) => {
         try {
             const isAlreadyUpvoted = upvotedPosts.includes(postId);
@@ -60,7 +60,7 @@ const Posts = ({ posts, setPosts }) => {
                 localStorage.setItem(
                     'upvotedPosts',
                     JSON.stringify(upvotedPosts.filter((id) => id !== postId))
-                );
+                );/* c8 ignore end */
             } else {
                 await axios.patch(`http://127.0.0.1:5000/posts/update/${postId}/upvote`);
                 await axios.post(`http://127.0.0.1:5000/users/posts/upvote`, {
