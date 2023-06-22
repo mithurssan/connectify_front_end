@@ -4,12 +4,11 @@ blog-container,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
 }
 
 .blog-image {
   width: 100%;
-  height: 550px;
+  height: 580px;
   object-fit: cover;
   border: none;
   margin-bottom: 40px;

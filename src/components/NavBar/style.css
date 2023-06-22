@@ -105,5 +105,16 @@ span {
   font-weight: 800;
   height: 60px;
   width: 280px;
-  transform: translate(-30px, -10px);
+  transform: translate(-18px, -10px);
+}
+
+.logout-icon {
+  width: 30px;
+  height: 30px;
+  transform: translate(25px, 6px);
+}
+
+.logout-container {
+  display: flex;
+  flex-direction: row;
 }
