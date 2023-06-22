@@ -35,6 +35,10 @@ const Dashboard = () => {
 	}, []);
 
 	useEffect(() => {
+		const pageName = 'dashboard';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
+	
+		if (!hasShownIntro) {
 		const intro = introJs();
 		intro.setOptions({
 			steps: [
@@ -59,8 +63,10 @@ const Dashboard = () => {
 				},
 			],
 		});
-
 		intro.start();
+		localStorage.setItem(`hasShownIntro_${pageName}`, 'true');	
+	}
+		
 	}, []);
 
 	const addPost = async (newPost) => {

@@ -44,24 +44,31 @@ const LoginUser = () => {
 	}, [verified, isLoaded]);
 
 	useEffect(() => {
-		const intro = introJs();
-		intro.setOptions({
+		const pageName = 'user-login';
+		const hasShownIntro = localStorage.getItem(`hasShownIntro_${pageName}`);
+	
+		if (!hasShownIntro) {
+		  const intro = introJs();
+		  intro.setOptions({
 			steps: [
-				{
-					intro: 'Welcome to the user login page!',
-				},
-				{
-					element: '.user-container',
-					intro: 'Enter your information to be able to login as a user.',
-				},
-				{
-					element: '.login-register-button',
-					intro: 'Click here to log in.',
-				},
+			  {
+				intro: 'Welcome to the user login page!',
+			  },
+			  {
+				element: '.user-container',
+				intro: 'Enter your information to be able to login as a user.',
+			  },
+			  {
+				element: '.login-register-button',
+				intro: 'Click here to log in.',
+			  },
 			],
-		});
-		intro.start();
-	}, []);
+		  });
+		  intro.start();
+	
+		  localStorage.setItem(`hasShownIntro_${pageName}`, 'true');
+		}
+	  }, []);
 
 	const errorCreate = (error) =>
 		toast.error(error, {
