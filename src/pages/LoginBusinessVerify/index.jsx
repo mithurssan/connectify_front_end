@@ -66,11 +66,12 @@ const LoginBusinessVerify = () => {
 				const res = await axios.post(url, options);
 				dispatch(setToken(res.data.token));
 				dispatch(setVerified(true));
-
+				const business_name = res.data.business_name;
 				const business_id = res.data.business_id;
 				localStorage.setItem('business_id', business_id);
 				localStorage.setItem('isBusiness', true);
 				localStorage.setItem('joinedBusiness', true);
+				localStorage.setItem('business_name', business_name);
 				dispatch(setCompanyPassword(res.data.business_password));
 				navigate('/dashboard');
 			} catch (error) {
