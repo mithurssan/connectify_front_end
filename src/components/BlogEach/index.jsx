@@ -6,7 +6,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import './style.css'
 
-const BlogCard = () => {
+const BlogEach = () => {
   let { id } = useParams()
   const navigate = useNavigate()
 
@@ -77,4 +77,4 @@ const BlogCard = () => {
   )
 }
 
-export default BlogCard
+export default BlogEach
