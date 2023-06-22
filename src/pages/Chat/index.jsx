@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import './style.css';
 import { MultiChatSocket, MultiChatWindow, useMultiChatLogic } from 'react-chat-engine-advanced';
 import { setPassword, setCompanyPassword } from '../../actions';
+import './style.css';
 
 const Chat = () => {
 	const dispatch = useDispatch();
 	const username = useSelector((state) => state.user.username);
 	const companyName = useSelector((state) => state.business.companyName);
-	// const [secret, setSecret] = useState('');
 	const secretUser = useSelector((state) => state.user.password);
 	const secretBusiness = useSelector((state) => state.business.companyPassword);
 
@@ -59,10 +58,10 @@ const Chat = () => {
 	const chatProps = useMultiChatLogic('7f8e7fee-521a-4f50-8d9a-9028fc529c34', isBusiness ? companyName : username, isBusiness ? secretBusiness : secretUser);
 
 	return (
-		<>
+		<div className="chat-eng">
 			<MultiChatWindow {...chatProps} />
 			<MultiChatSocket {...chatProps} />
-		</>
+		</div>
 	);
 };
 

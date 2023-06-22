@@ -1,18 +1,32 @@
 /* CHAT STYLES */
+
 * {
-	font-family: Avenir, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-		Segoe UI Symbol, Noto Color Emoji;
-	letter-spacing: 0.5px;
+	font-family: 'Montserrat', sans-serif !important;
+}
+.chat-eng {
+	height: 90%;
+	width: 100%;
+	margin: 0 auto !important;
 }
 
+.ce-chat-engine {
+	overflow-y: hidden !important;
+}
 .ce-chat-list {
 	background-color: rgb(240, 240, 240) !important;
+	overflow-y: hidden !important;
+}
+
+.ce-chat-settings-column {
+	overflow-y: hidden !important;
 }
 
 .ce-chats-container {
 	background-color: rgb(240, 240, 240) !important;
 }
-
+.ce-chat-list-column {
+	overflow-y: hidden !important;
+}
 .ce-active-chat-card {
 	background-color: #cabcdc !important;
 	border: 4px solid #cabcdc !important;
@@ -72,14 +86,16 @@
 .chat-feed {
 	height: 100%;
 	width: 100%;
-	overflow: scroll;
+	overflow: hidden;
 	background-color: rgb(240, 240, 240);
+	font-family: 'Montserrat', sans-serif !important;
 }
 
 .chat-title-container {
 	width: calc(100% - 36px);
 	padding: 18px;
 	text-align: center;
+	font-family: 'Montserrat', sans-serif !important;
 }
 
 .chat-title {
@@ -204,16 +220,6 @@
 	font-size: 14px;
 }
 
-/* FORM STYLES */
-*,
-*::after,
-*::before {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-size: 62, 5%;
-}
-
 .wrapper {
 	height: 100vh;
 	width: 100%;
@@ -235,9 +241,49 @@
 	align-items: center;
 }
 
+#msg-textarea {
+	font-size: 1.3rem !important;
+	height: 3rem !important;
+
+	padding-bottom: 0 !important;
+	margin-left: 5px !important;
+	margin-top: 5px !important;
+	width: 70% !important;
+}
+
+#ce-message-form {
+	padding: 0 !important;
+	border-top: 1px solid rgb(160, 159, 159) !important;
+}
+
+#ce-send-message-button {
+	font-size: 1.3rem !important;
+	bottom: 14px !important;
+}
+.ce-attachment-input {
+	top: -15px;
+	height: 20px !important;
+	width: 20px !important;
+}
+
+.ce-attachment-icon {
+	height: 200px !important;
+	width: 200px !important;
+	padding: 5px !important;
+
+	border: 1px solid rgb(160, 159, 159) !important;
+}
+.ce-chat-feed-column {
+	overflow-y: hidden !important;
+}
+
+.ce-message-list {
+	overflow-y: hidden !important;
+	padding: 0 10px !important;
+}
 .input {
 	color: #333;
-	font-size: 1.2rem;
+	font-size: 1.3rem !important;
 	margin: 0 auto;
 	padding: 1.5rem 2rem;
 	border-radius: 0.2rem;
