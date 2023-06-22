@@ -131,8 +131,11 @@ const EditJournal = () => {
     <>
       <form onSubmit={handleSubmit} className='add-journal-container'>
         <div className='date-add-journal-container'>
-          <label className='date-label'>Date</label>
+          <label className='date-label' htmlFor='date-input'>
+            Date
+          </label>
           <input
+            id='date-input'
             onChange={dateHandler}
             type='date'
             className='date-input'
@@ -142,18 +145,24 @@ const EditJournal = () => {
           />
         </div>
         <div className='date-add-journal-container'>
-          <label className='title-label'>Title</label>
+          <label htmlFor='title-input' className='title-label'>
+            Title
+          </label>
           <input
             onChange={titleHandler}
             type='text'
             placeholder='How do you feel today?'
             className='add-journal-text'
+            id='title-input'
           />
         </div>
         <div className='date-add-journal-container'>
-          <label className='content-label'>Content</label>
+          <label className='content-label' htmlFor='content-input'>
+            Content
+          </label>
           <div className='image-container-add-journal'>
             <textarea
+              id='content-input'
               onChange={contentHandler}
               type='text'
               placeholder="What's on your mind? Write it down."

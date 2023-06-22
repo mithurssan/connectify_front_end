@@ -19,14 +19,31 @@ const Blog = () => {
             overall wellness.
           </p>
         </div>
-        <div className='blog-details-container'>
+        <div
+          className='blog-details-container'
+          data-testid='blog-post-container'
+        >
           {blogs.map(({ id, title, date, image, details }) => (
-            <Link to={`/blogs-card/${id}`} className='link' key={id}>
+            <Link
+              to={`/blogs-card/${id}`}
+              className='link'
+              key={id}
+              role='link'
+            >
               <div className='each-blog-container'>
                 <div className='blog-description-container'>
-                  <div className='title-blog'>{title}</div>
-                  <span className='date-blog'>{date}</span>
-                  <p className='blog-details'>{details}</p>
+                  <div className='title-blog' data-testid='blog-title'>
+                    {title}
+                  </div>
+                  <span className='date-blog' data-testid='blog-title'>
+                    {date}
+                  </span>
+                  <p
+                    className='blog-details'
+                    data-testid='blog-details-container'
+                  >
+                    {details}
+                  </p>
                 </div>
                 <div className='blog-image-container'>
                   <img src={image} alt='blog-image' className='image-blog' />
