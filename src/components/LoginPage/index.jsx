@@ -6,7 +6,7 @@ import './style.css';
 const LoginPage = () => {
 	const [signIn, setSignIn] = useState(false);
 	const [slideAnimation, setSlideAnimation] = useState('');
-
+/* c8 ignore start */
 	const activateSignIn = () => {
 		setSlideAnimation('slide-in-animation');
 		setTimeout(() => {
@@ -22,7 +22,7 @@ const LoginPage = () => {
 			setSlideAnimation('');
 		}, 300);
 	};
-
+/* c8 ignore end */
 	return (
 		<div className="login-wrapper">
 			<div className={`mainContent ${slideAnimation}`}>

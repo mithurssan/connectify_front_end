@@ -18,16 +18,11 @@ const Wellbeing = () => {
           intro: 'Welcome to the Wellbeing page!',
         },
         {
-          element: '.box1',
-          intro:
-            'Explore the Journal section for personal reflection and well-being.',
+          element: '.journal-box',
+          intro: 'Explore the Journal section for personal reflection and well-being.',
         },
         {
-          element: '.box2',
-          intro: 'Chat with a therapist to seek guidance and support.',
-        },
-        {
-          element: '.box3',
+          element: '.blogs-box',
           intro: 'Read insightful blogs on various mental health topics.',
         },
       ],
@@ -54,7 +49,7 @@ const Wellbeing = () => {
       <div>
         <div className='image-grid'>
           <Link to='get-journal' className='link'>
-            <div className='box-welbeing'>
+            <div className='box-welbeing journal-box'>
               <img
                 src={journal}
                 alt='Journal'
@@ -80,7 +75,7 @@ const Wellbeing = () => {
           </Link> */}
 
           <Link to='blogs' className='link'>
-            <div className='box-welbeing'>
+            <div className='box-welbeing blogs-box'>
               <img
                 src={blog}
                 alt='Blogs'

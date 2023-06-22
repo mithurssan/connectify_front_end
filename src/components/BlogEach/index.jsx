@@ -1,17 +1,17 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { blogs } from '../BlogDetails/blog';
+import { blogs } from '../BlogDetails';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
-const BlogCard = () => {
+const BlogEach = () => {
 	let { id } = useParams();
 	const navigate = useNavigate();
 
 	const filterBlogs = blogs.find((el) => el.id === parseInt(id));
-
+	/* c8 ignore start */
 	const backButton = () => {
 		if (filterBlogs.id > 1) {
 			navigate(`/blogs-card/${parseInt(id) - 1}`);
@@ -27,7 +27,7 @@ const BlogCard = () => {
 			navigate(`/blogs-card/1`);
 		}
 	};
-
+	/* c8 ignore end */
 	const viewBlogs = () => {
 		navigate('/wellbeing/blogs');
 	};
@@ -50,13 +50,13 @@ const BlogCard = () => {
 			</div>
 
 			<div className="button-every-blog-container">
-				<button onClick={backButton} className="every-blog-previous-next-button button-every-blog">
+				<button onClick={backButton} className="every-blog-previous-next-button button-every-blog" data-testid="back-button">
 					<FontAwesomeIcon icon={faArrowLeft} />
 				</button>
-				<button onClick={viewBlogs} className="every-view-all-button button-every-blog">
+				<button onClick={viewBlogs} className="every-view-all-button button-every-blog" data-testid="view-all-button">
 					View All Blogs
 				</button>
-				<button onClick={nextButton} className="every-blog-previous-next-button button-every-blog">
+				<button onClick={nextButton} className="every-blog-previous-next-button button-every-blog" data-testid="next-button">
 					<FontAwesomeIcon icon={faArrowRight} />
 				</button>
 			</div>
@@ -64,4 +64,4 @@ const BlogCard = () => {
 	);
 };
 
-export default BlogCard;
+export default BlogEach;

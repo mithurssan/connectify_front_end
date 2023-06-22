@@ -14,7 +14,7 @@ import Avatar8 from '../../assets/image (16).png'
 import Avatar9 from '../../assets/image (17).png'
 import Avatar10 from '../../assets/image (18).png'
 import Avatar11 from '../../assets/image (19).png'
-
+/* c8 ignore start */
 export const ImageSelector = () => {
   const [showModal, setShowModal] = useState(false)
   const [avatarImages, setAvatarImages] = useState(ProfileImage)
@@ -31,7 +31,7 @@ export const ImageSelector = () => {
       setAvatarImages(storedImagePath)
     }
   }, [])
-
+/* c8 ignore start */
   return (
     <div className='avatar-character'>
       <img

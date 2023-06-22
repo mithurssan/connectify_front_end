@@ -15,7 +15,8 @@ const Rota = () => {
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [content, setContent] = useState('');
-	const [isBusiness, setIsBusiness] = useState(false);
+	// const [isBusiness, setIsBusiness] = useState(false);
+	const isBusiness = localStorage.getItem("isBusiness")
 	const businessId = localStorage.getItem('business_id');
 	/* c8 ignore start */
 	useEffect(() => {
@@ -202,13 +203,17 @@ const Rota = () => {
 	/* c8 ignore end */
 	return (
 		<div className="calendar-container">
-			<div className="add-entry-container">
-				<input type="text" placeholder="Start Date (DD-MM-YYYY)" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-				<input type="text" placeholder="End Date (DD-MM-YYYY)" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-				<input type="text" placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />
-				<button onClick={handleAddEntry}>Add Entry</button>
-			</div>
-			<div className="event-list-container">{eventComponents}</div>
+			{isBusiness &&
+				<>
+					<div className="add-entry-container">
+						<input type="text" placeholder="Start Date (DD-MM-YYYY)" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+						<input type="text" placeholder="End Date (DD-MM-YYYY)" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+						<input type="text" placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />
+						<button onClick={handleAddEntry}>Add Entry</button>
+					</div>
+					<div className="event-list-container">{eventComponents}</div>
+				</>
+			}
 			<div className="calendar-wrapper">
 				<DragAndDropCalendar
 					localizer={localizer}
