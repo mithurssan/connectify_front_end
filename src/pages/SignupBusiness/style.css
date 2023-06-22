@@ -1,31 +1,40 @@
 .show-password-sign-up {
-  position: absolute;
-  top: 66.7%;
-  right: 7%;
-  cursor: pointer;
-  font-size: 15px;
-  color: #0a1a41;
+	position: absolute;
+	top: 66.7%;
+	right: 7%;
+	cursor: pointer;
+	font-size: 15px;
+	color: #0a1a41;
 }
 
 .introjs-tooltipbuttons .introjs-button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  background-color: #785A9F; 
-  font-family: 'Montserrat', sans-serif;
-  cursor: pointer;
+	margin-top: 10px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 10px;
+	color: #fff;
+	background-color: #785a9f;
+	font-family: 'Montserrat', sans-serif;
+	cursor: pointer;
 }
 
 .introjs-tooltipbuttons .introjs-button.introjs-prevbutton {
-  background-color: #785A9F; 
+	background-color: #785a9f;
 }
 
 .introjs-tooltipbuttons .introjs-button.introjs-skipbutton {
-  background-color: #785A9F; 
+	background-color: #785a9f;
 }
 
 .introjs-tooltip {
-  font-family: 'Montserrat', sans-serif; 
+	font-family: 'Montserrat', sans-serif;
+}
+
+.business-container-new {
+	margin-top: 80px !important;
+	margin-bottom: 70px;
+}
+
+.error-message-container-new {
+	margin-top: 35px !important;
 }

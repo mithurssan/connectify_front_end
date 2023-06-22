@@ -16,10 +16,8 @@
 		"@fortawesome/free-solid-svg-icons": "^6.4.0",
 		"@fortawesome/react-fontawesome": "^0.2.0",
 		"@fullpage/react-fullpage": "^0.1.40",
-		"@rollup/plugin-babel": "^6.0.3",
 		"axios": "^1.4.0",
 		"bootstrap": "^5.3.0",
-		"dotenv": "^16.1.4",
 		"esbuild": "^0.18.2",
 		"intro.js": "^7.0.1",
 		"introjs": "^0.2.2",
@@ -28,7 +26,6 @@
 		"react": "^18.2.0",
 		"react-big-calendar": "^1.8.1",
 		"react-bootstrap": "^2.7.4",
-		"react-chat-engine": "^1.11.28",
 		"react-chat-engine-advanced": "^0.1.28",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.9.0",
@@ -48,9 +45,6 @@
 		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.22.5",
-		"@babel/plugin-transform-modules-commonjs": "^7.22.5",
-		"@babel/preset-env": "^7.22.5",
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^14.0.0",
 		"@testing-library/user-event": "^14.4.3",
@@ -69,7 +63,6 @@
 		"polyfill": "^0.1.0",
 		"redux-mock-store": "^1.5.4",
 		"vite": "^4.3.9",
-		"vite-plugin-require-transform": "^1.0.17",
 		"vitest": "^0.32.0"
 	}
 }

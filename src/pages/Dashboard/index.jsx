@@ -91,7 +91,7 @@ const Dashboard = () => {
 			) : (
 				<>
 					<div className="welcome">
-						<h1>
+						<h1 className="heading">
 							<span className="wave">👋</span>Welcome, {username}!
 						</h1>
 					</div>
@@ -114,7 +114,7 @@ const Dashboard = () => {
 			<div className="action-btns">
 				<div className="add-user-btn">{isBusiness && <AddUserForm />}</div>
 				<div className="add-post-btn">
-					<PostForm onAddPost={addPost}/>
+					<PostForm onAddPost={addPost} />
 				</div>
 			</div>
 			<Posts posts={posts} setPosts={setPosts} />

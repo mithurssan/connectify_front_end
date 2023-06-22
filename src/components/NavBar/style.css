@@ -1,120 +1,124 @@
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
 .navbar {
-  background-color: #f99776;
-  height: 80px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+	background-color: #f99776;
+	height: 80px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }
 
 .menu-bars {
-  margin-right: 2rem;
-  font-size: 2rem;
-  background: none;
+	margin-right: 2rem;
+	font-size: 2rem;
+	background: none;
 }
 
 .nav-menu {
-  background-color: white;
-  width: 250px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  right: -100%;
-  transition: 850ms;
-  z-index: 1;
+	background-color: white;
+	width: 250px;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	right: -100%;
+	transition: 850ms;
+	z-index: 10000000;
 }
 
 .nav-menu.active {
-  right: 0;
-  transition: 350ms;
+	right: 0;
+	transition: 350ms;
 }
 
 .nav-text {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  /* padding: 10px 20px 8px 0px; */
-  transform: translate(-35px, 0px);
-  margin-top: 10px;
-  list-style: none;
-  height: 60px;
-  width: 280px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	/* padding: 10px 20px 8px 0px; */
+	transform: translate(-35px, 0px);
+	margin-top: 10px;
+	list-style: none;
+	height: 60px;
+	width: 280px;
 }
 
 .nav-text a {
-  text-decoration: none;
-  color: #0a1a41;
-  font-size: 20px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  width: 95%;
-  height: 100%;
-  display: flex;
-  align-self: start;
-  gap: 10px;
-  padding: 0 45px 0 45px;
-  border-radius: 4px;
+	text-decoration: none;
+	color: #0a1a41;
+	font-size: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 800;
+	width: 95%;
+	height: 100%;
+	display: flex;
+	align-self: start;
+	gap: 10px;
+	padding: 0 45px 0 45px;
+	border-radius: 4px;
 }
 
 .nav-text a:hover,
 .logout-button:hover {
-  color: #4740b2;
+	color: #4740b2;
 }
 
 .nav-menu-items {
-  width: 100%;
+	width: 100%;
 }
 
 .navbar-toggle {
-  background-color: white;
-  width: 800px;
-  height: 80px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+	background-color: white;
+	width: 800px;
+	height: 80px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }
 
 span {
-  margin-right: 16px;
+	margin-right: 16px;
 }
 
 .connectify {
-  margin: 10px 10px 10px 10px;
-  padding-left: 20px;
-  font-size: 30px;
-  color: #0a1a41;
-  font-family: 'Alfa Slab One', sans-serif;
+	margin: 10px 10px 10px 10px;
+	padding-left: 20px;
+	font-size: 30px;
+	color: #0a1a41;
+	font-family: 'Alfa Slab One', sans-serif;
 }
 
 .nav-text {
-  display: flex;
-  gap: 10px;
+	display: flex;
+	gap: 10px;
 }
 
 .logout-button {
-  border: none;
-  background-color: transparent;
-  display: inline;
-  color: #0a1a41;
-  font-weight: 900;
-  font-size: 18px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  height: 60px;
-  width: 280px;
-  transform: translate(-18px, -10px);
+	border: none;
+	background-color: transparent;
+	display: inline;
+	color: #0a1a41;
+	font-weight: 900;
+	font-size: 18px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 800;
+	height: 60px;
+	width: 280px;
+	transform: translate(-18px, -10px);
 }
 
 .logout-icon {
-  width: 30px;
-  height: 30px;
-  transform: translate(25px, 6px);
+	width: 30px;
+	height: 30px;
+	transform: translate(25px, 6px);
 }
 
 .logout-container {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
+}
+
+.conn-logo {
+	text-decoration: none;
 }

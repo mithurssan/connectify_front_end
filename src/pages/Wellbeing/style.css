@@ -1,84 +1,87 @@
 .wellbeing-page {
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
 }
 .heading {
-  font-size: 50px;
-  margin-top: 50px;
-  color: #0a1a41;
+	font-size: 50px !important;
+	margin-top: 50px !important;
+	color: #0a1a41 !important;
+	font-family: 'Montserrat', sans-serif !important;
+	font-weight: 600;
 }
 .section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 35px;
-  margin-top: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 35px;
+	margin-top: 80px;
 }
 
 .image-container {
-  margin-left: 20px;
-  margin: 10px;
+	margin-left: 20px;
+	margin: 10px;
 }
 
 .image-container img {
-  max-width: 500px;
-  height: auto;
+	max-width: 500px;
+	height: auto;
 }
 
 .image-description {
-  margin-top: 0;
-  font-size: 22px;
+	margin-top: 0;
+	font-size: 22px;
 }
 
 .image-grid {
-  display: flex;
-  justify-content: center;
-  margin-top: 80px;
-  gap: 200px;
+	display: flex;
+	justify-content: center;
+	margin-top: 80px;
+	padding-bottom: 100px;
+	gap: 200px;
 }
 
 .box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 15px;
 }
 
 .link {
-  text-decoration: none;
-  color: #0a1a41;
-  font-size: 10px;
+	text-decoration: none;
+	color: #0a1a41;
+	font-size: 10px;
 }
 
 .box-welbeing {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 .link {
-  text-decoration: none;
-  cursor: pointer;
+	text-decoration: none;
+	cursor: pointer;
 }
 .box-welbeing:hover,
 .box-chat:hover {
-  transform: scale(1.1);
+	transform: scale(1.1);
 }
 .chat-image {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .welbeing-title {
-  font-size: 22px;
+	font-size: 22px;
 }
 
 .welbeing-image {
-  height: 170px;
-  width: 170px;
+	height: 170px;
+	width: 170px;
 }
 
 .icon-title {
-  font-size: 20px;
-  margin-top: 10px;
+	font-size: 20px;
+	margin-top: 10px;
 }
 
 /* .welbeing-chat {

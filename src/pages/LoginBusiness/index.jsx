@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setToken, setCompanyName, setCompanyPassword, setVerified } from '../../actions';
+import { setToken, setCompanyName, setCompanyPassword, setCompanyEmail, setVerified } from '../../actions';
 import LoginImage from '../../assets/Connectify.jpg';
 import './style.css';
 import { Spinner } from '../../components';
@@ -19,6 +19,7 @@ const LoginBusiness = () => {
 
 	const companyName = useSelector((state) => state.business.companyName);
 	const companyPassword = useSelector((state) => state.business.companyPassword);
+	const companyEmail = useSelector((state) => state.business.companyEmail);
 	const verified = useSelector((state) => state.app.verified);
 
 	useEffect(() => {
@@ -125,6 +126,7 @@ const LoginBusiness = () => {
 			const business = data.find((b) => b.business_name === companyName);
 			setIsLoaded(true);
 			dispatch(setVerified(business.business_verified));
+			dispatch(setCompanyEmail(business.business_email));
 		} catch (error) {
 			if (error) {
 				errorCreate("Business doesn't exist");

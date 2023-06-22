@@ -13,11 +13,12 @@
 }
 
 .business-container {
+	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 10px;
+	gap: 8px;
 	box-sizing: border-box;
 	max-width: 800px;
 	position: relative;
@@ -33,7 +34,7 @@
 	justify-content: center;
 	align-items: center;
 	max-width: 600px;
-	height: 6%;
+	height: 8%;
 	border: none;
 	width: 100%;
 }
@@ -44,6 +45,7 @@
 
 .business-text {
 	font-size: 20px;
+	padding: 15px 15px 18.5px 15px;
 }
 
 .image {
@@ -52,12 +54,13 @@
 }
 
 .business-label {
-	font-size: 16px;
-	font-weight: 900;
+	font-size: 20px;
+	font-weight: 600;
 	color: #0a1a41;
 	align-self: flex-start;
 	margin-left: 0;
 	margin-top: 10px;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .login-register-button {
