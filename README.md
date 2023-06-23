@@ -1,7 +1,7 @@
 # connectify_front_end
 This is a all-in-one application for companies and businesses of all sizes that contains many tool and functionalities used within a company. The app is built using React and allows both an employee and an employer to sign up and login to their respective accounts.
 
-Delployed at; https://connectifysite.netlify.app
+Delployed at: https://connectifysite.netlify.app
 
 ## Why we developed this app?
 
