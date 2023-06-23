@@ -1,6 +1,8 @@
 # connectify_front_end
 This is a all-in-one application for companies and businesses of all sizes that contains many tool and functionalities used within a company. The app is built using React and allows both an employee and an employer to sign up and login to their respective accounts.
 
+Delployed at; https://connectifysite.netlify.app
+
 ## Why we developed this app?
 
 In today's modern workplace, businesses often face the challenge of using multiple tools for different organizational tasks. Communication might happen through messaging apps like WhatsApp or Slack, while finance and payslip management rely on software like Sage HR. Meanwhile, traditional methods such as pen and paper or email are still used for booking time off or reporting emergencies/sick days. This fragmented approach can be overwhelming and inefficient, leading to confusion and wasted time.
