@@ -23,8 +23,6 @@ In today's modern workplace, businesses often face the challenge of using multip
 
 ## Final presentation 
 
-After weeks of hard work and dedication, we have successfully completed our journey with La Fosse Academy. 
-
 You can find the presentation: https://docs.google.com/presentation/d/1bkho3pHWv8AaYKFEAPobnigv1Ju3NVtQgc4X-oTqnm0/edit
 
 ## Installation
