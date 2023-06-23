@@ -21,6 +21,11 @@ In today's modern workplace, businesses often face the challenge of using multip
 - [Tom Burzynski ] (https://github.com/Tellur89)
 - [Nurudeen Adesina] (https://github.com/A-Nuru)
 
+## Final presentation 
+
+After weeks of hard work and dedication, we have successfully completed our journey with La Fosse Academy. 
+
+You can find the presentation: https://docs.google.com/presentation/d/1bkho3pHWv8AaYKFEAPobnigv1Ju3NVtQgc4X-oTqnm0/edit
 
 ## Installation
 
@@ -81,6 +86,7 @@ For designing and prototyping the user interface (UI) of the app, we relied on F
 
 ![Screenshot 2023-06-22 at 19 01 53](https://github.com/mithurssan/connectify_frontend/assets/112406576/a22e09dc-6788-4d28-903f-33c1369cfecd)
 
+
 ## Testing Coverage
 
 ![Testing coverage - Frontend-2](https://github.com/mithurssan/connectify_frontend/assets/112406576/37d4c560-359c-4dfd-8ec8-c460f5b254e1)
@@ -102,6 +108,7 @@ For designing and prototyping the user interface (UI) of the app, we relied on F
 - Flask
 - Python
 - Pytest
+
 
 
 
